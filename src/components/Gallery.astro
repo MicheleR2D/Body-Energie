@@ -1,0 +1,31 @@
+---
+interface Props {
+	images: string[];
+	alt?: string;
+}
+const { images, alt = '' } = Astro.props;
+---
+
+<div class="gal">
+	{images.map((src) => <img src={src} alt={alt} loading="lazy" />)}
+</div>
+
+<style>
+	.gal {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 12px;
+		margin-block: 20px;
+	}
+
+	.gal img {
+		aspect-ratio: 1;
+		object-fit: cover;
+	}
+
+	@media (max-width: 700px) {
+		.gal {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

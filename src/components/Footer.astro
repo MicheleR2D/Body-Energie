@@ -1,0 +1,260 @@
+---
+// Contenuto reale estratto dal template footer di Elementor (post ID 1068) del sito
+// WordPress originale, non riscritto: testi, orari, link e loghi partner sono quelli
+// pubblicati su bodyenergie.it.
+const partner = [
+	{ src: '/wp-content/uploads/2025/10/Logo-Asi-PNG.png', alt: 'ASI' },
+	{ src: '/wp-content/uploads/2025/10/logo-coni.png', alt: 'CONI' },
+	{ src: '/wp-content/uploads/2025/10/anif-logo-1.png', alt: 'ANIF' },
+	{ src: '/wp-content/uploads/2025/10/csen-logo.svg', alt: 'CSEN' },
+	{ src: '/wp-content/uploads/2025/10/Technogym_Logo.svg_.png', alt: 'Technogym' },
+	{ src: '/wp-content/uploads/2026/04/Logo-Mediolanum.png', alt: 'Mediolanum' },
+	{ src: '/wp-content/uploads/2025/12/ekoi-logo.png', alt: 'ekoi' },
+];
+---
+
+<footer class="ft">
+	<div class="ft__cta">
+		<div class="container ft__cta-inner">
+			<div>
+				<p class="ft__eyebrow">inizia oggi!</p>
+				<h2 class="ft__cta-title">Prova ora<br />il nostro centro</h2>
+			</div>
+			<button class="btn" type="button" data-open-contact data-interest="prova-gratuita">Attiva ora</button>
+		</div>
+	</div>
+
+	<div class="container ft__grid">
+		<div class="ft__col ft__col--brand">
+			<img
+				class="ft__logo"
+				src="/wp-content/uploads/2025/10/Logo-Body-Energie-scaled-e1768576105736.png"
+				alt="Body Energie"
+				width="200"
+			/>
+			<p>
+				<strong>Body Energie è il tuo punto di riferimento per fitness, benessere e sport a Villafranca di Verona.</strong><br
+				/>
+				Allenati nel nostro centro con attrezzature all'avanguardia, corsi per ogni livello e un'offerta completa per
+				adulti e bambini.
+			</p>
+			<button class="btn" type="button" data-open-contact data-interest="informazioni">Contattaci</button>
+		</div>
+
+		<div class="ft__col">
+			<h3>Orari</h3>
+			<a class="btn ft__planning" href="/orari">Planning settimanale</a>
+
+			<h4>Centro</h4>
+			<ul class="ft__orari">
+				<li><b>Lun - Ven:</b> 5.00 - 22.00</li>
+				<li><b>Sabato:</b> 8.00 - 18.00</li>
+				<li><b>Domenica:</b> 8.00 - 13.30</li>
+			</ul>
+
+			<h4>Termarium</h4>
+			<ul class="ft__orari">
+				<li><b>Lun - Mar - Gio:</b> 10.00 - 21.00</li>
+				<li><b>Sabato:</b> 10.00 - 17.30</li>
+				<li><b>Domenica:</b> 10.00 - 13.00</li>
+			</ul>
+
+			<details class="ft__estivi">
+				<summary>Orari estivi</summary>
+				<h4>Centro</h4>
+				<ul class="ft__orari">
+					<li><b>Lun - Ven:</b> 5.00 - 22.00</li>
+					<li><b>Sabato:</b> 8.00 - 13.30</li>
+					<li><b>Domenica:</b> 8.00 - 13.30</li>
+				</ul>
+				<h4>Termarium</h4>
+				<ul class="ft__orari">
+					<li><b>Lunedì:</b> 18.00 - 21.00</li>
+					<li><b>Giovedì:</b> 10.00 - 21.00</li>
+				</ul>
+			</details>
+		</div>
+
+		<div class="ft__col">
+			<h3>Lavora con noi</h3>
+			<!-- TODO: nel sito originale il bottone "Posizioni aperte" non aveva una destinazione configurata -->
+			<a class="btn" href="#">Posizioni aperte</a>
+		</div>
+
+		<div class="ft__col">
+			<h3>Risorse</h3>
+			<ul class="ft__links">
+				<li><a href="/privacy-body-energie">Privacy</a></li>
+				<li><a href="/wp-content/uploads/2025/12/Regolamento-Body-Energie.pdf">Regolamento</a></li>
+				<li>
+					<a href="/wp-content/uploads/2025/12/MODELLO-ORGANIZZATIVO-E-DI-CONTROLLO-DELLATTIVITA-SPORTIVA.pdf"
+						>Modello Organizzativo</a
+					>
+				</li>
+				<li><a href="/wp-content/uploads/2025/12/contributi.pdf">Contributi Pubblici</a></li>
+			</ul>
+
+			<h3>Social</h3>
+			<ul class="ft__social">
+				<li><a href="https://www.facebook.com/www.bodyenergie.it" aria-label="Facebook">Facebook</a></li>
+				<li><a href="https://www.instagram.com/body_energie/" aria-label="Instagram">Instagram</a></li>
+				<li><a href="https://www.youtube.com/@bodyenergie1631" aria-label="YouTube">YouTube</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="container ft__partner">
+		{partner.map((p) => <img src={p.src} alt={p.alt} loading="lazy" />)}
+	</div>
+
+	<a class="ft__ue" href="/contributo-regione-veneto">
+		<img
+			src="/wp-content/uploads/2026/03/Stringa-Coesione_UE_Repubblica_Regione-Veneto_VETTORIALE-scaled.jpg"
+			alt="Finanziato dall'Unione Europea, Repubblica Italiana, Regione del Veneto"
+		/>
+	</a>
+
+	<p class="ft__legal-title">Sito web per la Propaganda dell'Attività Fisica Sportiva Dilettantistica</p>
+
+	<div class="container ft__bottom">
+		<p>
+			<strong>Body Energie ssd a.r.l.</strong><br />
+			Via Adamello, 1, 37069 Villafranca di Verona (VR) | 0456304337<br />
+			P.IVA: 03716930239
+		</p>
+	</div>
+</footer>
+
+<style>
+	.ft {
+		background: var(--text);
+		color: var(--text-on-dark);
+	}
+
+	.ft h2,
+	.ft h3,
+	.ft h4 {
+		color: var(--text-on-dark);
+	}
+
+	.ft a {
+		color: var(--text-on-dark);
+	}
+
+	.ft__cta {
+		background: var(--accent);
+	}
+
+	.ft__cta-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 20px;
+		padding-block: 32px;
+	}
+
+	.ft__eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		font-weight: 700;
+	}
+
+	.ft__cta-title {
+		margin: 0;
+		color: var(--text);
+	}
+
+	.ft__grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr 1fr;
+		gap: 32px;
+		padding-block: 48px;
+	}
+
+	.ft__orari {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 16px;
+	}
+
+	.ft__links,
+	.ft__social {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 24px;
+	}
+
+	.ft__links li,
+	.ft__social li,
+	.ft__orari li {
+		margin-bottom: 6px;
+	}
+
+	.ft__planning {
+		display: inline-block;
+		margin-bottom: 20px;
+	}
+
+	.ft__estivi summary {
+		cursor: pointer;
+		margin-bottom: 12px;
+	}
+
+	.ft__logo {
+		margin-bottom: 16px;
+	}
+
+	.ft__partner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 32px;
+		padding-block: 24px;
+		border-top: 1px solid rgba(255, 255, 255, 0.15);
+	}
+
+	.ft__partner img {
+		height: 40px;
+		width: auto;
+		border-radius: 0;
+		filter: grayscale(1) brightness(2);
+		opacity: 0.8;
+	}
+
+	.ft__ue {
+		display: block;
+	}
+
+	.ft__ue img {
+		border-radius: 0;
+		width: 100%;
+		display: block;
+	}
+
+	.ft__legal-title {
+		text-align: center;
+		font-size: var(--text-xs);
+		padding: 12px;
+		margin: 0;
+		opacity: 0.7;
+	}
+
+	.ft__bottom {
+		border-top: 1px solid rgba(255, 255, 255, 0.15);
+		padding-block: 24px;
+		font-size: var(--text-sm);
+	}
+
+	@media (max-width: 900px) {
+		.ft__grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.ft__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

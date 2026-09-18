@@ -1,0 +1,86 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 {
+  font-size: var(--text-2xl);
+  font-weight: 900;
+}
+
+h2 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+img {
+  max-width: 100%;
+  border-radius: var(--radius-lg);
+  display: block;
+}
+
+a {
+  color: var(--accent);
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+.btn {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  background: var(--accent);
+  color: var(--text-on-dark);
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.btn:hover {
+  background: var(--text);
+  color: var(--accent);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+body.lf-locked {
+  overflow: hidden;
+}

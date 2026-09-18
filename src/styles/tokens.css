@@ -1,0 +1,46 @@
+/*
+ * Valori ricavati dal Global Kit di Elementor del sito WordPress originale
+ * (uploads/elementor/css/post-4.css: --e-global-color-*, --e-global-typography-*),
+ * non inventati: preservano l'identita' visiva del sito attuale.
+ */
+:root {
+  /* Sfondi */
+  --bg: #ffffff;
+  --bg-alt: #eeeae3; /* secondary kit color, sezioni/card alternate */
+  --bg-cream: #f7f0e4; /* colore extra del kit, sfondi caldi */
+
+  /* Testo */
+  --text: #000000;
+  --text-on-dark: #ffffff;
+  --text-muted: #4a4a4a;
+
+  /* Bordi (semi-trasparenti) */
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.12);
+
+  /* Accento (arancio del brand) */
+  --accent: #ec740f;
+  --accent-secondary: #ff9933;
+  --accent-hover: #c25f0c;
+  --accent-tint: rgba(236, 116, 15, 0.1);
+
+  /* Tipografia: Montserrat per i titoli (maiuscolo, molto bold), Open Sans per il testo */
+  --font-heading: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+
+  /* Scala dimensioni testo (h1/h2 desktop ricalcano i valori del kit: 40px/28px) */
+  --text-xs: 0.8rem;
+  --text-sm: 0.9rem;
+  --text-base: 1rem;
+  --text-md: 1.15rem;
+  --text-lg: 1.4rem;
+  --text-xl: clamp(1.75rem, 3vw, 2rem); /* h2 */
+  --text-2xl: clamp(2rem, 5vw, 2.5rem); /* h1 */
+
+  /* Raggi: 10px sui bottoni, 20px sulle immagini nel sito originale */
+  --radius: 10px;
+  --radius-lg: 20px;
+
+  /* Larghezza massima contenuto, dai breakpoint del kit Elementor */
+  --container-max-width: 1140px;
+}

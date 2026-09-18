@@ -1,0 +1,104 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LeadModal from '../components/LeadModal.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const cookieyesId = import.meta.env.PUBLIC_COOKIEYES_ID;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Google Consent Mode v2: default a "denied" prima di qualunque altro tag, come sugli altri siti del gruppo -->
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('consent', 'default', {
+				ad_storage: 'denied',
+				ad_user_data: 'denied',
+				ad_personalization: 'denied',
+				analytics_storage: 'denied',
+				functionality_storage: 'granted',
+				security_storage: 'granted',
+			});
+		</script>
+
+		{
+			gtmId && (
+				<script is:inline define:vars={{ gtmId }}>
+					(function (w, d, s, l, i) {
+						w[l] = w[l] || [];
+						w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+						var f = d.getElementsByTagName(s)[0],
+							j = d.createElement(s),
+							dl = l != 'dataLayer' ? '&l=' + l : '';
+						j.async = true;
+						j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+						f.parentNode.insertBefore(j, f);
+					})(window, document, 'script', 'dataLayer', gtmId);
+				</script>
+			)
+		}
+
+		{
+			cookieyesId && (
+				<script
+					id="cookieyes"
+					type="text/javascript"
+					src={`https://cdn-cookieyes.com/client_data/${cookieyesId}/script.js`}
+					is:inline
+				/>
+			)
+		}
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="/wp-content/uploads/2025/12/Favicon-body-Energie.png" />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+		<title>{title}</title>
+	</head>
+	<body>
+		{
+			gtmId && (
+				<noscript>
+					<iframe
+						src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+						height="0"
+						width="0"
+						style="display:none;visibility:hidden"
+					/>
+				</noscript>
+			)
+		}
+
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+		<LeadModal />
+
+		<script>
+			import { initConsentBridge } from '../lib/consent.client.js';
+			import { initMetaPixel } from '../lib/metaPixel.client.js';
+
+			initConsentBridge();
+			initMetaPixel();
+		</script>
+	</body>
+</html>

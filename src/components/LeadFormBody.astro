@@ -1,0 +1,48 @@
+---
+interface Props {
+	/** Prefisso degli id, per evitare collisioni se il form comparisse piu' volte nella pagina. */
+	prefix: string;
+}
+const { prefix } = Astro.props;
+---
+
+<div class="lf__body" data-step="form">
+	<p class="lf__interesse" data-lf-interesse-label></p>
+	<input type="hidden" data-lf-interesse />
+
+	<div class="lf__grid">
+		<label for={`${prefix}-nome`}>Nome*</label>
+		<input id={`${prefix}-nome`} type="text" required autocomplete="given-name" />
+
+		<label for={`${prefix}-cognome`}>Cognome*</label>
+		<input id={`${prefix}-cognome`} type="text" required autocomplete="family-name" />
+
+		<label for={`${prefix}-email`}>Email*</label>
+		<input id={`${prefix}-email`} type="email" required autocomplete="email" />
+
+		<label for={`${prefix}-cellulare`}>Cellulare*</label>
+		<input id={`${prefix}-cellulare`} type="tel" required autocomplete="tel" />
+
+		<label for={`${prefix}-messaggio`}>Messaggio (opzionale)</label>
+		<textarea id={`${prefix}-messaggio`} rows="3"></textarea>
+	</div>
+
+	<label class="lf__checkbox">
+		<input id={`${prefix}-privacy`} type="checkbox" required />
+		Ho letto e accetto la <a href="/privacy-body-energie" target="_blank">privacy policy</a>*
+	</label>
+	<label class="lf__checkbox">
+		<input id={`${prefix}-marketing`} type="checkbox" />
+		Accetto di ricevere comunicazioni promozionali
+	</label>
+
+	<p class="lf__error" hidden role="alert"></p>
+
+	<div class="lf__actions">
+		<button class="btn" type="button" data-lf-submit>Invia richiesta</button>
+	</div>
+</div>
+
+<div class="lf__body" data-step="conferma" hidden>
+	<p class="lf__conferma">Grazie! Abbiamo ricevuto la tua richiesta, ti ricontatteremo al piu' presto.</p>
+</div>

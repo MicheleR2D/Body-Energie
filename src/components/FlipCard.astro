@@ -1,0 +1,62 @@
+---
+interface Props {
+	href: string;
+	image: string;
+	title: string;
+	description: string;
+}
+const { href, image, title, description } = Astro.props;
+---
+
+<a class="fc" href={href} style={`background-image:url(${image})`}>
+	<div class="fc__overlay">
+		<h3 class="fc__title">{title}</h3>
+		<p class="fc__desc">{description}</p>
+	</div>
+</a>
+
+<style>
+	.fc {
+		position: relative;
+		display: block;
+		aspect-ratio: 4 / 5;
+		border-radius: var(--radius-lg);
+		background-size: cover;
+		background-position: center;
+		overflow: hidden;
+		color: var(--text-on-dark);
+		text-decoration: none;
+	}
+
+	.fc__overlay {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		padding: 20px;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.1) 55%, transparent 100%);
+	}
+
+	.fc__title {
+		margin: 0 0 4px;
+		color: var(--text-on-dark);
+		font-size: var(--text-md);
+	}
+
+	.fc__desc {
+		margin: 0;
+		font-size: var(--text-sm);
+		max-height: 0;
+		opacity: 0;
+		overflow: hidden;
+		transition: 0.25s ease;
+	}
+
+	.fc:hover .fc__desc,
+	.fc:focus-visible .fc__desc {
+		max-height: 200px;
+		opacity: 1;
+		margin-top: 6px;
+	}
+</style>
