@@ -90,4 +90,5 @@ export default defineConfig({
 	},
 	integrations: [sitemap()],
 	adapter: vercel(),
+	devToolbar: { enabled: false },
 });

@@ -60,8 +60,8 @@ input[type="submit"],
   text-align: center;
   background: var(--accent);
   color: var(--text-on-dark);
-  border: none;
-  border-radius: var(--radius);
+  border: 2px solid var(--accent);
+  border-radius: 0;
   padding: 14px 24px;
   cursor: pointer;
   white-space: nowrap;
@@ -72,7 +72,31 @@ input[type="button"]:hover,
 input[type="submit"]:hover,
 .btn:hover {
   background: var(--text);
+  border-color: var(--text);
   color: var(--accent);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--text);
+}
+
+.btn--outline:hover {
+  background: var(--text);
+  color: var(--text-on-dark);
+}
+
+.btn--dark {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--text-on-dark);
+}
+
+.btn--dark:hover {
+  background: var(--bg);
+  border-color: var(--bg);
+  color: var(--text);
 }
 
 .container {
@@ -83,4 +107,31 @@ input[type="submit"]:hover,
 
 body.lf-locked {
   overflow: hidden;
+}
+
+/* Blocchi colore a piena larghezza: il sito originale alterna sezioni intere
+   arancioni/nere invece di sfondi neutri, e li mantiene qui come classi
+   riusabili sulle sezioni della home. */
+.block--orange {
+  background: var(--accent);
+  color: var(--text);
+}
+
+.block--orange h2,
+.block--orange h3 {
+  color: var(--text-on-dark);
+}
+
+.block--black {
+  background: var(--text);
+  color: var(--text-on-dark);
+}
+
+.block--black h3 {
+  color: var(--text-on-dark);
+}
+
+.block--black .section-divider {
+  border-top: 2px solid var(--accent);
+  padding-top: 40px;
 }

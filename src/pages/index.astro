@@ -1,11 +1,23 @@
 ---
 // Contenuto reale estratto da _elementor_data della pagina "Body Energie - Villafranca
-// di Verona" (post ID 779, impostata come front page su WordPress), non riscritto.
+// di Verona" (post ID 779, impostata come front page su WordPress) e confrontato
+// direttamente col sito live per riprodurne fedelmente anche il layout a blocchi
+// di colore (arancione/nero), non solo i testi.
 import Layout from '../layouts/Layout.astro';
 import FlipCard from '../components/FlipCard.astro';
-import ImageStrip from '../components/ImageStrip.astro';
+import MediaCarousel from '../components/MediaCarousel.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
+import Accordion from '../components/Accordion.astro';
 
-const heroCarousel = [
+const heroImages = [
+	'/wp-content/uploads/2025/12/Body-Energie-Ambienti-57-scaled.jpg',
+	'/wp-content/uploads/2025/11/Body-Energie-Azioni-64-scaled.jpg',
+	'/wp-content/uploads/2025/12/Body-Energie-Piscina-2-scaled.jpg',
+	'/wp-content/uploads/2025/08/IMG-20210528-WA0046.jpg',
+	'/wp-content/uploads/2025/11/Body-Energie-Azioni-62-scaled.jpg',
+];
+
+const fotoCarosello = [
 	{ src: '/wp-content/uploads/2025/12/Body-Energie-Ambienti-57-scaled.jpg', alt: 'Body Energie - Gym Floor' },
 	{ src: '/wp-content/uploads/2025/11/Body-Energie-Azioni-64-scaled.jpg', alt: 'Corsi Fitness - Body Energie' },
 	{ src: '/wp-content/uploads/2025/12/Body-Energie-Piscina-2-scaled.jpg' },
@@ -17,10 +29,10 @@ const heroCarousel = [
 ];
 
 const contatori = [
-	{ numero: '5.500', suffisso: '', titolo: 'metri quadri' },
-	{ numero: '150', suffisso: '+', titolo: 'corsi a settimana' },
-	{ numero: '40', suffisso: '+', titolo: 'trainers qualificati' },
-	{ numero: '2.000', suffisso: '+', titolo: 'iscritti' },
+	{ target: 5500, suffisso: '', titolo: 'metri quadri' },
+	{ target: 150, suffisso: '+', titolo: 'corsi a settimana' },
+	{ target: 40, suffisso: '+', titolo: 'trainers qualificati' },
+	{ target: 2000, suffisso: '+', titolo: 'iscritti' },
 ];
 
 const attivitaAdulti = [
@@ -28,6 +40,7 @@ const attivitaAdulti = [
 		href: '/sala-pesi',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-51-scaled.jpg',
 		title: 'Sala Pesi',
+		tagline: 'Dove la forza prende forma.',
 		description:
 			'Uno spazio moderno e attrezzato dove allenare forza, resistenza e tono muscolare con il supporto dei nostri trainer. Ogni allenamento è un passo verso la tua migliore forma.',
 	},
@@ -35,6 +48,7 @@ const attivitaAdulti = [
 		href: '/corsi-fitness',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-14-scaled.jpg',
 		title: 'Corsi Fitness',
+		tagline: 'Allenati, divertiti, vivi la tua energia.',
 		description:
 			'Scopri i corsi fitness di Body Energie: allenamenti coinvolgenti per ogni livello, dal Functional Training al Pilates, dallo Yoga allo Step. Energia, musica e motivazione per migliorare forza, equilibrio e benessere.',
 	},
@@ -42,6 +56,7 @@ const attivitaAdulti = [
 		href: '/acqua',
 		image: '/wp-content/uploads/2025/12/Body-Energie-Piscina-29-scaled.jpg',
 		title: 'Acqua Fitness',
+		tagline: 'Muoviti in acqua, ritrova la tua energia.',
 		description:
 			'Allenati in piscina con programmi che uniscono movimento, divertimento e benessere. Migliora tono, resistenza e mobilità grazie a lezioni di acquagym, acquabike e nuoto, seguite dai nostri istruttori qualificati.',
 	},
@@ -49,6 +64,7 @@ const attivitaAdulti = [
 		href: '/pilates-reformer',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-30-scaled.jpg',
 		title: 'Pilates Reformer',
+		tagline: 'Controllo, equilibrio e forza: riscopri il tuo corpo.',
 		description:
 			'I corsi di Pilates Reformer di Body Energie offrono un allenamento equilibrato per migliorare postura e flessibilità. Con il Reformer, ogni movimento diventa fluido e controllato, per un lavoro completo sul tuo corpo.',
 	},
@@ -56,6 +72,7 @@ const attivitaAdulti = [
 		href: '/personal-training',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Azioni-52-scaled.jpg',
 		title: 'Personal Training',
+		tagline: 'Un obiettivo, un percorso: il tuo risultato è la nostra missione.',
 		description:
 			'Il Personal Training di Body Energie è un percorso su misura per raggiungere i tuoi obiettivi in modo efficace e sicuro. Guidato da trainer qualificati, ogni allenamento è personalizzato con programmi studiati su misura.',
 	},
@@ -63,6 +80,7 @@ const attivitaAdulti = [
 		href: '/termario',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-71-scaled.jpg',
 		title: 'Termario',
+		tagline: 'Lasciati avvolgere dal calore, ritrova il tuo benessere.',
 		description:
 			'Un’oasi di relax dove calore e vapore rigenerano corpo e mente. Tra sauna finlandese, bagno turco, sauna romana e idromassaggio, ritrovi equilibrio, benessere e una profonda sensazione di leggerezza.',
 	},
@@ -73,6 +91,7 @@ const attivitaBambini = [
 		href: '/nuoto-bimbi',
 		image: '/wp-content/uploads/2025/12/Body-Energie-Piscina-7-scaled.jpg',
 		title: 'Nuoto Bimbi',
+		tagline: 'In acqua si cresce, si gioca e si impara.',
 		description:
 			'I corsi di Nuoto Bimbi di Body Energie accompagnano i bambini dai 4 mesi ai 12 anni in un percorso di gioco e apprendimento in acqua, migliorando sicurezza, coordinazione e fiducia in sé stessi con istruttori qualificati FIN.',
 	},
@@ -80,6 +99,7 @@ const attivitaBambini = [
 		href: '/body-camp',
 		image: '/wp-content/uploads/2025/10/Body-Camp-villafranca-di-verona-750x480-1.jpg',
 		title: 'Body Camp',
+		tagline: 'Sport, amicizia e divertimento: l’estate firmata Body Energie.',
 		description:
 			'Il Body Camp di Body Energie è il Grest estivo per bambini e ragazzi dai 4 ai 13 anni, con sport, giochi, laboratori e attività di gruppo che uniscono divertimento, crescita e socialità in un ambiente sicuro e stimolante.',
 	},
@@ -87,6 +107,7 @@ const attivitaBambini = [
 		href: '/ciclismo',
 		image: '/wp-content/uploads/2025/12/pexels-pexels-latam-478514802-17979484-scaled.jpg',
 		title: 'Squadra Ciclistica',
+		tagline: 'Ekoi Body Energie: la scuola ciclismo per ragazzi dai 7 ai 12 anni.',
 		description:
 			'La squadra giovanile Ekoi Body Energie rende il ciclismo accessibile ai bambini dai 7 ai 12 anni, unendo allenamenti su strada e pista, con l’obiettivo di crescita sportiva in un ambiente sicuro.',
 	},
@@ -97,6 +118,7 @@ const bodyLab = [
 		href: '/body-lab#nutrizionista',
 		image: '/wp-content/uploads/2025/12/vista-dall-alto-del-cibo-vegetariano-sano-ed-equilibrato-scaled.jpg',
 		title: 'Nutrizionista',
+		tagline: 'Piani alimentari personalizzati per migliorare performance, benessere e salute.',
 		description:
 			'Il Nutrizionista di Body Energie ti guida con programmi alimentari su misura, pensati per lo sport, la composizione corporea e il supporto nutrizionale in caso di specifiche esigenze o patologie.',
 	},
@@ -104,6 +126,7 @@ const bodyLab = [
 		href: '/body-lab#osteopatia',
 		image: '/wp-content/uploads/2025/12/infermiera-che-si-prende-cura-del-paziente-scaled.jpg',
 		title: 'Osteopatia',
+		tagline: 'Trattamenti per migliorare mobilità, benessere e ridurre il dolore.',
 		description:
 			'L’Osteopata di Body Energie aiuta ad alleviare dolori muscoloscheletrici e tensioni, migliorando l’equilibrio e il funzionamento del corpo attraverso tecniche mirate e non invasive.',
 	},
@@ -111,6 +134,7 @@ const bodyLab = [
 		href: '/body-lab#posturologia',
 		image: '/wp-content/uploads/2025/12/pilates-di-pratica-della-donna-alla-palestra-di-yoga-scaled.jpg',
 		title: 'Posturologia',
+		tagline: 'Valutazione posturale per correggere squilibri e ridurre il dolore.',
 		description:
 			'Il Posturologo di Body Energie analizza il movimento e la postura per individuare la causa primaria delle tensioni e delle algie, guidando il recupero motorio, la rieducazione posturale e la preparazione sportiva.',
 	},
@@ -118,6 +142,7 @@ const bodyLab = [
 		href: '/body-lab#fisioterapia',
 		image: '/wp-content/uploads/2025/12/pexels-karola-g-4506169-scaled.jpg',
 		title: 'Fisioterapia',
+		tagline: 'Trattamenti fisioterapici per recupero, prevenzione e mobilità.',
 		description:
 			'La Fisioterapia di Body Energie supporta il recupero da traumi, riduce dolore e rigidità e migliora la funzionalità motoria, con percorsi personalizzati per prevenzione, riabilitazione e ritorno all’attività sportiva.',
 	},
@@ -125,6 +150,7 @@ const bodyLab = [
 		href: '/body-lab#palestra-della-salute',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Azioni-21-scaled.jpg',
 		title: 'Palestra della Salute',
+		tagline: 'Una palestra certificata per attività fisica sicura e guidata anche in presenza di patologie croniche.',
 		description:
 			'La Palestra della Salute di Body Energie, riconosciuta dalla Regione Veneto, permette di svolgere esercizio fisico prescritto in sicurezza, grazie alla supervisione di professionisti specializzati in attività motorie preventive e adattate.',
 	},
@@ -135,6 +161,7 @@ const serviziExtra = [
 		href: '/termario',
 		image: '/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-37-scaled.jpg',
 		title: 'RistoBar',
+		tagline: 'Colazioni, snack e aperitivi con piatti freschi e genuini, in un ambiente accogliente.',
 		description:
 			'All’Al RistoBar di Body Energie potrete gustare colazioni, snack, pause pranzo e aperitivi, con piatti locali preparati ogni giorno con ingredienti freschi, in un ambiente aperto a tutti con simpatia e professionalità.',
 	},
@@ -142,12 +169,82 @@ const serviziExtra = [
 		href: '/centro-estetico',
 		image: '/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-66-scaled.jpg',
 		title: 'Centro Estetico',
+		tagline: 'Prenditi cura di te, ogni giorno di più.',
 		description:
 			'Il centro estetico Beauty Energie offre trattamenti dimagranti, epilazione laser e massaggi personalizzati per valorizzare la bellezza naturale e ritrovare equilibrio e benessere.',
 	},
 ];
 
-const strutturaSpazi = ['Gym Floor', 'Group Fitness', 'Piscina', 'Termario', 'Air Park', 'Beauty', 'Ristobar'];
+const accordionItems = [
+	{
+		title: 'Gym Floor',
+		images: [
+			'/wp-content/uploads/2025/12/Body-Energie-Ambienti-57-scaled.jpg',
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-48-scaled.jpg',
+			'/wp-content/uploads/2025/11/Body-Energie-Azioni-64-scaled.jpg',
+			'/wp-content/uploads/2025/11/Body-Energie-Azioni-60-scaled.jpg',
+		],
+		html: '<p>La <strong>Gym Floor</strong> di Body Energie è lo spazio dedicato all’allenamento libero e personalizzato. Distribuita su due piani, offre attrezzature di ultima generazione, aree dedicate alla forza e al condizionamento, e zone per esercizi funzionali. Un ambiente moderno e stimolante dove ogni allenamento è guidato dai nostri trainer per aiutarti a raggiungere i tuoi obiettivi con efficacia e motivazione.</p>',
+	},
+	{
+		title: 'Group Fitness',
+		images: [
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-22-scaled.jpg',
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-27-scaled.jpg',
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-13-scaled.jpg',
+		],
+		html: '<p>Il Group Fitness offre <strong>tre aree specializzate</strong> per allenarti con energia, equilibrio e motivazione.</p><p>L’<strong>Area Dinamica</strong> è ideale per chi ama ritmo e intensità, propone <strong>Body Pump, Core, Shapes, Step, Zumba</strong> e <em>Strength Development</em>, perfetti per tonificare, migliorare la resistenza e allenarti divertendoti.</p><p>L’<strong>Area Attiva</strong> è dedicata a chi cerca forza e funzionalità: <strong>Functional Training, Powerlifting, TRX e TRX FTC</strong>.</p><p>L’<strong>Area Respira</strong> è uno spazio dedicato al benessere e alla consapevolezza del corpo. Le lezioni di <strong>Pilates, Back School, Balance e Yoga</strong> migliorano postura, mobilità, respirazione e riducono lo stress.</p>',
+	},
+	{
+		title: 'Piscina',
+		images: [
+			'/wp-content/uploads/2025/12/Body-Energie-Piscina-2-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Piscina-10-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Piscina-7-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Piscina-1-scaled.jpg',
+		],
+		html: '<p>La <strong>piscina di Body Energie</strong> è un ambiente accogliente e luminoso dove allenamento e benessere si incontrano. Qui puoi scegliere tra <strong>nuoto libero</strong>, <strong>corsi di acquafitness</strong> e <strong>scuola nuoto</strong>, per adulti e bambini. L’acqua diventa alleata del movimento: migliora tono, resistenza e mobilità, offrendo un allenamento completo e rilassante per corpo e mente.</p>',
+	},
+	{
+		title: 'Termario',
+		images: [
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-71-scaled.jpg',
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-68-scaled.jpg',
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-74-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-118-scaled.jpg',
+		],
+		html: '<p>Il <strong>Termario di Body Energie</strong> è uno spazio dedicato al relax e alla rigenerazione. Tra <strong>sauna finlandese</strong>, <strong>bagno turco</strong>, <strong>sauna romana</strong> e <strong>idromassaggio</strong>, puoi rilassarti, purificare la pelle e liberare la mente dallo stress quotidiano. Un’esperienza di benessere totale che completa e amplifica i benefici dell’attività fisica.</p>',
+	},
+	{
+		title: 'Air Park',
+		images: [
+			'/wp-content/uploads/2025/08/IMG20230523150812-scaled-1.jpg',
+			'/wp-content/uploads/2025/08/AIR-PARK-7-TRIFORM-1.jpg',
+			'/wp-content/uploads/2025/08/AIR-PARK-6-TRIFORM.jpg',
+		],
+		html: '<p>L’<strong>Air Park</strong> di Body Energie è l’area outdoor dedicata all’allenamento funzionale e al calisthenics. Dotato di <strong>TRIFORM</strong> e spazi attrezzati per esercizi a corpo libero, offre la possibilità di allenarsi all’aperto, migliorando forza, coordinazione e resistenza. Un luogo ideale per chi ama muoversi in libertà e trovare nuova energia a contatto con l’aria aperta.</p>',
+	},
+	{
+		title: 'Beauty',
+		images: [
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-66-scaled.jpg',
+			'/wp-content/uploads/2025/11/Body-Energie-Ambienti-67-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-66-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-122-scaled.jpg',
+		],
+		html: '<p>Il <strong>Centro Estetico di Body Energie</strong> è il luogo dove bellezza e benessere si incontrano. Offre <strong>trattamenti viso e corpo</strong>, <strong>epilazione laser a diodo</strong> e <strong>programmi dimagranti personalizzati</strong> per valorizzare la tua immagine e migliorare l’equilibrio psicofisico. Un ambiente accogliente e professionale dove ritrovare armonia, luminosità e cura di sé.</p>',
+	},
+	{
+		title: 'Ristobar',
+		images: [
+			'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-34-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-16-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-26-scaled.jpg',
+			'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-23-scaled.jpg',
+		],
+		html: '<p>Al <strong>RistoBar</strong>, situato all’interno del centro sportivo <strong>Body Energie</strong>, vi aspettano colazioni, snack, pause pranzo, bar, aperitivi. La nostra cucina propone piatti locali, semplici, curati e genuini, preparati ogni giorno con ingredienti freschi. Il bar è aperto a tutti, sempre con simpatia e professionalità.</p>',
+	},
+];
 
 const strutturaCarousel = [
 	{ src: '/wp-content/uploads/2025/07/Body-Energie-rose.jpg' },
@@ -175,130 +272,167 @@ const testimonianze = [
 	title="Body Energie - Villafranca di Verona | Sport, Fitness e Salute"
 	description="Body Energie: fitness, benessere e sport a Villafranca di Verona. Sala pesi, corsi fitness, acqua fitness, Body Lab e molto altro su oltre 5.500 mq."
 >
-	<section class="hero container">
-		<h1>body <span class="accent-text">Amazing</span> energie</h1>
+	<HeroCarousel images={heroImages}>
+		<h1 class="hero__title">BODY <span class="accent-text">ENERGIE</span></h1>
 		<p class="hero__lead">Dove sport, movimento e benessere si incontrano.</p>
-		<button class="btn" type="button" data-open-contact data-interest="prova-gratuita">Prova ora</button>
+		<button class="btn hero__btn" type="button" data-open-contact data-interest="prova-gratuita">Prova ora</button>
+	</HeroCarousel>
+
+	<section class="block--black">
+		<MediaCarousel images={fotoCarosello} />
 	</section>
 
-	<section class="container section">
-		<ImageStrip images={heroCarousel} />
+	<section class="block--orange">
+		<div class="storia__inner">
+			<div class="storia__foto" style="background-image:url(/wp-content/uploads/2025/07/stabile-body-energie.jpg)" />
+			<div class="storia__testo-col">
+				<blockquote class="storia__quote">La nostra Storia,<br />il tuo Benessere</blockquote>
+				<div class="storia__testo">
+					<p>
+						<strong>Body Energie nasce in una tiepida serata di novembre del 1994</strong>, al ritorno da un
+						allenamento. Ci siamo chiesti perché a Villafranca non esistesse un luogo capace di accogliere persone,
+						non solo body builder: uno spazio semplice, piacevole, dove allenarsi con serenità e anche con
+						divertimento. Da quel pensiero, quasi uno scherzo, è nato un sogno. E dopo soli due mesi e mezzo,
+						<strong>il 28 febbraio 1995, abbiamo inaugurato il nostro centro</strong>.
+					</p>
+					<p>
+						Da allora siamo guidati dalla stessa passione: migliorare ogni giorno, ascoltare i nostri clienti e
+						cogliere le novità più interessanti del mondo fitness e wellness. La crescita è arrivata naturale: la
+						struttura aveva bisogno di nuovi spazi, nuove energie, nuove possibilità. Così, nel 1998, abbiamo
+						iniziato a progettare il nostro grande traguardo: il Centro del Benessere.
+					</p>
+					<p>
+						<strong>Oggi Body Energie è molto più di una palestra</strong>: è una dimensione dove movimento, salute
+						e benessere si incontrano. <strong>Un luogo in cui sentirsi bene, davvero</strong>.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="container contatori">
+			{
+				contatori.map((c) => (
+					<div class="contatore">
+						<span class="contatore__numero" data-counter data-target={c.target} data-suffix={c.suffisso}>
+							0
+						</span>
+						<span class="contatore__titolo">{c.titolo}</span>
+					</div>
+				))
+			}
+		</div>
 	</section>
 
-	<section class="storia">
-		<div class="container storia__inner">
-			<blockquote class="storia__quote">La nostra Storia,<br />il tuo Benessere</blockquote>
-			<div class="storia__testo">
-				<p>
-					<strong>Body Energie nasce in una tiepida serata di novembre del 1994</strong>, al ritorno da un allenamento.
-					Ci siamo chiesti perché a Villafranca non esistesse un luogo capace di accogliere persone, non solo body
-					builder: uno spazio semplice, piacevole, dove allenarsi con serenità e anche con divertimento. Da quel
-					pensiero, quasi uno scherzo, è nato un sogno. E dopo soli due mesi e mezzo,
-					<strong>il 28 febbraio 1995, abbiamo inaugurato il nostro centro</strong>.
-				</p>
-				<p>
-					Da allora siamo guidati dalla stessa passione: migliorare ogni giorno, ascoltare i nostri clienti e cogliere
-					le novità più interessanti del mondo fitness e wellness. La crescita è arrivata naturale: la struttura
-					aveva bisogno di nuovi spazi, nuove energie, nuove possibilità. Così, nel 1998, abbiamo iniziato a
-					progettare il nostro grande traguardo: il Centro del Benessere.
-				</p>
-				<p>
-					<strong>Oggi Body Energie è molto più di una palestra</strong>: è una dimensione dove movimento, salute e
-					benessere si incontrano. <strong>Un luogo in cui sentirsi bene, davvero</strong>.
-				</p>
+	<script>
+		const counters = document.querySelectorAll('[data-counter]');
+		// Il sito originale mostra i numeri con la virgola (5,500) invece del
+		// punto italiano: replichiamo lo stesso formato, non e' un refuso nostro.
+		const formatta = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		const anima = (el: Element) => {
+			const target = Number(el.getAttribute('data-target'));
+			const suffix = el.getAttribute('data-suffix') || '';
+			const durata = 1500;
+			const inizio = performance.now();
+			function tick(ora: number) {
+				const progresso = Math.min(1, (ora - inizio) / durata);
+				const valore = Math.floor(progresso * target);
+				el.textContent = formatta(valore) + suffix;
+				if (progresso < 1) requestAnimationFrame(tick);
+				else el.textContent = formatta(target) + suffix;
+			}
+			requestAnimationFrame(tick);
+		};
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						anima(entry.target);
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.4 }
+		);
+		counters.forEach((c) => observer.observe(c));
+	</script>
+
+	<section class="block--black">
+		<div class="container section">
+			<h2>Le nostre attività per adulti</h2>
+			<p class="section__intro">
+				Le attività per adulti di Body Energie sono pensate per ritrovare energia, equilibrio e forma fisica, con
+				programmi che spaziano dalla sala pesi ai corsi in acqua, dal Functional Training al Pilates, in un ambiente
+				accogliente e motivante.
+			</p>
+			<div class="card-grid">
+				{attivitaAdulti.map((c) => <FlipCard {...c} titleBack={c.title} />)}
+			</div>
+		</div>
+
+		<div class="container section section-divider">
+			<h2>Le nostre attività per bambini</h2>
+			<p class="section__intro">
+				Le attività per bambini di Body Energie favoriscono la crescita e lo sviluppo motorio attraverso corsi di
+				nuoto, gioco e movimento, in un ambiente sicuro e stimolante guidato da istruttori qualificati.
+			</p>
+			<div class="card-grid">
+				{attivitaBambini.map((c) => <FlipCard {...c} titleBack={c.title} />)}
+			</div>
+		</div>
+
+		<div class="container section section-divider">
+			<h2>Body Lab</h2>
+			<p class="section__intro">
+				<strong>Body Lab</strong> è una realtà dedicata al benessere e alla salute della persona a 360°. I nostri
+				professionisti ti accompagneranno nel migliorare il tuo stato fisico, prevenire eventuali rischi e mantenerti
+				in forma, sempre sotto la guida di esperti qualificati in diversi settori.
+			</p>
+			<div class="card-grid">
+				{bodyLab.map((c) => <FlipCard {...c} titleBack={c.title} />)}
+			</div>
+		</div>
+
+		<div class="container section section-divider">
+			<h2>Servizi extra</h2>
+			<p class="section__intro">
+				Beauty Energie è l’oasi di relax di Body Energie, dove benessere ed estetica si incontrano. Tra termario con
+				sauna e bagno turco e centro estetico con trattamenti viso, corpo e laser, è il luogo ideale per ritrovare
+				equilibrio, energia e luminosità.
+			</p>
+			<div class="card-grid card-grid--2">
+				{serviziExtra.map((c) => <FlipCard {...c} titleBack={c.title} />)}
 			</div>
 		</div>
 	</section>
 
-	<section class="container section contatori">
-		{
-			contatori.map((c) => (
-				<div class="contatore">
-					<span class="contatore__numero">
-						{c.numero}
-						{c.suffisso}
-					</span>
-					<span class="contatore__titolo">{c.titolo}</span>
-				</div>
-			))
-		}
-	</section>
-
-	<section class="container section">
-		<h2>Le nostre attività per adulti</h2>
-		<p class="section__intro">
-			Le attività per adulti di Body Energie sono pensate per ritrovare energia, equilibrio e forma fisica, con
-			programmi che spaziano dalla sala pesi ai corsi in acqua, dal Functional Training al Pilates, in un ambiente
-			accogliente e motivante.
-		</p>
-		<div class="card-grid">
-			{attivitaAdulti.map((c) => <FlipCard {...c} />)}
+	<section class="block--orange section">
+		<div class="container">
+			<h2>La Struttura</h2>
+			<div class="struttura__testo">
+				<p>
+					<strong>Tutto ciò che ti serve per stare bene, in un unico luogo.</strong>
+					Body Energie Wellness Club si estende su oltre <strong>5.500 mq</strong>, di cui
+					<strong>3.000 mq indoor</strong> e <strong>2.500 mq outdoor</strong>, offrendo un’esperienza di benessere
+					completa, moderna e immersiva.
+				</p>
+				<p>
+					La struttura dispone di <strong>3 sale group training</strong>, <strong>2 ampie Gym Floor Technogym</strong> e
+					un’area dedicata al <strong>functional training</strong>, oltre a una <strong>Gym Floor esterna</strong> sul
+					suggestivo terrazzo <strong>Loft Gym</strong>. Il cuore dell’area acqua è una
+					<strong>piscina di circa 250 mq</strong>. L’area benessere comprende <strong>180 mq di termarium</strong>
+					con sauna finlandese, bagno turco, sauna romana, vasca idromassaggio e zona relax tiepidarium.
+				</p>
+				<p>
+					All’esterno, un’area verde di <strong>2.000 mq</strong> ospita lo spazio <strong>Triform</strong> per
+					allenamenti funzionali e attività outdoor, oltre a un <strong>campetto polivalente</strong> per basket e
+					calcio. Body Energie propone <strong>oltre 150 corsi settimanali</strong>, in acqua e a terra, per ogni
+					livello ed età.
+				</p>
+			</div>
+			<Accordion items={accordionItems} />
 		</div>
 	</section>
 
-	<section class="container section">
-		<h2>Le nostre attività per bambini</h2>
-		<p class="section__intro">
-			Le attività per bambini di Body Energie favoriscono la crescita e lo sviluppo motorio attraverso corsi di
-			nuoto, gioco e movimento, in un ambiente sicuro e stimolante guidato da istruttori qualificati.
-		</p>
-		<div class="card-grid">
-			{attivitaBambini.map((c) => <FlipCard {...c} />)}
-		</div>
-	</section>
-
-	<section class="container section">
-		<h2>Body Lab</h2>
-		<p class="section__intro">
-			<strong>Body Lab</strong> è una realtà dedicata al benessere e alla salute della persona a 360°. I nostri
-			professionisti ti accompagneranno nel migliorare il tuo stato fisico, prevenire eventuali rischi e mantenerti
-			in forma, sempre sotto la guida di esperti qualificati in diversi settori.
-		</p>
-		<div class="card-grid">
-			{bodyLab.map((c) => <FlipCard {...c} />)}
-		</div>
-	</section>
-
-	<section class="container section">
-		<h2>Servizi extra</h2>
-		<p class="section__intro">
-			Beauty Energie è l’oasi di relax di Body Energie, dove benessere ed estetica si incontrano. Tra termario con
-			sauna e bagno turco e centro estetico con trattamenti viso, corpo e laser, è il luogo ideale per ritrovare
-			equilibrio, energia e luminosità.
-		</p>
-		<div class="card-grid card-grid--2">
-			{serviziExtra.map((c) => <FlipCard {...c} />)}
-		</div>
-	</section>
-
-	<section class="container section">
-		<h2>La Struttura</h2>
-		<p class="section__intro">
-			<strong>Tutto ciò che ti serve per stare bene, in un unico luogo.</strong>
-			Body Energie Wellness Club si estende su oltre <strong>5.500 mq</strong>, di cui
-			<strong>3.000 mq indoor</strong> e <strong>2.500 mq outdoor</strong>, offrendo un’esperienza di benessere
-			completa, moderna e immersiva.
-		</p>
-		<p class="section__intro">
-			La struttura dispone di <strong>3 sale group training</strong>, <strong>2 ampie Gym Floor Technogym</strong> e
-			un’area dedicata al <strong>functional training</strong>, oltre a una <strong>Gym Floor esterna</strong> sul
-			suggestivo terrazzo <strong>Loft Gym</strong>, pensata per allenarsi all’aria aperta in un contesto esclusivo.
-			Il cuore dell’area acqua è una <strong>piscina di circa 250 mq</strong>, ideale per nuoto e attività di acqua
-			fitness. L’area benessere comprende <strong>180 mq di termarium</strong> con sauna finlandese, bagno turco,
-			sauna romana, vasca idromassaggio e zona relax tiepidarium.
-		</p>
-		<p class="section__intro">
-			All’esterno, un’area verde di <strong>2.000 mq</strong> ospita lo spazio <strong>Triform</strong> per
-			allenamenti funzionali e attività outdoor, oltre a un <strong>campetto polivalente</strong> per basket e calcio.
-			Body Energie propone <strong>oltre 150 corsi settimanali</strong>, in acqua e a terra, per ogni livello ed età,
-			con percorsi personalizzati che uniscono allenamento, benessere e stile di vita attivo.
-		</p>
-		<ul class="spazi">
-			{strutturaSpazi.map((s) => <li>{s}</li>)}
-		</ul>
-	</section>
-
-	<section class="cta-planning">
+	<section class="block--black">
 		<div class="container cta-planning__inner">
 			<div>
 				<h2>Body Energie</h2>
@@ -306,30 +440,31 @@ const testimonianze = [
 				<p>Scopri il Planning delle nostre attività e programma la tua settimana di Sport e Benessere!</p>
 				<a class="btn" href="/orari">Planning settimanale</a>
 			</div>
-			<ImageStrip images={strutturaCarousel} />
+			<MediaCarousel images={strutturaCarousel} />
 		</div>
-	</section>
 
-	<section class="container section testimonianze">
-		<h2>I nostri Soci</h2>
-		<p class="section__intro">Non fidarti solo di quello che diciamo noi</p>
-		<div class="testimonianze__grid">
-			{
-				testimonianze.map((t) => (
-					<figure class="testimonianza">
-						<blockquote>{t.testo}</blockquote>
-						<figcaption>{t.nome}</figcaption>
-					</figure>
-				))
-			}
+		<div class="container section testimonianze">
+			<p class="eyebrow">I nostri Soci</p>
+			<h2 class="testimonianze__title">Non fidarti solo di quello che diciamo noi</h2>
+			<div class="testimonianze__grid">
+				{
+					testimonianze.map((t) => (
+						<figure class="testimonianza">
+							<div class="testimonianza__stars" aria-hidden="true">★★★★★</div>
+							<blockquote>{t.testo}</blockquote>
+							<figcaption>{t.nome}</figcaption>
+						</figure>
+					))
+				}
+			</div>
 		</div>
 	</section>
 </Layout>
 
 <style>
-	.hero {
-		padding-block: 64px 32px;
-		text-align: center;
+	.hero__title {
+		color: var(--bg-alt);
+		font-size: clamp(2.5rem, 6vw, 5rem);
 	}
 
 	.accent-text {
@@ -340,46 +475,81 @@ const testimonianze = [
 		max-width: 640px;
 		margin: 0 auto 24px;
 		font-size: var(--text-md);
+		color: var(--text-on-dark);
+	}
+
+	.hero__btn {
+		padding: 20px 55px;
+		font-size: 20px;
 	}
 
 	.section {
-		padding-block: 48px;
+		padding-block: 56px;
+	}
+
+	.section-divider {
+		border-top: 2px solid var(--accent);
 	}
 
 	.section__intro {
 		max-width: 760px;
-		color: var(--text-muted);
 	}
 
-	.storia {
-		background: var(--bg-alt);
+	.block--orange .section__intro {
+		color: var(--text);
+	}
+
+	.block--black .section__intro {
+		color: #cccccc;
 	}
 
 	.storia__inner {
-		padding-block: 48px;
 		display: grid;
-		grid-template-columns: 1fr 2fr;
-		gap: 32px;
+		grid-template-columns: 46% 1fr;
+		align-items: stretch;
+		min-height: 420px;
+	}
+
+	.storia__foto {
+		background-size: cover;
+		background-position: center;
+		border-radius: 0 20px 20px 0;
+	}
+
+	.storia__testo-col {
+		padding: 48px 5% 32px;
 	}
 
 	.storia__quote {
-		margin: 0;
+		margin: 0 0 24px;
 		font-family: var(--font-heading);
-		font-size: var(--text-xl);
+		font-size: 40px;
+		line-height: 1.15;
 		font-weight: 800;
 		text-transform: uppercase;
-		color: var(--accent);
+		color: var(--text-on-dark);
+	}
+
+	.storia__testo {
+		column-count: 2;
+		column-gap: 30px;
 	}
 
 	.storia__testo p {
-		margin-bottom: 1em;
+		margin: 0 0 1em;
+		color: var(--text);
+		break-inside: avoid;
 	}
 
 	.contatori {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		gap: 24px;
-		text-align: center;
+		padding-block: 32px 56px;
+	}
+
+	.contatore {
+		text-align: left;
 	}
 
 	.contatore__numero {
@@ -394,7 +564,7 @@ const testimonianze = [
 		font-size: var(--text-sm);
 		font-weight: 800;
 		text-transform: uppercase;
-		color: var(--text-muted);
+		color: var(--text);
 	}
 
 	.card-grid {
@@ -408,64 +578,82 @@ const testimonianze = [
 		grid-template-columns: repeat(2, 1fr);
 	}
 
-	.spazi {
-		list-style: none;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-		padding: 0;
+	.struttura__testo p {
+		color: var(--text);
+		max-width: 900px;
 	}
 
-	.spazi li {
-		background: var(--bg-alt);
-		border-radius: var(--radius);
-		padding: 8px 16px;
-		font-weight: 700;
-		font-size: var(--text-sm);
-	}
-
-	.cta-planning {
-		background: var(--text);
-		color: var(--text-on-dark);
-	}
-
-	.cta-planning h2,
-	.cta-planning p {
-		color: var(--text-on-dark);
+	.struttura__testo {
+		margin-bottom: 32px;
 	}
 
 	.cta-planning__inner {
-		padding-block: 48px;
+		padding-block: 56px;
 		display: grid;
+		grid-template-columns: 1fr 1fr;
 		gap: 32px;
+		align-items: center;
+	}
+
+	.testimonianze {
+		text-align: center;
+	}
+
+	.eyebrow {
+		color: var(--accent);
+		text-transform: uppercase;
+		font-weight: 700;
+		margin-bottom: 4px;
+	}
+
+	.testimonianze__title {
+		color: var(--text-on-dark);
+		max-width: 700px;
+		margin-inline: auto;
 	}
 
 	.testimonianze__grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 24px;
-		margin-top: 24px;
+		margin-top: 32px;
+		text-align: left;
 	}
 
 	.testimonianza {
 		margin: 0;
-		background: var(--bg-alt);
-		border-radius: var(--radius);
-		padding: 24px;
+	}
+
+	.testimonianza__stars {
+		color: var(--accent);
+		letter-spacing: 2px;
+		margin-bottom: 12px;
 	}
 
 	.testimonianza blockquote {
 		margin: 0 0 12px;
-		font-style: italic;
+		color: #cccccc;
 	}
 
 	.testimonianza figcaption {
 		font-weight: 700;
+		color: var(--accent);
+		text-transform: uppercase;
 	}
 
 	@media (max-width: 900px) {
 		.storia__inner {
 			grid-template-columns: 1fr;
+			min-height: 0;
+		}
+
+		.storia__foto {
+			height: 260px;
+			border-radius: 0 0 20px 20px;
+		}
+
+		.storia__testo {
+			column-count: 1;
 		}
 
 		.contatori {
@@ -474,7 +662,8 @@ const testimonianze = [
 
 		.card-grid,
 		.card-grid--2,
-		.testimonianze__grid {
+		.testimonianze__grid,
+		.cta-planning__inner {
 			grid-template-columns: 1fr 1fr;
 		}
 	}
@@ -482,7 +671,8 @@ const testimonianze = [
 	@media (max-width: 560px) {
 		.card-grid,
 		.card-grid--2,
-		.testimonianze__grid {
+		.testimonianze__grid,
+		.cta-planning__inner {
 			grid-template-columns: 1fr;
 		}
 	}

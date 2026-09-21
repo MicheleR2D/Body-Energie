@@ -67,6 +67,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 		}
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Font del brand: solo Montserrat, ovunque (titoli e testo) -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+
 		<link rel="icon" href="/wp-content/uploads/2025/12/Favicon-body-Energie.png" />
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonicalURL} />

@@ -1,7 +1,10 @@
 ---
 // Contenuto reale estratto dal template footer di Elementor (post ID 1068) del sito
 // WordPress originale, non riscritto: testi, orari, link e loghi partner sono quelli
-// pubblicati su bodyenergie.it.
+// pubblicati su bodyenergie.it. La sezione "La nostra sede" sostituisce con una mappa
+// statica il widget a pagamento Elfsight Store Locator usato dal sito originale
+// (stessi dati reali: indirizzo, telefono, email), per non introdurre un nuovo
+// servizio a pagamento nello stack.
 const partner = [
 	{ src: '/wp-content/uploads/2025/10/Logo-Asi-PNG.png', alt: 'ASI' },
 	{ src: '/wp-content/uploads/2025/10/logo-coni.png', alt: 'CONI' },
@@ -9,7 +12,11 @@ const partner = [
 	{ src: '/wp-content/uploads/2025/10/csen-logo.svg', alt: 'CSEN' },
 	{ src: '/wp-content/uploads/2025/10/Technogym_Logo.svg_.png', alt: 'Technogym' },
 	{ src: '/wp-content/uploads/2026/04/Logo-Mediolanum.png', alt: 'Mediolanum' },
+	{ src: '/wp-content/uploads/2025/10/3.png', alt: 'Partner' },
+	{ src: '/wp-content/uploads/2025/10/2.png', alt: 'Partner' },
+	{ src: '/wp-content/uploads/2025/10/les-mills-international-ltd-vector-logo-small.png', alt: 'Les Mills' },
 	{ src: '/wp-content/uploads/2025/12/ekoi-logo.png', alt: 'ekoi' },
+	{ src: '/wp-content/uploads/2025/10/3f1ad25eb309b5954e57bf591318daed.png', alt: 'Partner' },
 ];
 ---
 
@@ -20,27 +27,35 @@ const partner = [
 				<p class="ft__eyebrow">inizia oggi!</p>
 				<h2 class="ft__cta-title">Prova ora<br />il nostro centro</h2>
 			</div>
-			<button class="btn" type="button" data-open-contact data-interest="prova-gratuita">Attiva ora</button>
+			<button class="btn btn--dark" type="button" data-open-contact data-interest="prova-gratuita">Attiva ora</button>
+		</div>
+	</div>
+
+	<div class="ft__sede">
+		<div class="container ft__sede-inner">
+			<div>
+				<h2>La nostra sede</h2>
+				<p class="ft__sede-nome">Body Energie <span class="ft__badge">Fitness Club</span></p>
+				<p>Via Adamello, 1, 37069 Villafranca di Verona (VR), Italy</p>
+				<p>+39 045 630 4337</p>
+				<p><a href="mailto:info@bodyenergie.it">info@bodyenergie.it</a></p>
+				<img
+					class="ft__sede-img"
+					src="/wp-content/uploads/2025/07/Body-Energie-rose.jpg"
+					alt="Sede di Body Energie a Villafranca di Verona"
+				/>
+			</div>
+			<iframe
+				class="ft__map"
+				title="Mappa - Body Energie Villafranca di Verona"
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+				src="https://www.google.com/maps?q=Via+Adamello+1+37069+Villafranca+di+Verona+VR&output=embed"
+			></iframe>
 		</div>
 	</div>
 
 	<div class="container ft__grid">
-		<div class="ft__col ft__col--brand">
-			<img
-				class="ft__logo"
-				src="/wp-content/uploads/2025/10/Logo-Body-Energie-scaled-e1768576105736.png"
-				alt="Body Energie"
-				width="200"
-			/>
-			<p>
-				<strong>Body Energie è il tuo punto di riferimento per fitness, benessere e sport a Villafranca di Verona.</strong><br
-				/>
-				Allenati nel nostro centro con attrezzature all'avanguardia, corsi per ogni livello e un'offerta completa per
-				adulti e bambini.
-			</p>
-			<button class="btn" type="button" data-open-contact data-interest="informazioni">Contattaci</button>
-		</div>
-
 		<div class="ft__col">
 			<h3>Orari</h3>
 			<a class="btn ft__planning" href="/orari">Planning settimanale</a>
@@ -116,12 +131,32 @@ const partner = [
 
 	<p class="ft__legal-title">Sito web per la Propaganda dell'Attività Fisica Sportiva Dilettantistica</p>
 
+	<div class="ft__brand">
+		<img
+			class="ft__logo"
+			src="/wp-content/uploads/2025/10/Logo-Body-Energie-scaled-e1768576105736.png"
+			alt="Body Energie"
+			width="200"
+		/>
+		<p>
+			<strong>Body Energie è il tuo punto di riferimento per fitness, benessere e sport a Villafranca di Verona.</strong
+			><br />
+			Allenati nel nostro centro con attrezzature all'avanguardia, corsi per ogni livello e un'offerta completa per
+			adulti e bambini.
+		</p>
+		<button class="btn btn--dark" type="button" data-open-contact data-interest="informazioni">Contattaci</button>
+	</div>
+
 	<div class="container ft__bottom">
 		<p>
 			<strong>Body Energie ssd a.r.l.</strong><br />
 			Via Adamello, 1, 37069 Villafranca di Verona (VR) | 0456304337<br />
 			P.IVA: 03716930239
 		</p>
+		<a class="ft__poweredby" href="https://ready2digital.it" target="_blank" rel="noopener">
+			<span>Powered by</span>
+			<img src="/wp-content/uploads/2026/04/R2D.png" alt="Ready 2 Digital" />
+		</a>
 	</div>
 </footer>
 
@@ -158,6 +193,7 @@ const partner = [
 		margin: 0;
 		text-transform: uppercase;
 		font-weight: 700;
+		color: var(--text);
 	}
 
 	.ft__cta-title {
@@ -165,9 +201,48 @@ const partner = [
 		color: var(--text);
 	}
 
+	.ft__sede {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+	}
+
+	.ft__sede-inner {
+		padding-block: 48px;
+		display: grid;
+		grid-template-columns: 1fr 1.4fr;
+		gap: 32px;
+		align-items: start;
+	}
+
+	.ft__badge {
+		background: var(--accent);
+		color: var(--text-on-dark);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		padding: 2px 8px;
+		border-radius: 4px;
+		margin-left: 8px;
+	}
+
+	.ft__sede-nome {
+		font-weight: 700;
+		font-size: var(--text-md);
+	}
+
+	.ft__sede-img {
+		border-radius: var(--radius);
+		margin-top: 16px;
+	}
+
+	.ft__map {
+		width: 100%;
+		height: 320px;
+		border: 0;
+		border-radius: var(--radius);
+	}
+
 	.ft__grid {
 		display: grid;
-		grid-template-columns: 2fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		gap: 32px;
 		padding-block: 48px;
 	}
@@ -199,10 +274,6 @@ const partner = [
 	.ft__estivi summary {
 		cursor: pointer;
 		margin-bottom: 12px;
-	}
-
-	.ft__logo {
-		margin-bottom: 16px;
 	}
 
 	.ft__partner {
@@ -240,15 +311,53 @@ const partner = [
 		opacity: 0.7;
 	}
 
+	.ft__brand {
+		background: var(--bg-cream);
+		color: var(--text);
+		text-align: center;
+		padding: 48px 20px;
+	}
+
+	.ft__brand p {
+		max-width: 560px;
+		margin-inline: auto 16px auto;
+		margin-bottom: 20px;
+	}
+
+	.ft__logo {
+		margin-bottom: 20px;
+	}
+
 	.ft__bottom {
 		border-top: 1px solid rgba(255, 255, 255, 0.15);
 		padding-block: 24px;
 		font-size: var(--text-sm);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+
+	.ft__poweredby {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: var(--text-sm);
+	}
+
+	.ft__poweredby img {
+		height: 20px;
+		border-radius: 0;
 	}
 
 	@media (max-width: 900px) {
 		.ft__grid {
 			grid-template-columns: 1fr 1fr;
+		}
+
+		.ft__sede-inner {
+			grid-template-columns: 1fr;
 		}
 	}
 
