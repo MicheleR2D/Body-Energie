@@ -1,0 +1,311 @@
+---
+// Riga di "accordion orizzontale": card affiancate che si aprono in
+// larghezza. Chiusa mostra una singola immagine ferma; aperta mostra le
+// foto in una striscia scorrevole (avanzamento automatico + trascinamento
+// manuale). Solo una card puo' restare aperta in tutta la sezione: aprirne
+// una chiude qualunque altra, anche in un'altra riga.
+interface Item {
+	title: string;
+	html: string;
+	images: string[];
+}
+interface Props {
+	items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<div class="srow" data-srow>
+	{
+		items.map((item) => (
+			<div class="scard" data-scard>
+				<div class="scard__visual">
+					<div class="scard__track" data-scard-track>
+						{item.images.map((src) => (
+							<div class="scard__slide" style={`background-image:url(${src})`} />
+						))}
+					</div>
+					<div class="scard__scrim" />
+					<h3 class="scard__title">{item.title}</h3>
+				</div>
+
+				<div class="scard__panel">
+					<div class="scard__panel-inner">
+						<h4 class="scard__panel-title">{item.title}</h4>
+						<div class="scard__text" set:html={item.html} />
+					</div>
+				</div>
+
+				<button class="scard__toggle" type="button" data-scard-toggle aria-expanded="false">
+					<span class="scard__toggle-icon" data-scard-icon aria-hidden="true">
+						→
+					</span>
+					<span class="scard__toggle-label" data-scard-label>
+						Apri
+					</span>
+				</button>
+			</div>
+		))
+	}
+</div>
+
+<script>
+	const allCards = Array.from(document.querySelectorAll<HTMLElement>('[data-scard]'));
+	const allRows = Array.from(document.querySelectorAll<HTMLElement>('[data-srow]'));
+	const timers = new WeakMap<HTMLElement, number>();
+
+	function startAuto(track: HTMLElement) {
+		stopAuto(track);
+		const id = window.setInterval(() => {
+			const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+			if (atEnd) track.scrollTo({ left: 0, behavior: 'smooth' });
+			else track.scrollBy({ left: track.clientWidth, behavior: 'smooth' });
+		}, 3200);
+		timers.set(track, id);
+	}
+
+	function stopAuto(track: HTMLElement) {
+		const id = timers.get(track);
+		if (id) window.clearInterval(id);
+	}
+
+	function setOpen(card: HTMLElement | null) {
+		allCards.forEach((c) => {
+			const isOpen = c === card;
+			c.classList.toggle('is-open', isOpen);
+			const btn = c.querySelector<HTMLButtonElement>('[data-scard-toggle]');
+			const label = c.querySelector('[data-scard-label]');
+			const icon = c.querySelector('[data-scard-icon]');
+			if (btn) btn.setAttribute('aria-expanded', String(isOpen));
+			if (label) label.textContent = isOpen ? 'Chiudi' : 'Apri';
+			if (icon) icon.textContent = isOpen ? '←' : '→';
+
+			const track = c.querySelector<HTMLElement>('[data-scard-track]');
+			if (!track) return;
+			if (isOpen) startAuto(track);
+			else {
+				stopAuto(track);
+				track.scrollTo({ left: 0, behavior: 'auto' });
+			}
+		});
+		allRows.forEach((row) => row.classList.toggle('has-open', !!card && row.contains(card)));
+	}
+
+	allCards.forEach((card) => {
+		const btn = card.querySelector<HTMLButtonElement>('[data-scard-toggle]');
+		const track = card.querySelector<HTMLElement>('[data-scard-track]');
+		btn?.addEventListener('click', () => {
+			setOpen(card.classList.contains('is-open') ? null : card);
+		});
+		// La rotazione automatica non deve litigare con un trascinamento manuale.
+		if (track) {
+			track.addEventListener('mouseenter', () => stopAuto(track));
+			track.addEventListener('mouseleave', () => {
+				if (card.classList.contains('is-open')) startAuto(track);
+			});
+		}
+	});
+</script>
+
+<style>
+	.srow {
+		display: flex;
+		gap: 6px;
+		height: 340px;
+		padding-inline: 5%;
+		margin-bottom: 16px;
+	}
+
+	.scard {
+		position: relative;
+		display: flex;
+		flex: 1 1 0;
+		min-width: 0;
+		overflow: hidden;
+		border-radius: var(--radius);
+		background: var(--bg);
+		transition: flex-grow 0.85s var(--ease-out-crit);
+	}
+
+	.scard.is-open {
+		flex-grow: 2.4;
+	}
+
+	.srow.has-open .scard:not(.is-open) {
+		flex-grow: 0.7;
+	}
+
+	/* --- Striscia immagine: si restringe da dentro la card quando si apre,
+	   dando l'impressione che il pannello di testo emerga da li'. --- */
+	.scard__visual {
+		position: relative;
+		flex: 1 1 100%;
+		min-width: 0;
+		overflow: hidden;
+		transition: flex-basis 0.85s var(--ease-out-crit);
+	}
+
+	.scard.is-open .scard__visual {
+		flex: 0 0 34%;
+	}
+
+	/* Chiusa: una sola immagine ferma (niente scroll). Aperta: striscia
+	   scorrevole che avanza da sola ma si puo' anche trascinare a mano. */
+	.scard__track {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		overflow-x: hidden;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.scard__track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.scard.is-open .scard__track {
+		overflow-x: auto;
+	}
+
+	.scard__slide {
+		flex: 0 0 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center;
+		scroll-snap-align: start;
+	}
+
+	.scard__scrim {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background: linear-gradient(0deg, rgba(10, 10, 10, 0.75) 0%, rgba(10, 10, 10, 0.1) 45%, rgba(10, 10, 10, 0.3) 100%);
+		pointer-events: none;
+	}
+
+	.scard__title {
+		position: absolute;
+		left: 20px;
+		bottom: 16px;
+		z-index: 2;
+		margin: 0;
+		max-width: calc(100% - 40px);
+		font-family: var(--font-heading);
+		font-size: 19px;
+		font-weight: 800;
+		text-transform: uppercase;
+		color: var(--text-on-dark);
+		pointer-events: none;
+	}
+
+	/* Bottone apri/chiudi: ancorato alla card intera (non alla striscia
+	   immagine che si restringe), cosi' "chiudi" resta dove era "apri" e
+	   non costringe l'utente a rincorrerlo. Nessuno sfondo. */
+	.scard__toggle {
+		position: absolute;
+		right: 16px;
+		bottom: 16px;
+		z-index: 3;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		background: none;
+		border: none;
+		padding: 0;
+		font-family: var(--font-heading);
+		font-size: var(--text-xs);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--text-on-dark);
+		cursor: pointer;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	}
+
+	.scard.is-open .scard__toggle {
+		color: var(--text);
+		text-shadow: none;
+	}
+
+	.scard__toggle-icon {
+		color: var(--accent);
+		font-size: 18px;
+		line-height: 1;
+	}
+
+	/* --- Pannello testo: parte a larghezza zero dentro la card e si apre
+	   in orizzontale, come se uscisse da dietro la striscia immagine. --- */
+	.scard__panel {
+		flex: 0 0 0%;
+		min-width: 0;
+		overflow: hidden;
+		background: var(--bg);
+		transition: flex-basis 0.85s var(--ease-out-crit);
+	}
+
+	.scard.is-open .scard__panel {
+		flex: 1 1 66%;
+	}
+
+	.scard__panel-inner {
+		width: 100%;
+		height: 100%;
+		padding: 24px 28px;
+		overflow-y: auto;
+		opacity: 0;
+		transition: opacity 0.4s ease;
+	}
+
+	.scard.is-open .scard__panel-inner {
+		opacity: 1;
+		transition-delay: 0.4s;
+	}
+
+	.scard__panel-title {
+		margin: 0 0 8px;
+		font-family: var(--font-heading);
+		font-size: 19px;
+		font-weight: 800;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.scard__text {
+		color: var(--text);
+		font-size: var(--text-sm);
+		line-height: 1.55;
+	}
+
+	.scard__text :global(p) {
+		margin: 0 0 0.8em;
+	}
+
+	.scard__text :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	@media (max-width: 900px) {
+		.srow {
+			flex-direction: column;
+			height: auto;
+		}
+
+		.scard {
+			flex-direction: column;
+			height: 220px;
+		}
+
+		.scard.is-open {
+			height: auto;
+		}
+
+		.scard.is-open .scard__visual {
+			flex-basis: 180px;
+		}
+
+		.scard.is-open .scard__panel {
+			flex-basis: auto;
+		}
+	}
+</style>

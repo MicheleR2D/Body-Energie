@@ -143,6 +143,25 @@ body.lf-locked {
   padding-top: 40px;
 }
 
+/* Spazio neutro (non bianco: una fascia scura) tra una sezione a piena
+   larghezza e la successiva, cosi' i blocchi di colore non si toccano
+   direttamente l'uno con l'altro. Un bordo invece di un margine, cosi'
+   la fascia ha un colore proprio indipendente dallo sfondo della pagina. */
+main > section ~ section {
+  border-top: 56px solid var(--bg-dark);
+}
+
+/* La fascia prende il colore della sezione che segue (invece di un grigio
+   scuro fisso), cosi' non crea un "gradino" visibile quando la sezione
+   dopo e' arancione o usa una tonalita' di nero diversa da --bg-dark. */
+main > section.block--orange {
+  border-top-color: var(--accent);
+}
+
+main > section.attivita {
+  border-top-color: var(--bg-dark-deep);
+}
+
 /* ---- Reveal on scroll -------------------------------------------------
    Un solo IntersectionObserver condiviso (vedi Layout.astro) aggiunge
    .is-visible. La variante si sceglie per elemento con data-anim. */

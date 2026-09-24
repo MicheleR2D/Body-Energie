@@ -8,7 +8,7 @@ import ActivityGrid from '../components/ActivityGrid.astro';
 import MediaCarousel from '../components/MediaCarousel.astro';
 import PhotoMarquee from '../components/PhotoMarquee.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
-import Accordion from '../components/Accordion.astro';
+import StrutturaRow from '../components/StrutturaRow.astro';
 
 const heroImages = [
 	'/wp-content/uploads/2025/12/Body-Energie-Ambienti-57-scaled.jpg',
@@ -446,27 +446,24 @@ const testimonianze = [
 			<h2>La Struttura</h2>
 			<div class="struttura__testo">
 				<p>
-					<strong>Tutto ciò che ti serve per stare bene, in un unico luogo.</strong>
-					Body Energie Wellness Club si estende su oltre <strong>5.500 mq</strong>, di cui
-					<strong>3.000 mq indoor</strong> e <strong>2.500 mq outdoor</strong>, offrendo un’esperienza di benessere
-					completa, moderna e immersiva.
+					<strong>Tutto ciò che ti serve per stare bene, in un unico luogo:</strong> oltre <strong>5.500 mq</strong>
+					(<strong>3.000 mq indoor</strong> e <strong>2.500 mq outdoor</strong>) con <strong>3 sale group training</strong>,
+					<strong>2 ampie Gym Floor Technogym</strong>, un’area <strong>functional training</strong> e una
+					<strong>Gym Floor esterna</strong> sul terrazzo <strong>Loft Gym</strong>, oltre a una
+					<strong>piscina di circa 250 mq</strong> e <strong>180 mq di termarium</strong> con sauna finlandese, bagno
+					turco, sauna romana, idromassaggio e zona relax tiepidarium.
 				</p>
 				<p>
-					La struttura dispone di <strong>3 sale group training</strong>, <strong>2 ampie Gym Floor Technogym</strong> e
-					un’area dedicata al <strong>functional training</strong>, oltre a una <strong>Gym Floor esterna</strong> sul
-					suggestivo terrazzo <strong>Loft Gym</strong>. Il cuore dell’area acqua è una
-					<strong>piscina di circa 250 mq</strong>. L’area benessere comprende <strong>180 mq di termarium</strong>
-					con sauna finlandese, bagno turco, sauna romana, vasca idromassaggio e zona relax tiepidarium.
-				</p>
-				<p>
-					All’esterno, un’area verde di <strong>2.000 mq</strong> ospita lo spazio <strong>Triform</strong> per
-					allenamenti funzionali e attività outdoor, oltre a un <strong>campetto polivalente</strong> per basket e
-					calcio. Body Energie propone <strong>oltre 150 corsi settimanali</strong>, in acqua e a terra, per ogni
-					livello ed età.
+					All’esterno, <strong>2.000 mq</strong> di area verde ospitano lo spazio <strong>Triform</strong> per
+					allenamenti funzionali e un <strong>campetto polivalente</strong> per basket e calcio, con
+					<strong>oltre 150 corsi settimanali</strong> in acqua e a terra, per ogni livello ed età.
 				</p>
 			</div>
-			<Accordion items={accordionItems} />
 		</div>
+		<StrutturaRow items={accordionItems.slice(0, 2)} />
+		<StrutturaRow items={accordionItems.slice(2, 4)} />
+		<StrutturaRow items={accordionItems.slice(4, 6)} />
+		<StrutturaRow items={accordionItems.slice(6, 7)} />
 	</section>
 
 	<section class="block--black">
@@ -524,9 +521,22 @@ const testimonianze = [
 		padding-block: 56px;
 	}
 
+	/* La sezione "La Struttura" e' gia' preceduta dalla fascia di 56px tra
+	   sezioni (vedi "section ~ section" in global.css): niente doppio
+	   padding, solo quello della fascia. */
+	section.section {
+		padding-top: 0;
+	}
+
 	.attivita__block {
 		background: var(--block-bg);
 		padding-block: 56px;
+	}
+
+	/* Stesso discorso: il primo blocco della sezione "attivita" e' gia'
+	   preceduto dalla fascia tra sezioni. */
+	.attivita__block:first-child {
+		padding-top: 0;
 	}
 
 	.attivita h2 {
@@ -648,12 +658,13 @@ const testimonianze = [
 		margin-bottom: 32px;
 	}
 
-	.cta-planning__inner {
-		padding-block: 56px;
+.cta-planning__inner {
+		padding-top: 0;
+		padding-bottom: 56px;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 32px;
-		align-items: center;
+		align-items: start;
 	}
 
 	.testimonianze {
