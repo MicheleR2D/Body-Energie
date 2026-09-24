@@ -52,51 +52,69 @@ button,
 input[type="button"],
 input[type="submit"],
 .btn {
+  /* Il riempimento in hover e' sempre il colore del bordo; il testo in
+     hover e' arancione (bordo bianco/nero) o bianco (bordo arancione) —
+     ogni variante si limita a cambiare queste due variabili. */
+  --btn-border: var(--accent);
+  --btn-hover-text: var(--text-on-dark);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-block;
   font-family: var(--font-heading);
   font-weight: 800;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
-  background: var(--accent);
-  color: var(--text-on-dark);
-  border: 2px solid var(--accent);
-  border-radius: 0;
+  background: transparent;
+  color: var(--btn-border);
+  border: 2px solid var(--btn-border);
+  border-radius: 8px;
   padding: 14px 24px;
   cursor: pointer;
   white-space: nowrap;
+  transition: color 0.35s ease, transform 0.25s var(--ease-out-crit, ease);
+}
+
+/* Riempimento che entra da sinistra (colore del bordo) + leggero zoom,
+   invece del semplice cambio di colore. */
+button::before,
+input[type="button"]::before,
+input[type="submit"]::before,
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--btn-border);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
 }
 
 button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 .btn:hover {
-  background: var(--text);
-  border-color: var(--text);
-  color: var(--accent);
+  color: var(--btn-hover-text);
+  transform: scale(1.05);
+}
+
+button:hover::before,
+input[type="button"]:hover::before,
+input[type="submit"]:hover::before,
+.btn:hover::before {
+  transform: scaleX(1);
 }
 
 .btn--outline {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--text);
-}
-
-.btn--outline:hover {
-  background: var(--text);
-  color: var(--text-on-dark);
+  --btn-border: var(--text);
+  --btn-hover-text: var(--accent);
 }
 
 .btn--dark {
-  background: var(--text);
-  border-color: var(--text);
-  color: var(--text-on-dark);
-}
-
-.btn--dark:hover {
-  background: var(--bg);
-  border-color: var(--bg);
-  color: var(--text);
+  --btn-border: var(--text);
+  --btn-hover-text: var(--accent);
 }
 
 .container {

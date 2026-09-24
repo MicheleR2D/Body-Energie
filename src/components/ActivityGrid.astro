@@ -34,7 +34,7 @@ const { items, columns = 3, gapTop = 56, startIndex = 0 } = Astro.props;
 						<strong class="card__name">{item.title}</strong>
 						<div class="card__hover">
 							<p class="card__desc">{item.description}</p>
-							<span class="card__more">Scopri di più →</span>
+							<span class="btn card__more">Scopri di più →</span>
 						</div>
 					</div>
 				</div>
@@ -213,11 +213,15 @@ const { items, columns = 3, gapTop = 56, startIndex = 0 } = Astro.props;
 		font-size: var(--text-xs);
 		font-weight: 700;
 		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--bg-dark);
-		background: var(--accent);
 		padding: 0.55rem 1rem;
 		border-radius: 100px;
+	}
+
+	/* Niente zoom qui: il pallino sta dentro due contenitori con
+	   overflow:hidden (.card__clip e .card__hover) troppo stretti, lo zoom
+	   lo tagliava ai bordi. */
+	.card__more:hover {
+		transform: none;
 	}
 
 	@media (max-width: 900px) {

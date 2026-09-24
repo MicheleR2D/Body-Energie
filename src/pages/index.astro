@@ -443,22 +443,7 @@ const testimonianze = [
 
 	<section class="block--orange section">
 		<div class="container-wide">
-			<h2>La Struttura</h2>
-			<div class="struttura__testo">
-				<p>
-					<strong>Tutto ciò che ti serve per stare bene, in un unico luogo:</strong> oltre <strong>5.500 mq</strong>
-					(<strong>3.000 mq indoor</strong> e <strong>2.500 mq outdoor</strong>) con <strong>3 sale group training</strong>,
-					<strong>2 ampie Gym Floor Technogym</strong>, un’area <strong>functional training</strong> e una
-					<strong>Gym Floor esterna</strong> sul terrazzo <strong>Loft Gym</strong>, oltre a una
-					<strong>piscina di circa 250 mq</strong> e <strong>180 mq di termarium</strong> con sauna finlandese, bagno
-					turco, sauna romana, idromassaggio e zona relax tiepidarium.
-				</p>
-				<p>
-					All’esterno, <strong>2.000 mq</strong> di area verde ospitano lo spazio <strong>Triform</strong> per
-					allenamenti funzionali e un <strong>campetto polivalente</strong> per basket e calcio, con
-					<strong>oltre 150 corsi settimanali</strong> in acqua e a terra, per ogni livello ed età.
-				</p>
-			</div>
+			<h2 class="struttura__title">La Struttura</h2>
 		</div>
 		<StrutturaRow items={accordionItems.slice(0, 2)} />
 		<StrutturaRow items={accordionItems.slice(2, 4)} />
@@ -649,13 +634,11 @@ const testimonianze = [
 		color: var(--text);
 	}
 
-	.struttura__testo p {
-		color: var(--text);
-		max-width: 900px;
-	}
-
-	.struttura__testo {
-		margin-bottom: 32px;
+	.struttura__title {
+		font-size: 40px;
+		font-weight: 800;
+		color: var(--text-on-dark);
+		margin: 0 0 56px;
 	}
 
 .cta-planning__inner {

@@ -54,21 +54,56 @@ import { megaMenu } from '../data/nav';
 		const aperto = nav?.classList.toggle('hd__nav--aperto');
 		toggle.setAttribute('aria-expanded', aperto ? 'true' : 'false');
 	});
+
+	// L'header cambia colore (sfondo a gradiente, voci col colore che
+	// prima era lo sfondo) appena si inizia a scorrere la pagina.
+	const header = document.querySelector('.hd');
+	const aggiornaScroll = () => header?.classList.toggle('hd--scrolled', window.scrollY > 10);
+	aggiornaScroll();
+	window.addEventListener('scroll', aggiornaScroll, { passive: true });
 </script>
 
 <style>
 	.hd {
-		background: var(--bg-alt);
-		border-bottom: 1px solid var(--border);
-		position: sticky;
+		background: transparent;
+		border-bottom: 1px solid transparent;
+		position: fixed;
 		top: 0;
+		left: 0;
+		right: 0;
 		z-index: 40;
+		transition: background 0.3s ease, border-color 0.3s ease;
+	}
+
+	/* In cima alla pagina l'header e' trasparente (sopra la hero scura):
+	   voci di menu' bianche. Appena si scorre torna l'header originale,
+	   sfondo crema pieno, voci di menu' nel colore originale (nero). */
+	.hd__col-title,
+	.hd__chevron {
+		color: var(--text-on-dark);
+	}
+
+	.hd__col + .hd__col::before {
+		background: var(--text-on-dark);
+	}
+
+	.hd.hd--scrolled {
+		background: var(--bg-alt);
+		border-bottom-color: var(--border);
+	}
+
+	.hd--scrolled .hd__col-title,
+	.hd--scrolled .hd__chevron {
+		color: var(--text);
+	}
+
+	.hd--scrolled .hd__col + .hd__col::before {
+		background: var(--accent);
 	}
 
 	.hd__chevron {
 		margin-left: 4px;
 		vertical-align: middle;
-		color: var(--accent);
 	}
 
 	.hd__actions {
@@ -81,16 +116,15 @@ import { megaMenu } from '../data/nav';
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-block: 12px;
-		gap: 24px;
+		padding-block: 8px;
 	}
 
 	.hd__logo {
 		text-decoration: none;
 		display: block;
 		-webkit-tap-highlight-color: transparent;
-		width: 154px;
-		height: 60px;
+		width: 113px;
+		height: 44px;
 		background-image: url('/wp-content/uploads/2025/10/Logo-Body-Energie-header.png');
 		background-repeat: no-repeat;
 		background-position: left center;
@@ -116,17 +150,17 @@ import { megaMenu } from '../data/nav';
 	.hd__nav {
 		display: flex;
 		align-items: center;
-		gap: 32px;
 		flex: 1;
-		justify-content: flex-end;
 	}
 
+	/* Margini automatici sui due lati: il menu resta sempre esattamente a
+	   meta' strada tra il logo e i bottoni, qualunque sia la loro larghezza. */
 	.hd__mega {
 		list-style: none;
 		display: flex;
 		align-items: center;
 		gap: 20px;
-		margin: 0;
+		margin-inline: auto;
 		padding: 0;
 	}
 
@@ -142,7 +176,6 @@ import { megaMenu } from '../data/nav';
 		transform: translateY(-50%);
 		width: 2px;
 		height: 22px;
-		background: var(--accent);
 	}
 
 	.hd__col-title {
@@ -194,26 +227,19 @@ import { megaMenu } from '../data/nav';
 		font-size: 14px;
 		padding: 10px 16px;
 		text-align: center;
-		border-radius: 0;
 	}
 
 	.hd__cta--contact {
-		background: var(--bg);
-		border-color: var(--text);
-		color: var(--text);
+		--btn-border: var(--text-on-dark);
+		--btn-hover-text: var(--accent);
 	}
 
-	.hd__cta--contact:hover {
-		background: var(--text);
-		color: var(--bg);
-	}
-
-	.hd__cta--primary {
-		color: var(--text);
-	}
-
-	.hd__cta--primary:hover {
-		color: var(--accent);
+	/* Header scrollato: l'header torna crema, quindi il bottone torna al
+	   bordo/testo neri (con la stessa regola dell'hover: bordo nero ->
+	   testo in hover arancione). */
+	.hd--scrolled .hd__cta--contact {
+		--btn-border: var(--text);
+		--btn-hover-text: var(--accent);
 	}
 
 	@media (max-width: 900px) {
