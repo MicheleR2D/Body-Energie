@@ -1,0 +1,682 @@
+---
+// Stesso contenuto reale del footer originale (post ID 1068 di Elementor) e stessi
+// loghi partner, ma riorganizzato seguendo la struttura del footer di Sito-Ronchiverdi
+// (sezione "dove siamo" con mappa, griglia footer, marquee federazioni, sezione
+// "lavora con noi", pillole legal, riga finale) invece del layout piatto originale.
+// La sezione "La nostra sede" sostituisce con una mappa statica il widget a
+// pagamento Elfsight Store Locator del sito originale (stessi dati reali:
+// indirizzo, telefono, email), per non introdurre un nuovo servizio a pagamento.
+const address = 'Via Adamello, 1, 37069 Villafranca di Verona (VR)';
+const mapsEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+
+const social = [
+	{ href: 'https://www.facebook.com/www.bodyenergie.it', label: 'Facebook' },
+	{ href: 'https://www.instagram.com/body_energie/', label: 'Instagram' },
+	{ href: 'https://www.youtube.com/@bodyenergie1631', label: 'YouTube' },
+];
+
+const legalLinks = [
+	{ href: '/privacy-body-energie', label: 'Privacy' },
+	{ href: '/wp-content/uploads/2025/12/Regolamento-Body-Energie.pdf', label: 'Regolamento', esterno: true },
+	{
+		href: '/wp-content/uploads/2025/12/MODELLO-ORGANIZZATIVO-E-DI-CONTROLLO-DELLATTIVITA-SPORTIVA.pdf',
+		label: 'Modello Organizzativo',
+		esterno: true,
+	},
+	{ href: '/wp-content/uploads/2025/12/contributi.pdf', label: 'Contributi Pubblici', esterno: true },
+];
+
+const partner = [
+	{ src: '/wp-content/uploads/2025/10/Logo-Asi-PNG.png', alt: 'ASI' },
+	{ src: '/wp-content/uploads/2025/10/logo-coni.png', alt: 'CONI' },
+	{ src: '/wp-content/uploads/2025/10/anif-logo-1.png', alt: 'ANIF' },
+	{ src: '/wp-content/uploads/2025/10/csen-logo.svg', alt: 'CSEN' },
+	{ src: '/wp-content/uploads/2025/10/Technogym_Logo.svg_.png', alt: 'Technogym' },
+	{ src: '/wp-content/uploads/2026/04/Logo-Mediolanum.png', alt: 'Mediolanum' },
+	{ src: '/wp-content/uploads/2025/10/3.png', alt: 'Partner' },
+	{ src: '/wp-content/uploads/2025/10/2.png', alt: 'Partner' },
+	{ src: '/wp-content/uploads/2025/10/les-mills-international-ltd-vector-logo-small.png', alt: 'Les Mills' },
+	{ src: '/wp-content/uploads/2025/12/ekoi-logo.png', alt: 'ekoi' },
+	{ src: '/wp-content/uploads/2025/10/3f1ad25eb309b5954e57bf591318daed.png', alt: 'Partner' },
+];
+---
+
+<footer class="ft">
+	<div class="ft__cta">
+		<div class="container ft__cta-inner">
+			<div>
+				<p class="ft__eyebrow">inizia oggi!</p>
+				<h2 class="ft__cta-title">Prova ora<br />il nostro centro</h2>
+			</div>
+			<button class="btn btn--dark" type="button" data-open-contact data-interest="prova-gratuita">Attiva ora</button>
+		</div>
+	</div>
+
+	<section class="find-us" aria-label="Come trovarci">
+		<div class="find-us__head">
+			<span class="eyebrow">Dove siamo</span>
+			<h2 class="find-us__title">Vieni a <em class="accent-text">trovarci</em></h2>
+		</div>
+
+		<div class="find-us__map">
+			<iframe
+				src={mapsEmbedSrc}
+				title={`Mappa - Body Energie, ${address}`}
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+			></iframe>
+		</div>
+
+		<div class="find-us__info">
+			<div class="find-us__item">
+				<p class="find-us__label">Indirizzo</p>
+				<p>{address}</p>
+			</div>
+			<div class="find-us__item">
+				<p class="find-us__label">Orari Centro</p>
+				<p>Lun-Ven 5.00-22.00 · Sab 8.00-18.00 · Dom 8.00-13.30</p>
+			</div>
+			<div class="find-us__item">
+				<p class="find-us__label">Orari Termarium</p>
+				<p>Lun-Mar-Gio 10.00-21.00 · Sab 10.00-17.30 · Dom 10.00-13.00</p>
+			</div>
+			<div class="find-us__item">
+				<p class="find-us__label">Contatti</p>
+				<p><a href="tel:+390456304337">045 630 4337</a></p>
+				<p><a href="mailto:info@bodyenergie.it">info@bodyenergie.it</a></p>
+			</div>
+		</div>
+
+		<div class="find-us__cta">
+			<a class="btn btn--outline btn--outline-dark" href={mapsDirectionsUrl} target="_blank" rel="noopener">
+				Indicazioni
+			</a>
+			<button class="btn" type="button" data-open-contact data-interest="informazioni">Contattaci</button>
+		</div>
+	</section>
+
+	<div class="footer-grid">
+		<div class="footer-brand">
+			<img
+				src="/wp-content/uploads/2025/10/Logo-Body-Energie-scaled-e1768576105736.png"
+				alt="Body Energie"
+				height="40"
+			/>
+			<p class="muted footer-blurb">
+				Body Energie è il tuo punto di riferimento per fitness, benessere e sport a Villafranca di Verona. Attrezzature
+				all'avanguardia, corsi per ogni livello e un'offerta completa per adulti e bambini.
+			</p>
+			<ul class="footer-contacts">
+				<li><a href="tel:+390456304337">045 630 4337</a></li>
+				<li class="muted">{address}</li>
+			</ul>
+			<div class="footer-social">
+				{
+					social.map((s) => (
+						<a class="social-btn" href={s.href} target="_blank" rel="noopener" aria-label={`Body Energie su ${s.label}`}>
+							<span>{s.label}</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="footer-col">
+			<p class="footer-heading">Orari</p>
+			<a class="btn footer-planning" href="/orari">Planning settimanale</a>
+
+			<p class="footer-heading footer-heading--spaced">Centro</p>
+			<ul class="footer-orari">
+				<li><b>Lun - Ven:</b> 5.00 - 22.00</li>
+				<li><b>Sabato:</b> 8.00 - 18.00</li>
+				<li><b>Domenica:</b> 8.00 - 13.30</li>
+			</ul>
+
+			<p class="footer-heading">Termarium</p>
+			<ul class="footer-orari">
+				<li><b>Lun - Mar - Gio:</b> 10.00 - 21.00</li>
+				<li><b>Sabato:</b> 10.00 - 17.30</li>
+				<li><b>Domenica:</b> 10.00 - 13.00</li>
+			</ul>
+
+			<details class="footer-estivi">
+				<summary>Orari estivi</summary>
+				<p class="footer-heading footer-heading--spaced">Centro</p>
+				<ul class="footer-orari">
+					<li><b>Lun - Ven:</b> 5.00 - 22.00</li>
+					<li><b>Sabato:</b> 8.00 - 13.30</li>
+					<li><b>Domenica:</b> 8.00 - 13.30</li>
+				</ul>
+				<p class="footer-heading">Termarium</p>
+				<ul class="footer-orari">
+					<li><b>Lunedì:</b> 18.00 - 21.00</li>
+					<li><b>Giovedì:</b> 10.00 - 21.00</li>
+				</ul>
+			</details>
+		</div>
+	</div>
+
+	<section class="federazioni" aria-label="Federazioni ed enti sportivi">
+		<p class="federazioni__claim">Sito web per la Propaganda dell'Attività Fisica Sportiva Dilettantistica</p>
+		<div class="marquee">
+			<div class="marquee__track">
+				{
+					[0, 1].map((copy) => (
+						<ul class="marquee__group" aria-hidden={copy === 1 ? 'true' : undefined}>
+							{partner.map((p) => (
+								<li>
+									<img src={p.src} alt={copy === 1 ? '' : p.alt} loading="lazy" />
+								</li>
+							))}
+						</ul>
+					))
+				}
+			</div>
+		</div>
+		<a class="federazioni__ue" href="/contributo-regione-veneto">
+			<img
+				src="/wp-content/uploads/2026/03/Stringa-Coesione_UE_Repubblica_Regione-Veneto_VETTORIALE-scaled.jpg"
+				alt="Finanziato dall'Unione Europea, Repubblica Italiana, Regione del Veneto"
+			/>
+		</a>
+	</section>
+
+	<section class="footer-lavora" aria-label="Lavora con noi">
+		<p class="footer-heading">Lavora con noi</p>
+		<!-- TODO: nel sito originale il bottone "Posizioni aperte" non aveva una destinazione configurata -->
+		<a class="btn btn--outline btn--outline-dark" href="#">Posizioni aperte</a>
+	</section>
+
+	<section class="legal" aria-label="Documenti e informative">
+		<p class="footer-heading">Risorse</p>
+		<ul class="legal-list">
+			{
+				legalLinks.map((l) => (
+					<li>
+						<a href={l.href} target={l.esterno ? '_blank' : undefined} rel={l.esterno ? 'noopener' : undefined}>
+							{l.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<div class="footer-bottom">
+		<p class="muted">© {new Date().getFullYear()} Body Energie ssd a.r.l.</p>
+		<address class="footer-societa">
+			<span>{address}</span>
+			<span>P.IVA: 03716930239</span>
+		</address>
+	</div>
+
+	<div class="footer-firma">
+		<span>Powered by</span>
+		<a href="https://ready2digital.it" target="_blank" rel="noopener">
+			<img src="/wp-content/uploads/2026/04/R2D.png" alt="Ready 2 Digital" height="16" />
+		</a>
+	</div>
+</footer>
+
+<style>
+	.ft {
+		background: var(--bg-dark);
+		color: var(--text-on-dark);
+	}
+
+	.ft h2 {
+		color: var(--text-on-dark);
+	}
+
+	.accent-text {
+		color: var(--accent);
+		font-style: normal;
+	}
+
+	.muted {
+		color: rgba(255, 255, 255, 0.55);
+	}
+
+	.eyebrow {
+		display: block;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: var(--text-xs);
+		font-weight: 700;
+		color: var(--accent);
+		margin-bottom: 6px;
+	}
+
+	/* --- Banda CTA arancione in cima --- */
+	.ft__cta {
+		background: var(--accent);
+	}
+
+	.ft__cta-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 20px;
+		padding-block: 32px;
+	}
+
+	.ft__eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		font-weight: 700;
+		color: var(--text);
+	}
+
+	.ft__cta-title {
+		margin: 0;
+		color: var(--text);
+	}
+
+	.btn--outline-dark {
+		border-color: var(--text-on-dark);
+		color: var(--text-on-dark);
+	}
+
+	.btn--outline-dark:hover {
+		background: var(--text-on-dark);
+		color: var(--text);
+	}
+
+	/* --- "Dove siamo": mappa + info + cta --- */
+	.find-us {
+		max-width: 1140px;
+		margin: 0 auto;
+		padding: 56px 20px 40px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+	}
+
+	.find-us__head {
+		margin-bottom: 32px;
+	}
+
+	.find-us__title {
+		margin: 0;
+	}
+
+	.find-us__map {
+		position: relative;
+		aspect-ratio: 16 / 6;
+		overflow: hidden;
+	}
+
+	.find-us__map iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	.find-us__info {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		margin-top: 32px;
+		border-top: 1px solid rgba(255, 255, 255, 0.14);
+		border-left: 1px solid rgba(255, 255, 255, 0.14);
+	}
+
+	.find-us__item {
+		padding: 20px 24px;
+		border-right: 1px solid rgba(255, 255, 255, 0.14);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+	}
+
+	.find-us__label {
+		margin: 0 0 8px;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: var(--text-xs);
+		font-weight: 700;
+		color: var(--accent);
+	}
+
+	.find-us__item p:not(.find-us__label) {
+		margin: 0 0 4px;
+		font-size: var(--text-sm);
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.find-us__item a {
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.find-us__item a:hover {
+		color: var(--text-on-dark);
+	}
+
+	.find-us__cta {
+		display: flex;
+		gap: 16px;
+		flex-wrap: wrap;
+		margin-top: 32px;
+	}
+
+	/* --- Griglia footer: brand + orari --- */
+	.footer-grid {
+		max-width: 1140px;
+		margin: 0 auto;
+		padding: 48px 20px;
+		display: grid;
+		grid-template-columns: 1.5fr 1fr;
+		gap: 40px;
+	}
+
+	.footer-brand img {
+		height: 40px;
+		width: auto;
+		border-radius: 0;
+		margin-bottom: 16px;
+	}
+
+	.footer-blurb {
+		max-width: 26rem;
+		font-size: var(--text-sm);
+		line-height: 1.6;
+	}
+
+	.footer-contacts {
+		list-style: none;
+		margin: 20px 0 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		font-size: var(--text-sm);
+	}
+
+	.footer-contacts a {
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.footer-contacts a:hover {
+		color: var(--text-on-dark);
+	}
+
+	.footer-social {
+		display: flex;
+		gap: 10px;
+		margin-top: 20px;
+		flex-wrap: wrap;
+	}
+
+	.social-btn {
+		display: inline-flex;
+		padding: 8px 16px;
+		border: 1px solid var(--accent);
+		border-radius: 999px;
+		text-decoration: none;
+		font-size: var(--text-xs);
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--accent);
+		transition: 0.2s ease;
+	}
+
+	.social-btn:hover {
+		background: var(--accent);
+		color: var(--text);
+	}
+
+	.footer-heading {
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: var(--text-xs);
+		font-weight: 700;
+		color: var(--accent);
+		margin: 0 0 12px;
+	}
+
+	.footer-heading--spaced {
+		margin-top: 20px;
+	}
+
+	.footer-planning {
+		display: inline-block;
+		margin-bottom: 20px;
+	}
+
+	.footer-orari {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 4px;
+		font-size: var(--text-sm);
+	}
+
+	.footer-orari li {
+		margin-bottom: 6px;
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.footer-estivi {
+		margin-top: 20px;
+		font-size: var(--text-sm);
+	}
+
+	.footer-estivi summary {
+		cursor: pointer;
+		color: var(--accent);
+		font-weight: 700;
+		margin-bottom: 12px;
+	}
+
+	/* --- Federazioni: marquee animato + banner UE --- */
+	.federazioni {
+		max-width: 1140px;
+		margin: 0 auto;
+		padding: 40px 20px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.14);
+	}
+
+	.federazioni__claim {
+		margin: 0 0 28px;
+		text-align: center;
+		font-size: var(--text-xs);
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.55);
+	}
+
+	.marquee {
+		overflow: hidden;
+		-webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+		mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+	}
+
+	.marquee__track {
+		display: flex;
+		width: max-content;
+		animation: marquee-scroll 32s linear infinite;
+	}
+
+	.marquee:hover .marquee__track {
+		animation-play-state: paused;
+	}
+
+	.marquee__group {
+		list-style: none;
+		margin: 0;
+		padding: 0 56px 0 0;
+		display: flex;
+		align-items: center;
+		gap: 56px;
+	}
+
+	.marquee__group li {
+		flex-shrink: 0;
+	}
+
+	.marquee__group img {
+		display: block;
+		height: 40px;
+		width: auto;
+		border-radius: 0;
+		filter: grayscale(1) brightness(2);
+		opacity: 0.75;
+		transition: opacity 0.25s ease;
+	}
+
+	.marquee__group img:hover {
+		opacity: 1;
+	}
+
+	@keyframes marquee-scroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.marquee__track {
+			animation: none;
+		}
+		.marquee {
+			overflow-x: auto;
+		}
+	}
+
+	.federazioni__ue {
+		display: block;
+		margin-top: 32px;
+	}
+
+	.federazioni__ue img {
+		border-radius: 0;
+		width: 100%;
+		display: block;
+	}
+
+	/* --- Lavora con noi --- */
+	.footer-lavora {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 16px;
+		max-width: 1140px;
+		margin: 40px auto 0;
+		padding: 32px 20px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.14);
+	}
+
+	.footer-lavora .footer-heading {
+		margin: 0;
+	}
+
+	/* --- Legal --- */
+	.legal {
+		max-width: 1140px;
+		margin: 32px auto 0;
+		padding: 32px 20px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.14);
+	}
+
+	.legal-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.legal-list a {
+		display: inline-flex;
+		padding: 10px 18px;
+		border: 1px solid rgba(255, 255, 255, 0.14);
+		border-radius: var(--radius);
+		text-decoration: none;
+		font-size: var(--text-sm);
+		color: rgba(255, 255, 255, 0.8);
+		transition: 0.2s ease;
+	}
+
+	.legal-list a:hover {
+		border-color: var(--accent);
+		color: var(--text-on-dark);
+	}
+
+	/* --- Riga finale --- */
+	.footer-bottom {
+		max-width: 1140px;
+		margin: 32px auto 0;
+		padding: 24px 20px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.14);
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 12px;
+		font-size: var(--text-sm);
+	}
+
+	.footer-societa {
+		display: grid;
+		gap: 2px;
+		font-style: normal;
+		text-align: right;
+		color: rgba(255, 255, 255, 0.55);
+	}
+
+	.footer-firma {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		padding: 20px 20px 32px;
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: rgba(255, 255, 255, 0.4);
+	}
+
+	.footer-firma a {
+		display: block;
+		line-height: 0;
+	}
+
+	.footer-firma img {
+		display: block;
+		border-radius: 0;
+		opacity: 0.75;
+	}
+
+	.footer-firma a:hover img {
+		opacity: 1;
+	}
+
+	@media (max-width: 900px) {
+		.footer-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.find-us__info {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 700px) {
+		.footer-lavora {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.footer-bottom {
+			flex-direction: column;
+		}
+
+		.footer-societa {
+			text-align: left;
+		}
+	}
+</style>

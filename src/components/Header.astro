@@ -1,0 +1,255 @@
+---
+import { megaMenu } from '../data/nav';
+---
+
+<header class="hd">
+	<div class="hd__bar container">
+		<a class="hd__logo" href="/" aria-label="Body Energie - Home"></a>
+
+		<button class="hd__toggle" type="button" aria-label="Apri il menu" aria-expanded="false" data-hd-toggle>
+			<span></span><span></span><span></span>
+		</button>
+
+		<nav class="hd__nav" data-hd-nav>
+			<ul class="hd__mega">
+				{
+					megaMenu.map((colonna) => (
+						<li class="hd__col">
+							<span class="hd__col-title">
+								{colonna.titolo}
+								<svg class="hd__chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+									<path d="M1 5l4-4 4 4" stroke="currentColor" stroke-width="1.5" fill="none" />
+								</svg>
+							</span>
+							<ul>
+								{colonna.voci.map((voce) => (
+									<li>
+										<a href={voce.href}>{voce.label}</a>
+									</li>
+								))}
+							</ul>
+						</li>
+					))
+				}
+			</ul>
+			<div class="hd__actions">
+				<button
+					class="btn btn--outline hd__cta hd__cta--contact"
+					type="button"
+					data-open-contact
+					data-interest="informazioni"
+				>
+					Contattaci
+				</button>
+				<a class="btn hd__cta hd__cta--primary" href="/abbonamenti">I nostri abbonamenti</a>
+			</div>
+		</nav>
+	</div>
+</header>
+
+<script>
+	const toggle = document.querySelector('[data-hd-toggle]');
+	const nav = document.querySelector('[data-hd-nav]');
+	toggle?.addEventListener('click', () => {
+		const aperto = nav?.classList.toggle('hd__nav--aperto');
+		toggle.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+	});
+</script>
+
+<style>
+	.hd {
+		background: var(--bg-alt);
+		border-bottom: 1px solid var(--border);
+		position: sticky;
+		top: 0;
+		z-index: 40;
+	}
+
+	.hd__chevron {
+		margin-left: 4px;
+		vertical-align: middle;
+		color: var(--accent);
+	}
+
+	.hd__actions {
+		display: flex;
+		gap: 12px;
+		flex-wrap: wrap;
+	}
+
+	.hd__bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-block: 12px;
+		gap: 24px;
+	}
+
+	.hd__logo {
+		text-decoration: none;
+		display: block;
+		-webkit-tap-highlight-color: transparent;
+		width: 154px;
+		height: 60px;
+		background-image: url('/wp-content/uploads/2025/10/Logo-Body-Energie-header.png');
+		background-repeat: no-repeat;
+		background-position: left center;
+		background-size: contain;
+	}
+
+	.hd__toggle {
+		display: none;
+		flex-direction: column;
+		gap: 5px;
+		background: none;
+		border: none;
+		padding: 8px;
+	}
+
+	.hd__toggle span {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: var(--text);
+	}
+
+	.hd__nav {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		flex: 1;
+		justify-content: flex-end;
+	}
+
+	.hd__mega {
+		list-style: none;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		margin: 0;
+		padding: 0;
+	}
+
+	.hd__col {
+		position: relative;
+	}
+
+	.hd__col + .hd__col::before {
+		content: '';
+		position: absolute;
+		left: -10px;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 2px;
+		height: 22px;
+		background: var(--accent);
+	}
+
+	.hd__col-title {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 16px;
+		cursor: default;
+	}
+
+	.hd__col > ul {
+		list-style: none;
+		margin: 0;
+		padding: 12px;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 220px;
+		background: var(--bg);
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(4px);
+		transition: 0.15s ease;
+	}
+
+	.hd__col:hover > ul,
+	.hd__col:focus-within > ul {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+
+	.hd__col > ul li a {
+		display: block;
+		padding: 6px 4px;
+		color: var(--text);
+		text-decoration: none;
+		font-size: var(--text-sm);
+	}
+
+	.hd__col > ul li a:hover {
+		color: var(--accent);
+	}
+
+	.hd__cta {
+		white-space: normal;
+		font-size: 14px;
+		padding: 10px 16px;
+		text-align: center;
+		border-radius: 0;
+	}
+
+	.hd__cta--contact {
+		background: var(--bg);
+		border-color: var(--text);
+		color: var(--text);
+	}
+
+	.hd__cta--contact:hover {
+		background: var(--text);
+		color: var(--bg);
+	}
+
+	.hd__cta--primary {
+		color: var(--text);
+	}
+
+	.hd__cta--primary:hover {
+		color: var(--accent);
+	}
+
+	@media (max-width: 900px) {
+		.hd__toggle {
+			display: flex;
+		}
+
+		.hd__nav {
+			position: fixed;
+			inset: 72px 0 0 0;
+			background: var(--bg-alt);
+			flex-direction: column;
+			align-items: stretch;
+			padding: 20px;
+			overflow-y: auto;
+			display: none;
+		}
+
+		.hd__nav.hd__nav--aperto {
+			display: flex;
+		}
+
+		.hd__mega {
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		.hd__col > ul {
+			position: static;
+			opacity: 1;
+			visibility: visible;
+			transform: none;
+			box-shadow: none;
+			border: none;
+			padding: 8px 0 0 12px;
+			display: block;
+		}
+	}
+</style>

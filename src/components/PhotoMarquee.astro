@@ -1,0 +1,103 @@
+---
+// Striscia fotografica a scorrimento continuo, senza soluzione di
+// continuità (loop infinito), con sfumatura ai bordi come nel marquee
+// dei loghi partner di Ronchiverdi/Footer.astro.
+interface Img {
+	src: string;
+	alt?: string;
+}
+interface Props {
+	images: Img[];
+	height?: number;
+	cardWidth?: number;
+	speed?: number; // px al secondo
+}
+const { images, height = 320, cardWidth = 460, speed = 60 } = Astro.props;
+
+const gap = 8;
+const groupWidth = images.length * cardWidth + images.length * gap;
+const duration = Math.round(groupWidth / speed);
+---
+
+<div class="pm">
+	<div class="pm__track" style={`--pm-duration:${duration}s`}>
+		{
+			[0, 1].map((copy) => (
+				<div class="pm__group" aria-hidden={copy === 1 ? 'true' : undefined}>
+					{images.map((img) => (
+						<img
+							src={img.src}
+							alt={copy === 1 ? '' : img.alt || ''}
+							loading="lazy"
+							style={`width:${cardWidth}px; height:${height}px`}
+						/>
+					))}
+				</div>
+			))
+		}
+	</div>
+</div>
+
+<style define:vars={{ gap: `${gap}px` }}>
+	.pm {
+		overflow: hidden;
+		padding: var(--gap) 0;
+		-webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+		mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+	}
+
+	.pm__track {
+		display: flex;
+		width: max-content;
+		animation: pm-scroll var(--pm-duration) linear infinite;
+	}
+
+	.pm:hover .pm__track {
+		animation-play-state: paused;
+	}
+
+	.pm__group {
+		display: flex;
+		flex-shrink: 0;
+		gap: var(--gap);
+		padding-right: var(--gap);
+	}
+
+	.pm__group img {
+		flex-shrink: 0;
+		object-fit: cover;
+		display: block;
+	}
+
+	@keyframes pm-scroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.pm__group img {
+			height: 240px !important;
+			width: 340px !important;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.pm__group img {
+			height: 200px !important;
+			width: 260px !important;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.pm__track {
+			animation: none;
+		}
+		.pm {
+			overflow-x: auto;
+		}
+	}
+</style>

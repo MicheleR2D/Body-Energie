@@ -1,0 +1,32 @@
+---
+interface Img {
+	src: string;
+	alt?: string;
+}
+interface Props {
+	images: Img[];
+}
+const { images } = Astro.props;
+---
+
+<div class="is">
+	{images.map((img) => <img src={img.src} alt={img.alt || ''} loading="lazy" />)}
+</div>
+
+<style>
+	.is {
+		display: flex;
+		gap: 16px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		padding-bottom: 8px;
+	}
+
+	.is img {
+		flex: 0 0 auto;
+		width: min(320px, 80vw);
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		scroll-snap-align: start;
+	}
+</style>

@@ -1,0 +1,147 @@
+---
+interface Img {
+	src: string;
+	alt?: string;
+}
+interface Props {
+	images: Img[];
+}
+const { images } = Astro.props;
+---
+
+<div class="mc">
+	<div class="mc__viewport">
+		<button class="mc__arrow mc__arrow--prev" type="button" aria-label="Precedente" data-mc-prev>&lsaquo;</button>
+		<div class="mc__track" data-mc-track>
+			{images.map((img) => <img src={img.src} alt={img.alt || ''} loading="lazy" />)}
+		</div>
+		<button class="mc__arrow mc__arrow--next" type="button" aria-label="Successivo" data-mc-next>&rsaquo;</button>
+	</div>
+</div>
+
+<script>
+	document.querySelectorAll('.mc').forEach((mc) => {
+		const track = mc.querySelector('[data-mc-track]');
+		const prev = mc.querySelector('[data-mc-prev]');
+		const next = mc.querySelector('[data-mc-next]');
+		if (!track) return;
+
+		const step = () => {
+			const card = track.querySelector('img');
+			return card ? card.clientWidth + 6 : 300;
+		};
+
+		const atEnd = () => track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+
+		const advance = (dir) => {
+			if (dir > 0 && atEnd()) {
+				track.scrollTo({ left: 0, behavior: 'smooth' });
+			} else {
+				track.scrollBy({ left: dir * step(), behavior: 'smooth' });
+			}
+		};
+
+		prev?.addEventListener('click', () => {
+			stopAutoplay();
+			advance(-1);
+			startAutoplay();
+		});
+		next?.addEventListener('click', () => {
+			stopAutoplay();
+			advance(1);
+			startAutoplay();
+		});
+
+		let timer = null;
+		function startAutoplay() {
+			stopAutoplay();
+			timer = window.setInterval(() => advance(1), 3500);
+		}
+		function stopAutoplay() {
+			if (timer) window.clearInterval(timer);
+		}
+
+		mc.addEventListener('mouseenter', stopAutoplay);
+		mc.addEventListener('mouseleave', startAutoplay);
+
+		startAutoplay();
+	});
+</script>
+
+<style>
+	.mc {
+		position: relative;
+		padding: 4px;
+	}
+
+	.mc__viewport {
+		position: relative;
+	}
+
+	.mc__track {
+		display: flex;
+		gap: 6px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.mc__track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.mc__track img {
+		flex: 0 0 calc((100% - 12px) / 3);
+		height: 320px;
+		object-fit: cover;
+		scroll-snap-align: start;
+	}
+
+	.mc__arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 52px;
+		height: 52px;
+		background: transparent;
+		border: none;
+		color: rgba(237, 237, 237, 0.9);
+		font-size: 52px;
+		line-height: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		padding: 0;
+		z-index: 2;
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+	}
+
+	.mc__arrow--prev {
+		left: 10px;
+	}
+
+	.mc__arrow--next {
+		right: 10px;
+	}
+
+	@media (max-width: 900px) {
+		.mc__track img {
+			flex-basis: calc((100% - 6px) / 2);
+			height: 240px;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.mc__track img {
+			flex-basis: 90%;
+			height: 200px;
+		}
+
+		.mc__arrow {
+			width: 36px;
+			height: 36px;
+			font-size: 36px;
+		}
+	}
+</style>

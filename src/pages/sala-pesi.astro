@@ -1,0 +1,239 @@
+---
+// Contenuto reale estratto da _elementor_data della pagina "Sala Pesi" (post ID 950).
+import Layout from '../layouts/Layout.astro';
+import Gallery from '../components/Gallery.astro';
+
+const aree = [
+	{ label: 'Gym Floor (piano terra)', href: '#gymfloor1' },
+	{ label: 'Gym Floor (primo piano)', href: '#gymfloor2' },
+	{ label: 'Loft Gym', href: '#loftgym' },
+	{ label: 'Air Park', href: '#airpark' },
+];
+
+const gymFloorTerra = [
+	'/wp-content/uploads/2025/11/Body-Energie-Ambienti-51-scaled.jpg',
+	'/wp-content/uploads/2025/11/Body-Energie-Ambienti-53-scaled.jpg',
+	'/wp-content/uploads/2025/11/Body-Energie-Ambienti-58-scaled.jpg',
+	'/wp-content/uploads/2025/11/Body-Energie-Azioni-50-scaled.jpg',
+];
+
+const gymFloorRialzato = [
+	'/wp-content/uploads/2025/11/Body-Energie-Ambienti-45-scaled.jpg',
+	'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-1-scaled.jpg',
+	'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-4-scaled.jpg',
+	'/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-11-scaled.jpg',
+];
+
+const loftGym = [
+	'/wp-content/uploads/2025/11/Body-Energie-Azioni-62-scaled.jpg',
+	'/wp-content/uploads/2025/08/IMG20230522180324-scaled-1.jpg',
+	'/wp-content/uploads/2025/11/Body-Energie-Azioni-61-scaled.jpg',
+	'/wp-content/uploads/2025/11/Body-Energie-Azioni-54-scaled.jpg',
+];
+
+const airPark = [
+	'/wp-content/uploads/2025/08/IMG20230523150820-scaled-1.jpg',
+	'/wp-content/uploads/2025/08/AIR-PARK-7-TRIFORM-1.jpg',
+	'/wp-content/uploads/2025/08/AIR-PARK-7-TRIFORM.jpg',
+	'/wp-content/uploads/2025/08/AIR-PARK-6-TRIFORM.jpg',
+];
+
+const faq = [
+	'Ho bisogno del Certificato Medico?',
+	'Ho acquistato una lezione singola, cosa succede in caso di disdetta?',
+	'Ho un Abbonamento attivo, è necessaria la prenotazione?',
+];
+---
+
+<Layout
+	title="Sala Pesi - Body Energie | Villafranca di Verona"
+	description="Scopri le quattro aree della Sala Pesi di Body Energie: Gym Floor, Loft Gym e Air Park. Attrezzature Technogym di ultima generazione a Villafranca di Verona."
+>
+	<section class="hero container">
+		<p class="eyebrow">Scopri le quattro aree</p>
+		<h1>gym <span class="accent-text">Amazing</span> floor</h1>
+		<div class="hero__cta">
+			<button class="btn" type="button" data-open-contact data-interest="sala-pesi">Prova ora</button>
+			<a class="btn btn--outline" href="/orari">Planning settimanale</a>
+		</div>
+	</section>
+
+	<section class="container section">
+		<p class="section__intro">
+			Le due sale <strong>Gym Floor</strong>, l'area <strong>LoftGym</strong> e l'<strong>Air Park</strong> di Body
+			Energie offrono un’esperienza di allenamento completa, tra innovazione e natura. Spazi moderni e attrezzature
+			Technogym di ultima generazione si uniscono alla libertà dell’allenamento all’aperto, per migliorare forza,
+			resistenza e benessere in un ambiente stimolante e ricco di energia.
+		</p>
+		<ul class="area-nav">
+			{
+				aree.map((a) => (
+					<li>
+						<a href={a.href}>{a.label}</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="container section" id="gymfloor1">
+		<h2>Gym Floor <span class="subtitle">piano terra</span></h2>
+		<Gallery images={gymFloorTerra} alt="Gym Floor piano terra - Body Energie" />
+		<p>
+			La Gym Floor al piano terra di Body Energie è un ambiente moderno e attrezzato per un allenamento libero,
+			efficace e completo. Tra gli attrezzi di punta trovi
+			<strong>Hack Squat, Leg Press, Olympic Half Rack, Multipower, Chest Press e Lat Machine</strong>, ideali per
+			sviluppare forza e tono muscolare in modo sicuro. Non mancano panche regolabili, bilancieri olimpionici e
+			stazioni via cavo per esercizi mirati su tutto il corpo. Uno spazio funzionale e stimolante, dove i nostri
+			trainer qualificati sono sempre disponibili per supportarti e guidarti verso i tuoi obiettivi.
+		</p>
+	</section>
+
+	<section class="container section" id="gymfloor2">
+		<h2>Gym Floor <span class="subtitle">piano rialzato</span></h2>
+		<Gallery images={gymFloorRialzato} alt="Gym Floor piano rialzato - Body Energie" />
+		<p>
+			La Gym Floor al piano rialzato di Body Energie è uno spazio moderno dedicato all’allenamento libero e
+			funzionale, con attrezzature di ultima generazione per forza, resistenza e condizionamento. Tra gli strumenti
+			principali trovi <strong>Technogym Ride, Climb 1000, SkillRow, SkillMill e Run Excite</strong>, perfetti per
+			cardio e allenamenti ad alta intensità, insieme a macchine per gambe e glutei come
+			<strong>Hip Thrust, Standing Abductor e Belt Squat</strong>.
+		</p>
+		<p>
+			L’area <strong>Glute Circuit Training</strong> è progettata per un allenamento mirato ed efficace dei glutei.
+			Il circuito comprende <strong>6 macchinari specifici</strong>, tra cui <strong>Dead Lift</strong> e
+			<strong>Belt Squat</strong>, ideali per sviluppare forza, tono e stabilità attraverso un lavoro strutturato e
+			progressivo.
+		</p>
+		<p>
+			Completano l’area panche regolabili, attrezzi per addominali e stazioni per il rinforzo posturale. Uno spazio
+			stimolante e versatile, dove i nostri trainer qualificati ti accompagnano in ogni sessione per aiutarti a
+			raggiungere i tuoi obiettivi con efficacia e motivazione.
+		</p>
+	</section>
+
+	<section class="container section" id="loftgym">
+		<h2>Loft Gym</h2>
+		<Gallery images={loftGym} alt="Loft Gym - Body Energie" />
+		<p>
+			All’aperto ma con tutto il comfort di una palestra, la <strong>LoftGym</strong> è l’area esterna di Body
+			Energie dedicata all’allenamento della forza e al functional training. Situata sul
+			<strong>terrazzo sotto il pergolato fotovoltaico</strong>, offre attrezzi di ultima generazione immersi nel
+			verde, con <strong>giochi di luce suggestivi</strong> e una <strong>zona relax con lettini prendisole</strong>
+			per rigenerarti dopo la sessione.
+		</p>
+		<p>
+			Allenarsi qui significa respirare energia, godere di un ambiente unico e vivere il fitness in modo naturale,
+			intenso e rigenerante.
+		</p>
+	</section>
+
+	<section class="container section" id="airpark">
+		<h2>Air Park</h2>
+		<Gallery images={airPark} alt="Air Park - Body Energie" />
+		<p>
+			L’Air Park di Body Energie è l’<strong>area outdoor dedicata all’allenamento funzionale e al calisthenics</strong>,
+			un ambiente stimolante e immerso nella natura dove puoi allenarti in modo completo ed efficace. La struttura
+			Triform Functional Training Outdoor offre <strong>numerose postazioni per un training sempre vario</strong>,
+			che sviluppa forza, equilibrio, coordinazione e flessibilità, adatto sia ai principianti sia agli atleti più
+			esperti. Qui trovi anche <strong>uno spazio ideale per il Calisthenics</strong>, con sbarre, parallele e
+			pavimentazione dedicata, libero per tutti i soci che praticano questa disciplina. L’Air Park è il
+			<strong>luogo perfetto per vivere il fitness all’aria aperta</strong>, con energia, libertà e massima
+			funzionalità.
+		</p>
+	</section>
+
+	<section class="container section">
+		<h2>FAQ</h2>
+		<!-- Le risposte non erano compilate nel sito originale: da completare con il cliente. -->
+		<ul class="faq-list">
+			{faq.map((q) => <li>{q}</li>)}
+		</ul>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		padding-block: 56px 24px;
+		text-align: center;
+	}
+
+	.eyebrow {
+		text-transform: uppercase;
+		font-weight: 800;
+		color: var(--accent);
+		letter-spacing: 0.05em;
+	}
+
+	.accent-text {
+		color: var(--accent);
+	}
+
+	.hero__cta {
+		display: flex;
+		gap: 16px;
+		justify-content: center;
+		margin-top: 24px;
+		flex-wrap: wrap;
+	}
+
+	.btn--outline {
+		background: transparent;
+		color: var(--accent);
+		border: 2px solid var(--accent);
+	}
+
+	.section {
+		padding-block: 40px;
+		scroll-margin-top: 90px;
+	}
+
+	.section__intro {
+		max-width: 760px;
+		color: var(--text-muted);
+	}
+
+	.subtitle {
+		text-transform: none;
+		color: var(--text);
+		font-weight: 400;
+	}
+
+	.area-nav {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding: 0;
+		margin-top: 20px;
+	}
+
+	.area-nav a {
+		display: inline-block;
+		background: var(--bg-alt);
+		border-radius: var(--radius);
+		padding: 10px 18px;
+		font-weight: 700;
+		text-decoration: none;
+		color: var(--text);
+	}
+
+	.area-nav a:hover {
+		background: var(--accent);
+		color: var(--text-on-dark);
+	}
+
+	.faq-list {
+		list-style: none;
+		padding: 0;
+		max-width: 700px;
+	}
+
+	.faq-list li {
+		background: var(--bg-alt);
+		border-radius: var(--radius);
+		padding: 16px 20px;
+		margin-bottom: 12px;
+		font-weight: 700;
+	}
+</style>

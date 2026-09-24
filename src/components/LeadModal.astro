@@ -1,0 +1,152 @@
+---
+import LeadFormBody from './LeadFormBody.astro';
+import { interessi } from '../data/interessi';
+---
+
+<dialog id="lead-modal" class="lf" aria-labelledby="lf-title" data-interessi={JSON.stringify(interessi)}>
+	<div class="lf__panel">
+		<div class="lf__head">
+			<h2 class="lf__title" id="lf-title">Richiedi informazioni</h2>
+			<button class="lf__close" type="button" aria-label="Chiudi" data-lf-close>&times;</button>
+		</div>
+		<LeadFormBody prefix="lm" />
+	</div>
+</dialog>
+
+<script>
+	import { initLeadForm } from '../lib/leadForm.client.js';
+
+	const modal = document.getElementById('lead-modal');
+	const interessi = JSON.parse(modal?.dataset.interessi || '{}');
+	const form = initLeadForm(modal, {
+		prefix: 'lm',
+		onClose: () => chiudiEPulisci(),
+	});
+
+	function chiudiEPulisci() {
+		modal.close();
+		document.body.classList.remove('lf-locked');
+		form.clear();
+	}
+
+	modal.addEventListener('close', () => {
+		document.body.classList.remove('lf-locked');
+		form.clear();
+	});
+
+	document.querySelector('[data-lf-close]')?.addEventListener('click', chiudiEPulisci);
+
+	// Chiusura dal backdrop: il click cade sul <dialog> stesso, non sul pannello.
+	modal.addEventListener('click', (e) => {
+		if (e.target === modal) chiudiEPulisci();
+	});
+
+	document.addEventListener('click', (e) => {
+		const trigger = e.target.closest('[data-open-contact]');
+		if (!trigger) return;
+		e.preventDefault();
+		const interesseId = trigger.dataset.interest || '';
+		modal.showModal();
+		document.body.classList.add('lf-locked');
+		form.open(location.pathname, (trigger.textContent || '').trim(), interesseId, interessi[interesseId]);
+	});
+</script>
+
+<style is:global>
+	.lf {
+		border: none;
+		border-radius: var(--radius);
+		padding: 0;
+		width: min(560px, calc(100vw - 32px));
+		max-height: min(680px, calc(100vh - 32px));
+	}
+
+	.lf::backdrop {
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	.lf__panel {
+		padding: 28px;
+		overflow-y: auto;
+		max-height: inherit;
+	}
+
+	.lf__head {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		margin-bottom: 16px;
+	}
+
+	.lf__title {
+		margin: 0;
+		font-size: var(--text-lg);
+	}
+
+	.lf__close {
+		background: none;
+		border: none;
+		font-size: 28px;
+		line-height: 1;
+		padding: 0;
+		color: var(--text);
+		cursor: pointer;
+	}
+
+	.lf__interesse {
+		font-weight: 700;
+		color: var(--accent);
+		margin-top: 0;
+	}
+
+	.lf__grid {
+		display: grid;
+		gap: 4px 16px;
+		margin-bottom: 16px;
+	}
+
+	.lf__grid label {
+		font-size: var(--text-sm);
+		font-weight: 600;
+		margin-top: 8px;
+	}
+
+	.lf__grid input,
+	.lf__grid textarea {
+		font: inherit;
+		padding: 10px 12px;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+	}
+
+	.lf__checkbox {
+		display: flex;
+		align-items: flex-start;
+		gap: 8px;
+		font-size: var(--text-sm);
+		margin-bottom: 10px;
+	}
+
+	.lf__checkbox input {
+		margin-top: 3px;
+	}
+
+	.lf__error {
+		color: #b3261e;
+		font-size: var(--text-sm);
+	}
+
+	.lf__actions {
+		margin-top: 16px;
+	}
+
+	.lf__actions .btn {
+		width: 100%;
+	}
+
+	.lf__conferma {
+		font-size: var(--text-md);
+		text-align: center;
+		padding: 24px 0;
+	}
+</style>
