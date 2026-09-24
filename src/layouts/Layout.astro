@@ -109,5 +109,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 			initConsentBridge();
 			initMetaPixel();
 		</script>
+
+		<script>
+			// Un solo observer per tutta la pagina: ogni elemento sceglie la
+			// variante con data-anim e si rivela una volta sola (niente replay
+			// se si torna a scorrere in su).
+			const obs = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+						const el = entry.target as HTMLElement;
+						const delay = el.dataset.animDelay ? parseInt(el.dataset.animDelay, 10) : 0;
+						window.setTimeout(() => el.classList.add('is-visible'), delay);
+						obs.unobserve(el);
+					});
+				},
+				{ threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
+			);
+
+			document.querySelectorAll<HTMLElement>('[data-anim]').forEach((el) => obs.observe(el));
+		</script>
 	</body>
 </html>

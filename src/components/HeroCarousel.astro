@@ -4,21 +4,24 @@ interface Props {
 }
 const { images } = Astro.props;
 
-// Stessi tempi del background-slideshow di Elementor sul sito originale:
-// 5000ms di visualizzazione per foto, 500ms di dissolvenza incrociata.
-const SLIDE_MS = 5000;
-const FADE_MS = 500;
+// Dissolvenza incrociata vera: la foto successiva inizia a comparire
+// mentre quella attuale sta ancora sparendo, cosi' non si vede mai
+// per un istante lo sfondo nudo dietro le immagini.
+const HOLD_MS = 3200; // quanto resta a piena opacita' ogni foto
+const FADE_MS = 900; // durata della dissolvenza (piu' rapida di prima)
+const STAGGER_MS = HOLD_MS + FADE_MS; // avanzamento tra una foto e la successiva
 const count = images.length;
-const totalMs = count * SLIDE_MS;
+const totalMs = count * STAGGER_MS;
+
 const fadeInEnd = (FADE_MS / totalMs) * 100;
-const visibleEnd = ((SLIDE_MS - FADE_MS) / totalMs) * 100;
-const fadeOutEnd = (SLIDE_MS / totalMs) * 100;
+const holdEnd = ((FADE_MS + HOLD_MS) / totalMs) * 100;
+const fadeOutEnd = ((2 * FADE_MS + HOLD_MS) / totalMs) * 100;
 
 const keyframesCss = `
 @keyframes hc-fade {
 	0% { opacity: 0; }
 	${fadeInEnd}% { opacity: 1; }
-	${visibleEnd}% { opacity: 1; }
+	${holdEnd}% { opacity: 1; }
 	${fadeOutEnd}% { opacity: 0; }
 	100% { opacity: 0; }
 }
@@ -29,7 +32,7 @@ const keyframesCss = `
 	<div class="hc__slides">
 		{
 			images.map((src, i) => (
-				<div class="hc__slide" style={`background-image:url(${src}); animation-delay:${i * SLIDE_MS}ms`} />
+				<div class="hc__slide" style={`background-image:url(${src}); animation-delay:${i * STAGGER_MS}ms`} />
 			))
 		}
 	</div>
@@ -50,6 +53,7 @@ const keyframesCss = `
 		justify-content: center;
 		overflow: hidden;
 		color: var(--text-on-dark);
+		background: var(--bg-dark);
 	}
 
 	.hc__slides {

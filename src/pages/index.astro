@@ -4,8 +4,9 @@
 // direttamente col sito live per riprodurne fedelmente anche il layout a blocchi
 // di colore (arancione/nero), non solo i testi.
 import Layout from '../layouts/Layout.astro';
-import FlipCard from '../components/FlipCard.astro';
+import ActivityGrid from '../components/ActivityGrid.astro';
 import MediaCarousel from '../components/MediaCarousel.astro';
+import PhotoMarquee from '../components/PhotoMarquee.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import Accordion from '../components/Accordion.astro';
 
@@ -29,10 +30,10 @@ const fotoCarosello = [
 ];
 
 const contatori = [
-	{ target: 5500, suffisso: '', titolo: 'metri quadri' },
-	{ target: 150, suffisso: '+', titolo: 'corsi a settimana' },
-	{ target: 40, suffisso: '+', titolo: 'trainers qualificati' },
-	{ target: 2000, suffisso: '+', titolo: 'iscritti' },
+	{ target: 5500, suffisso: '', titolo: 'Metri quadri', sotto: 'dedicati al benessere' },
+	{ target: 150, suffisso: '+', titolo: 'Corsi a settimana', sotto: 'tra corsi, acqua e sala pesi' },
+	{ target: 40, suffisso: '+', titolo: 'Trainers qualificati', sotto: 'sempre al tuo fianco' },
+	{ target: 2000, suffisso: '+', titolo: 'Iscritti', sotto: 'che si allenano con noi' },
 ];
 
 const attivitaAdulti = [
@@ -41,48 +42,42 @@ const attivitaAdulti = [
 		image: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-51-scaled.jpg',
 		title: 'Sala Pesi',
 		tagline: 'Dove la forza prende forma.',
-		description:
-			'Uno spazio moderno e attrezzato dove allenare forza, resistenza e tono muscolare con il supporto dei nostri trainer. Ogni allenamento è un passo verso la tua migliore forma.',
+		description: 'Spazio moderno e attrezzato per allenare forza, resistenza e tono muscolare.',
 	},
 	{
 		href: '/corsi-fitness',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-14-scaled.jpg',
 		title: 'Corsi Fitness',
 		tagline: 'Allenati, divertiti, vivi la tua energia.',
-		description:
-			'Scopri i corsi fitness di Body Energie: allenamenti coinvolgenti per ogni livello, dal Functional Training al Pilates, dallo Yoga allo Step. Energia, musica e motivazione per migliorare forza, equilibrio e benessere.',
+		description: 'Allenamenti per ogni livello, dal Functional Training al Pilates allo Yoga.',
 	},
 	{
 		href: '/acqua',
 		image: '/wp-content/uploads/2025/12/Body-Energie-Piscina-29-scaled.jpg',
 		title: 'Acqua Fitness',
 		tagline: 'Muoviti in acqua, ritrova la tua energia.',
-		description:
-			'Allenati in piscina con programmi che uniscono movimento, divertimento e benessere. Migliora tono, resistenza e mobilità grazie a lezioni di acquagym, acquabike e nuoto, seguite dai nostri istruttori qualificati.',
+		description: 'Acquagym, acquabike e nuoto con istruttori qualificati, in totale sicurezza.',
 	},
 	{
 		href: '/pilates-reformer',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-30-scaled.jpg',
 		title: 'Pilates Reformer',
 		tagline: 'Controllo, equilibrio e forza: riscopri il tuo corpo.',
-		description:
-			'I corsi di Pilates Reformer di Body Energie offrono un allenamento equilibrato per migliorare postura e flessibilità. Con il Reformer, ogni movimento diventa fluido e controllato, per un lavoro completo sul tuo corpo.',
+		description: 'Allenamento fluido e controllato con il Reformer, per postura ed equilibrio.',
 	},
 	{
 		href: '/personal-training',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Azioni-52-scaled.jpg',
 		title: 'Personal Training',
 		tagline: 'Un obiettivo, un percorso: il tuo risultato è la nostra missione.',
-		description:
-			'Il Personal Training di Body Energie è un percorso su misura per raggiungere i tuoi obiettivi in modo efficace e sicuro. Guidato da trainer qualificati, ogni allenamento è personalizzato con programmi studiati su misura.',
+		description: 'Percorsi su misura con trainer qualificati, per obiettivi sicuri ed efficaci.',
 	},
 	{
 		href: '/termario',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-71-scaled.jpg',
 		title: 'Termario',
 		tagline: 'Lasciati avvolgere dal calore, ritrova il tuo benessere.',
-		description:
-			'Un’oasi di relax dove calore e vapore rigenerano corpo e mente. Tra sauna finlandese, bagno turco, sauna romana e idromassaggio, ritrovi equilibrio, benessere e una profonda sensazione di leggerezza.',
+		description: 'Sauna finlandese, bagno turco e idromassaggio per relax e benessere totale.',
 	},
 ];
 
@@ -92,24 +87,21 @@ const attivitaBambini = [
 		image: '/wp-content/uploads/2025/12/Body-Energie-Piscina-7-scaled.jpg',
 		title: 'Nuoto Bimbi',
 		tagline: 'In acqua si cresce, si gioca e si impara.',
-		description:
-			'I corsi di Nuoto Bimbi di Body Energie accompagnano i bambini dai 4 mesi ai 12 anni in un percorso di gioco e apprendimento in acqua, migliorando sicurezza, coordinazione e fiducia in sé stessi con istruttori qualificati FIN.',
+		description: 'Corsi di nuoto per bambini dai 4 mesi ai 12 anni, tra gioco e sicurezza.',
 	},
 	{
 		href: '/body-camp',
 		image: '/wp-content/uploads/2025/10/Body-Camp-villafranca-di-verona-750x480-1.jpg',
 		title: 'Body Camp',
 		tagline: 'Sport, amicizia e divertimento: l’estate firmata Body Energie.',
-		description:
-			'Il Body Camp di Body Energie è il Grest estivo per bambini e ragazzi dai 4 ai 13 anni, con sport, giochi, laboratori e attività di gruppo che uniscono divertimento, crescita e socialità in un ambiente sicuro e stimolante.',
+		description: 'Il Grest estivo con sport, giochi e laboratori per bambini e ragazzi.',
 	},
 	{
 		href: '/ciclismo',
 		image: '/wp-content/uploads/2025/12/pexels-pexels-latam-478514802-17979484-scaled.jpg',
 		title: 'Squadra Ciclistica',
 		tagline: 'Ekoi Body Energie: la scuola ciclismo per ragazzi dai 7 ai 12 anni.',
-		description:
-			'La squadra giovanile Ekoi Body Energie rende il ciclismo accessibile ai bambini dai 7 ai 12 anni, unendo allenamenti su strada e pista, con l’obiettivo di crescita sportiva in un ambiente sicuro.',
+		description: 'La scuola ciclismo Ekoi per ragazzi dai 7 ai 12 anni, su strada e pista.',
 	},
 ];
 
@@ -119,40 +111,35 @@ const bodyLab = [
 		image: '/wp-content/uploads/2025/12/vista-dall-alto-del-cibo-vegetariano-sano-ed-equilibrato-scaled.jpg',
 		title: 'Nutrizionista',
 		tagline: 'Piani alimentari personalizzati per migliorare performance, benessere e salute.',
-		description:
-			'Il Nutrizionista di Body Energie ti guida con programmi alimentari su misura, pensati per lo sport, la composizione corporea e il supporto nutrizionale in caso di specifiche esigenze o patologie.',
+		description: 'Programmi alimentari su misura per sport, forma fisica e benessere.',
 	},
 	{
 		href: '/body-lab#osteopatia',
 		image: '/wp-content/uploads/2025/12/infermiera-che-si-prende-cura-del-paziente-scaled.jpg',
 		title: 'Osteopatia',
 		tagline: 'Trattamenti per migliorare mobilità, benessere e ridurre il dolore.',
-		description:
-			'L’Osteopata di Body Energie aiuta ad alleviare dolori muscoloscheletrici e tensioni, migliorando l’equilibrio e il funzionamento del corpo attraverso tecniche mirate e non invasive.',
+		description: 'Tecniche mirate per alleviare tensioni e migliorare l’equilibrio del corpo.',
 	},
 	{
 		href: '/body-lab#posturologia',
 		image: '/wp-content/uploads/2025/12/pilates-di-pratica-della-donna-alla-palestra-di-yoga-scaled.jpg',
 		title: 'Posturologia',
 		tagline: 'Valutazione posturale per correggere squilibri e ridurre il dolore.',
-		description:
-			'Il Posturologo di Body Energie analizza il movimento e la postura per individuare la causa primaria delle tensioni e delle algie, guidando il recupero motorio, la rieducazione posturale e la preparazione sportiva.',
+		description: 'Valutazione della postura per individuare la causa di tensioni e dolori.',
 	},
 	{
 		href: '/body-lab#fisioterapia',
 		image: '/wp-content/uploads/2025/12/pexels-karola-g-4506169-scaled.jpg',
 		title: 'Fisioterapia',
 		tagline: 'Trattamenti fisioterapici per recupero, prevenzione e mobilità.',
-		description:
-			'La Fisioterapia di Body Energie supporta il recupero da traumi, riduce dolore e rigidità e migliora la funzionalità motoria, con percorsi personalizzati per prevenzione, riabilitazione e ritorno all’attività sportiva.',
+		description: 'Percorsi personalizzati per recupero, prevenzione e ritorno allo sport.',
 	},
 	{
 		href: '/body-lab#palestra-della-salute',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Azioni-21-scaled.jpg',
 		title: 'Palestra della Salute',
 		tagline: 'Una palestra certificata per attività fisica sicura e guidata anche in presenza di patologie croniche.',
-		description:
-			'La Palestra della Salute di Body Energie, riconosciuta dalla Regione Veneto, permette di svolgere esercizio fisico prescritto in sicurezza, grazie alla supervisione di professionisti specializzati in attività motorie preventive e adattate.',
+		description: 'Attività fisica sicura e guidata, riconosciuta dalla Regione Veneto.',
 	},
 ];
 
@@ -162,16 +149,14 @@ const serviziExtra = [
 		image: '/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-37-scaled.jpg',
 		title: 'RistoBar',
 		tagline: 'Colazioni, snack e aperitivi con piatti freschi e genuini, in un ambiente accogliente.',
-		description:
-			'All’Al RistoBar di Body Energie potrete gustare colazioni, snack, pause pranzo e aperitivi, con piatti locali preparati ogni giorno con ingredienti freschi, in un ambiente aperto a tutti con simpatia e professionalità.',
+		description: 'Colazioni, snack e aperitivi genuini in un ambiente accogliente e informale.',
 	},
 	{
 		href: '/centro-estetico',
 		image: '/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-66-scaled.jpg',
 		title: 'Centro Estetico',
 		tagline: 'Prenditi cura di te, ogni giorno di più.',
-		description:
-			'Il centro estetico Beauty Energie offre trattamenti dimagranti, epilazione laser e massaggi personalizzati per valorizzare la bellezza naturale e ritrovare equilibrio e benessere.',
+		description: 'Trattamenti viso, corpo e laser per bellezza ed equilibrio psicofisico.',
 	},
 ];
 
@@ -279,15 +264,19 @@ const testimonianze = [
 	</HeroCarousel>
 
 	<section class="block--black">
-		<MediaCarousel images={fotoCarosello} />
+		<PhotoMarquee images={fotoCarosello} />
 	</section>
 
 	<section class="block--orange">
 		<div class="storia__inner">
-			<div class="storia__foto" style="background-image:url(/wp-content/uploads/2025/07/stabile-body-energie.jpg)" />
+			<div
+				class="storia__foto"
+				data-anim="from-left"
+				style="background-image:url(/wp-content/uploads/2025/07/stabile-body-energie.jpg)"
+			/>
 			<div class="storia__testo-col">
-				<blockquote class="storia__quote">La nostra Storia,<br />il tuo Benessere</blockquote>
-				<div class="storia__testo">
+				<blockquote class="storia__quote" data-anim="from-right">La nostra Storia,<br />il tuo Benessere</blockquote>
+				<div class="storia__testo" data-anim="fade">
 					<p>
 						<strong>Body Energie nasce in una tiepida serata di novembre del 1994</strong>, al ritorno da un
 						allenamento. Ci siamo chiesti perché a Villafranca non esistesse un luogo capace di accogliere persone,
@@ -308,7 +297,7 @@ const testimonianze = [
 				</div>
 			</div>
 		</div>
-		<div class="container contatori">
+		<div class="contatori">
 			{
 				contatori.map((c) => (
 					<div class="contatore">
@@ -316,6 +305,7 @@ const testimonianze = [
 							0
 						</span>
 						<span class="contatore__titolo">{c.titolo}</span>
+						<span class="contatore__sub">{c.sotto}</span>
 					</div>
 				))
 			}
@@ -355,57 +345,104 @@ const testimonianze = [
 		counters.forEach((c) => observer.observe(c));
 	</script>
 
-	<section class="block--black">
-		<div class="container section">
-			<h2>Le nostre attività per adulti</h2>
-			<p class="section__intro">
-				Le attività per adulti di Body Energie sono pensate per ritrovare energia, equilibrio e forma fisica, con
-				programmi che spaziano dalla sala pesi ai corsi in acqua, dal Functional Training al Pilates, in un ambiente
-				accogliente e motivante.
-			</p>
-			<div class="card-grid">
-				{attivitaAdulti.map((c) => <FlipCard {...c} titleBack={c.title} />)}
+	<script>
+		// Allinea la foto della sezione "storia" al titolo (stesso spazio arancione
+		// sopra) e ne riduce l'altezza fino a coincidere con la fine della prima
+		// colonna di testo, cosi' i due elementi condividono lo stesso "inizio" e
+		// la stessa "fine" a schermo.
+		function allineaFotoStoria() {
+			const foto = document.querySelector<HTMLElement>('.storia__foto');
+			const col = document.querySelector<HTMLElement>('.storia__testo-col');
+			const testo = document.querySelector('.storia__testo');
+			if (!foto || !col || !testo) return;
+
+			if (window.matchMedia('(max-width: 900px)').matches) {
+				foto.style.marginTop = '';
+				foto.style.height = '';
+				return;
+			}
+
+			const range = document.createRange();
+			range.selectNodeContents(testo);
+			const righe = Array.from(range.getClientRects());
+			if (!righe.length) return;
+
+			const testoLeft = testo.getBoundingClientRect().left;
+			const primaColonna = righe.filter((r) => Math.abs(r.left - testoLeft) < 2);
+			const fineColonna1 = primaColonna.length
+				? Math.max(...primaColonna.map((r) => r.bottom))
+				: testo.getBoundingClientRect().bottom;
+
+			const colTop = col.getBoundingClientRect().top;
+			const spazioSopra = parseFloat(getComputedStyle(col).paddingTop);
+
+			foto.style.marginTop = `${spazioSopra}px`;
+			foto.style.height = `${fineColonna1 - colTop - spazioSopra}px`;
+		}
+
+		allineaFotoStoria();
+		window.addEventListener('resize', allineaFotoStoria);
+		document.fonts?.ready.then(allineaFotoStoria);
+	</script>
+
+	<script>
+		// La linea sotto ai titoli "attivita" parte dal bordo della sezione
+		// (non dal rientro del testo) e sottolinea tutto il titolo: la sua
+		// larghezza va quindi calcolata dal bordo del blocco fino alla fine
+		// del testo del titolo, non e' un valore fisso.
+		function allineaLineeAttivita() {
+			document.querySelectorAll<HTMLElement>('.attivita__line').forEach((linea) => {
+				const blocco = linea.closest<HTMLElement>('.attivita__block');
+				const titolo = blocco?.querySelector('h2');
+				if (!blocco || !titolo) return;
+				const bloccoRect = blocco.getBoundingClientRect();
+				const titoloRect = titolo.getBoundingClientRect();
+				linea.style.width = `${titoloRect.right - bloccoRect.left}px`;
+			});
+		}
+
+		allineaLineeAttivita();
+		window.addEventListener('resize', allineaLineeAttivita);
+		document.fonts?.ready.then(allineaLineeAttivita);
+	</script>
+
+	<section class="attivita">
+		<div class="attivita__block" style="--block-bg:var(--bg-dark-deep)">
+			<div class="container-wide">
+				<h2>Attività <span class="attivita__accent" data-anim="from-left">per adulti</span></h2>
 			</div>
+			<span class="attivita__line" data-anim="line" />
+			<ActivityGrid items={attivitaAdulti} gapTop={35} />
 		</div>
 
-		<div class="container section section-divider">
-			<h2>Le nostre attività per bambini</h2>
-			<p class="section__intro">
-				Le attività per bambini di Body Energie favoriscono la crescita e lo sviluppo motorio attraverso corsi di
-				nuoto, gioco e movimento, in un ambiente sicuro e stimolante guidato da istruttori qualificati.
-			</p>
-			<div class="card-grid">
-				{attivitaBambini.map((c) => <FlipCard {...c} titleBack={c.title} />)}
+		<div class="attivita__block" style="--block-bg:var(--bg-dark)">
+			<div class="container-wide">
+				<h2>Attività <span class="attivita__accent" data-anim="from-left">per bambini</span></h2>
 			</div>
+			<span class="attivita__line" data-anim="line" />
+			<ActivityGrid items={attivitaBambini} gapTop={35} />
 		</div>
 
-		<div class="container section section-divider">
-			<h2>Body Lab</h2>
-			<p class="section__intro">
-				<strong>Body Lab</strong> è una realtà dedicata al benessere e alla salute della persona a 360°. I nostri
-				professionisti ti accompagneranno nel migliorare il tuo stato fisico, prevenire eventuali rischi e mantenerti
-				in forma, sempre sotto la guida di esperti qualificati in diversi settori.
-			</p>
-			<div class="card-grid">
-				{bodyLab.map((c) => <FlipCard {...c} titleBack={c.title} />)}
+		<div class="attivita__block" style="--block-bg:var(--bg-dark-soft)">
+			<div class="container-wide">
+				<h2>Body <span class="attivita__accent" data-anim="from-left">Lab</span></h2>
 			</div>
+			<span class="attivita__line" data-anim="line" />
+			<ActivityGrid items={bodyLab.slice(0, 3)} gapTop={35} />
+			<ActivityGrid items={bodyLab.slice(3)} columns={2} startIndex={3} gapTop={20} />
 		</div>
 
-		<div class="container section section-divider">
-			<h2>Servizi extra</h2>
-			<p class="section__intro">
-				Beauty Energie è l’oasi di relax di Body Energie, dove benessere ed estetica si incontrano. Tra termario con
-				sauna e bagno turco e centro estetico con trattamenti viso, corpo e laser, è il luogo ideale per ritrovare
-				equilibrio, energia e luminosità.
-			</p>
-			<div class="card-grid card-grid--2">
-				{serviziExtra.map((c) => <FlipCard {...c} titleBack={c.title} />)}
+		<div class="attivita__block" style="--block-bg:var(--bg-dark-deep)">
+			<div class="container-wide">
+				<h2>Servizi <span class="attivita__accent" data-anim="from-left">extra</span></h2>
 			</div>
+			<span class="attivita__line" data-anim="line" />
+			<ActivityGrid items={serviziExtra} columns={2} gapTop={35} />
 		</div>
 	</section>
 
 	<section class="block--orange section">
-		<div class="container">
+		<div class="container-wide">
 			<h2>La Struttura</h2>
 			<div class="struttura__testo">
 				<p>
@@ -433,7 +470,7 @@ const testimonianze = [
 	</section>
 
 	<section class="block--black">
-		<div class="container cta-planning__inner">
+		<div class="container-wide cta-planning__inner">
 			<div>
 				<h2>Body Energie</h2>
 				<p>Sport, movimento e benessere che si incontrano.</p>
@@ -443,7 +480,7 @@ const testimonianze = [
 			<MediaCarousel images={strutturaCarousel} />
 		</div>
 
-		<div class="container section testimonianze">
+		<div class="container-wide section testimonianze">
 			<p class="eyebrow">I nostri Soci</p>
 			<h2 class="testimonianze__title">Non fidarti solo di quello che diciamo noi</h2>
 			<div class="testimonianze__grid">
@@ -487,20 +524,33 @@ const testimonianze = [
 		padding-block: 56px;
 	}
 
-	.section-divider {
-		border-top: 2px solid var(--accent);
+	.attivita__block {
+		background: var(--block-bg);
+		padding-block: 56px;
 	}
 
-	.section__intro {
-		max-width: 760px;
+	.attivita h2 {
+		font-size: 40px;
+		font-weight: 800;
+		margin-bottom: 0;
+		color: var(--text-on-dark);
+		/* Serve che il box combaci col testo (non con tutta la larghezza
+		   disponibile): la linea sotto misura la larghezza reale del titolo. */
+		width: fit-content;
 	}
 
-	.block--orange .section__intro {
-		color: var(--text);
+	.attivita__accent {
+		color: var(--accent);
+		font-style: italic;
+		font-weight: 400;
 	}
 
-	.block--black .section__intro {
-		color: #cccccc;
+	.attivita__line {
+		display: block;
+		height: 3px;
+		margin-top: 18px;
+		background: var(--accent);
+		transform-origin: left;
 	}
 
 	.storia__inner {
@@ -514,10 +564,11 @@ const testimonianze = [
 		background-size: cover;
 		background-position: center;
 		border-radius: 0 20px 20px 0;
+		align-self: start;
 	}
 
 	.storia__testo-col {
-		padding: 48px 5% 32px;
+		padding: 12px 5% 32px;
 	}
 
 	.storia__quote {
@@ -538,44 +589,54 @@ const testimonianze = [
 	.storia__testo p {
 		margin: 0 0 1em;
 		color: var(--text);
-		break-inside: avoid;
 	}
 
 	.contatori {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
-		gap: 24px;
-		padding-block: 32px 56px;
+		gap: 0;
+		padding: 24px 5% 12px;
 	}
 
 	.contatore {
-		text-align: left;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		padding: 8px 32px;
+		border-left: 1px solid var(--text);
+	}
+
+	.contatore:first-child {
+		border-left: none;
+		padding-left: 0;
 	}
 
 	.contatore__numero {
 		display: block;
 		font-family: var(--font-heading);
 		font-weight: 900;
-		font-size: clamp(2.5rem, 6vw, 3.5rem);
-		color: var(--text);
+		font-size: clamp(2.75rem, 5vw, 4.5rem);
+		letter-spacing: -0.02em;
+		font-variant-numeric: tabular-nums;
+		color: var(--text-on-dark);
+		margin-bottom: 14px;
 	}
 
 	.contatore__titolo {
-		font-size: var(--text-sm);
-		font-weight: 800;
+		font-family: var(--font-heading);
+		font-size: var(--text-lg);
+		font-weight: 600;
+		line-height: 1.15;
 		text-transform: uppercase;
 		color: var(--text);
+		margin-bottom: 8px;
 	}
 
-	.card-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 20px;
-		margin-top: 24px;
-	}
-
-	.card-grid--2 {
-		grid-template-columns: repeat(2, 1fr);
+	.contatore__sub {
+		font-size: var(--text-base);
+		line-height: 1.6;
+		color: var(--text);
 	}
 
 	.struttura__testo p {
@@ -658,10 +719,18 @@ const testimonianze = [
 
 		.contatori {
 			grid-template-columns: repeat(2, 1fr);
+			gap: 36px 0;
 		}
 
-		.card-grid,
-		.card-grid--2,
+		.contatore {
+			padding: 0 20px;
+		}
+
+		.contatore:nth-child(odd) {
+			border-left: none;
+			padding-left: 0;
+		}
+
 		.testimonianze__grid,
 		.cta-planning__inner {
 			grid-template-columns: 1fr 1fr;
@@ -669,8 +738,6 @@ const testimonianze = [
 	}
 
 	@media (max-width: 560px) {
-		.card-grid,
-		.card-grid--2,
 		.testimonianze__grid,
 		.cta-planning__inner {
 			grid-template-columns: 1fr;

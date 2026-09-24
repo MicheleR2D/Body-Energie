@@ -105,6 +105,13 @@ input[type="submit"]:hover,
   padding-inline: 20px;
 }
 
+/* Allineamento a piena larghezza (stesso margine laterale della sezione
+   numeri), usato dove il contenuto deve arrivare fino ai bordi della
+   sezione invece di restare centrato in una colonna stretta. */
+.container-wide {
+  padding-inline: 5%;
+}
+
 body.lf-locked {
   overflow: hidden;
 }
@@ -123,7 +130,7 @@ body.lf-locked {
 }
 
 .block--black {
-  background: var(--text);
+  background: var(--bg-dark);
   color: var(--text-on-dark);
 }
 
@@ -134,4 +141,44 @@ body.lf-locked {
 .block--black .section-divider {
   border-top: 2px solid var(--accent);
   padding-top: 40px;
+}
+
+/* ---- Reveal on scroll -------------------------------------------------
+   Un solo IntersectionObserver condiviso (vedi Layout.astro) aggiunge
+   .is-visible. La variante si sceglie per elemento con data-anim. */
+[data-anim] {
+  opacity: 0;
+  transition: opacity 0.7s var(--ease-out-crit), transform 0.8s var(--ease-out-crit);
+}
+[data-anim].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+[data-anim="from-left"] {
+  transform: translateX(-48px);
+}
+
+[data-anim="from-right"] {
+  transform: translateX(48px);
+}
+
+[data-anim="fade"] {
+  transform: none;
+}
+
+[data-anim="scale"] {
+  transform: scale(0.92) translateY(20px);
+}
+
+[data-anim="line"] {
+  transform: scaleX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-anim] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
