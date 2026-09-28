@@ -15,7 +15,7 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="srow" data-srow>
+<div class="srow" data-srow data-anim="reveal">
 	{
 		items.map((item) => (
 			<div class="scard" data-scard>
@@ -189,7 +189,14 @@ const { items } = Astro.props;
 		overflow: hidden;
 		border-radius: var(--radius);
 		background: var(--bg);
-		transition: flex-grow 0.85s var(--ease-out-crit);
+		/* clip-path: srotolamento in entrata della riga (data-anim="reveal"). */
+		transition:
+			flex-grow 0.85s var(--ease-out-crit),
+			clip-path 1.1s var(--ease-out-crit);
+	}
+
+	.scard + .scard {
+		transition-delay: 0s, 0.15s;
 	}
 
 	.scard.is-open {

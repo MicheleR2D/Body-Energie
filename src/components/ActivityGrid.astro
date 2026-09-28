@@ -83,8 +83,13 @@ const { items, columns = 3, gapTop = 56, startIndex = 0 } = Astro.props;
 		background: var(--bg-dark);
 		color: var(--text-on-dark);
 		box-shadow: 0 0 22px rgba(0, 0, 0, 0.22);
-		transform: translateY(0) scale(1);
-		transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base) var(--ease-out-crit);
+		/* Nessun transform di base: lascia partire quello dell'entrata
+		   (data-anim="scale"); l'opacita' va nella stessa transition,
+		   altrimenti questa regola la sovrascrive e la card compare di colpo. */
+		transition:
+			transform var(--dur-base) var(--ease-spring),
+			box-shadow var(--dur-base) var(--ease-out-crit),
+			opacity 0.6s var(--ease-out-crit);
 		/* Evita che Chrome "squadri" per un istante gli angoli arrotondati
 		   quando la card entra nel proprio layer composito durante l'hover. */
 		will-change: transform;

@@ -251,13 +251,17 @@ const testimonianze = [
 	description="Body Energie: fitness, benessere e sport a Villafranca di Verona. Sala pesi, corsi fitness, acqua fitness, Body Lab e molto altro su oltre 5.500 mq."
 >
 	<HeroCarousel images={heroImages}>
-		<h1 class="hero__title">BODY <span class="accent-text">ENERGIE</span></h1>
-		<p class="hero__lead">Dove sport, movimento e benessere si incontrano.</p>
-		<button class="btn hero__btn" type="button" data-open-contact data-interest="prova-gratuita">Prova ora</button>
+		<h1 class="hero__title" data-anim="up">BODY <span class="accent-text">ENERGIE</span></h1>
+		<p class="hero__lead" data-anim="up" data-anim-delay="200">Dove sport, movimento e benessere si incontrano.</p>
+		<div data-anim="up" data-anim-delay="400">
+			<button class="btn hero__btn" type="button" data-open-contact data-interest="prova-gratuita">Prova ora</button>
+		</div>
 	</HeroCarousel>
 
 	<section class="block--black">
-		<PhotoMarquee images={fotoCarosello} />
+		<div data-anim="fade">
+			<PhotoMarquee images={fotoCarosello} />
+		</div>
 	</section>
 
 	<section class="block--orange">
@@ -292,8 +296,8 @@ const testimonianze = [
 		</div>
 		<div class="contatori">
 			{
-				contatori.map((c) => (
-					<div class="contatore">
+				contatori.map((c, i) => (
+					<div class="contatore" data-anim="up" data-anim-delay={String(i * 120)}>
 						<span class="contatore__numero" data-counter data-target={c.target} data-suffix={c.suffisso}>
 							0
 						</span>
@@ -388,19 +392,26 @@ const testimonianze = [
 			// dal bordo della sezione e arriva fino alla fine del testo.
 			document.querySelectorAll<HTMLElement>('.attivita__line, .struttura__line').forEach((linea) => {
 				const blocco = linea.closest<HTMLElement>('.attivita__block') ?? linea.closest<HTMLElement>('section');
-				const titolo = blocco?.querySelector('h2');
+				const titolo = blocco?.querySelector<HTMLElement>('h2');
 				if (!blocco || !titolo) return;
-				const bloccoRect = blocco.getBoundingClientRect();
-				const titoloRect = titolo.getBoundingClientRect();
-				linea.style.width = `${titoloRect.right - bloccoRect.left}px`;
+				const fineTitolo = bordoSinistro(titolo) + titolo.offsetWidth;
+				linea.style.width = `${fineTitolo - bordoSinistro(blocco)}px`;
 			});
 
 			// Titolo allineato a destra (testimonianze): la linea segue
 			// semplicemente la larghezza del testo, non quella della sezione.
 			document.querySelectorAll<HTMLElement>('.testimonianze__line').forEach((linea) => {
-				const titolo = linea.closest('section')?.querySelector('h2');
-				if (titolo) linea.style.width = `${titolo.getBoundingClientRect().width}px`;
+				const titolo = linea.closest('section')?.querySelector<HTMLElement>('h2');
+				if (titolo) linea.style.width = `${titolo.offsetWidth}px`;
 			});
+		}
+
+		// Misure di layout (offset*), non getBoundingClientRect: i titoli con
+		// animazione in entrata restano traslati finche' non compaiono.
+		function bordoSinistro(el: HTMLElement) {
+			let x = 0;
+			for (let n: HTMLElement | null = el; n; n = n.offsetParent as HTMLElement | null) x += n.offsetLeft;
+			return x;
 		}
 
 		allineaLineeAttivita();
@@ -445,7 +456,7 @@ const testimonianze = [
 
 	<section class="block--orange section">
 		<div class="container-wide">
-			<h2 class="struttura__title">La Struttura</h2>
+			<h2 class="struttura__title" data-anim="from-left">La Struttura</h2>
 		</div>
 		<span class="struttura__line" data-anim="line" />
 		<StrutturaRow items={accordionItems.slice(0, 2)} />
@@ -456,7 +467,7 @@ const testimonianze = [
 
 	<section class="planning">
 		<div class="container-wide planning__wrap">
-			<div class="planning__inner">
+			<div class="planning__inner" data-anim="up">
 				<div class="planning__media">
 					<img
 						class="planning__img planning__img--main"
@@ -474,7 +485,7 @@ const testimonianze = [
 						data-anim-delay="150"
 					/>
 				</div>
-				<div class="planning__text">
+				<div class="planning__text" data-anim="from-right" data-anim-delay="250">
 					<h2>Orari di Body Energie</h2>
 					<p>Sport, movimento e benessere che si incontrano.</p>
 					<p>Scopri il Planning delle nostre attività e programma la tua settimana di Sport e Benessere!</p>
@@ -486,7 +497,7 @@ const testimonianze = [
 
 	<section class="block--black section testimonianze">
 		<div class="container-wide">
-			<h2 class="testimonianze__title">Cosa pensano i nostri soci</h2>
+			<h2 class="testimonianze__title" data-anim="from-right">Cosa pensano i nostri soci</h2>
 			<span class="testimonianze__line" data-anim="line" />
 			<div class="testimonianze__grid">
 				{

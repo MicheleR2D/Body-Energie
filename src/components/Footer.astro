@@ -124,16 +124,16 @@ const colonneFoto = [
 <footer class="ft">
 	<section class="cta-final" aria-labelledby="cta-final-title">
 		<div class="cta-final__content">
-			<p class="cta-final__eyebrow">Inizia oggi!</p>
-			<h2 class="cta-final__title" id="cta-final-title">
+			<p class="cta-final__eyebrow" data-anim="pop">Inizia oggi!</p>
+			<h2 class="cta-final__title" id="cta-final-title" data-anim="up" data-anim-delay="120">
 				Prova <span class="cta-final__title-accent">ora</span><br />il nostro centro
 			</h2>
-			<p class="cta-final__lead">Lascia i tuoi dati: ti ricontattiamo noi per organizzare la tua prova.</p>
+			<p class="cta-final__lead" data-anim="up" data-anim-delay="240">Lascia i tuoi dati: ti ricontattiamo noi per organizzare la tua prova.</p>
 
 			<ul class="cta-final__proof">
 				{
-					provaSociale.map((p) => (
-						<li>
+					provaSociale.map((p, i) => (
+						<li data-anim="up" data-anim-delay={String(360 + i * 100)}>
 							<strong>{p.numero}</strong>
 							<span>{p.etichetta}</span>
 						</li>
@@ -141,14 +141,14 @@ const colonneFoto = [
 				}
 			</ul>
 
-			<div class="cta-final__actions">
+			<div class="cta-final__actions" data-anim="up" data-anim-delay="760">
 				<button class="btn cta-final__btn" type="button" data-open-contact data-interest="prova-gratuita">
 					Attiva ora <span class="cta-final__btn-arrow" aria-hidden="true">→</span>
 				</button>
 			</div>
 		</div>
 
-		<div class="cta-final__wall" aria-hidden="true">
+		<div class="cta-final__wall" aria-hidden="true" data-anim="from-right">
 			{
 				colonneFoto.map((colonna, i) => (
 					<div class={`cta-final__col ${i === 1 ? 'cta-final__col--down' : ''}`}>
@@ -165,15 +165,15 @@ const colonneFoto = [
 
 	<section class="find-us" aria-labelledby="find-us-title">
 		<div class="find-us__content">
-			<p class="find-us__eyebrow">Dove siamo</p>
-			<h2 class="find-us__title" id="find-us-title">
+			<p class="find-us__eyebrow" data-anim="pop">Dove siamo</p>
+			<h2 class="find-us__title" id="find-us-title" data-anim="up" data-anim-delay="120">
 				Vieni a <span class="find-us__title-accent">trovarci</span>
 			</h2>
 
 			<div class="find-us__orari">
 				{
-					orari.map((o) => (
-						<div class="find-us__orari-card">
+					orari.map((o, i) => (
+						<div class="find-us__orari-card" data-anim="up" data-anim-delay={String(240 + i * 120)}>
 							<p class="find-us__label">{o.titolo}</p>
 							<dl class="find-us__orari-list">
 								{o.righe.map((r) => (
@@ -188,7 +188,7 @@ const colonneFoto = [
 				}
 			</div>
 
-			<div class="find-us__cta">
+			<div class="find-us__cta" data-anim="up" data-anim-delay="480">
 				<a class="btn btn--outline" href={mapsDirectionsUrl} target="_blank" rel="noopener">
 					Indicazioni
 				</a>
@@ -196,7 +196,7 @@ const colonneFoto = [
 			</div>
 		</div>
 
-		<div class="find-us__map">
+		<div class="find-us__map" data-anim="from-left">
 			<iframe
 				src={mapsEmbedSrc}
 				title={`Mappa - Body Energie, ${address}`}
@@ -207,7 +207,7 @@ const colonneFoto = [
 	</section>
 
 	<div class="ft-main">
-		<div class="ft-brand">
+		<div class="ft-brand" data-anim="up">
 			<img
 				class="ft-brand__logo"
 				src="/images/logo-body-energie-chiaro.png"
@@ -230,8 +230,8 @@ const colonneFoto = [
 		</div>
 
 		{
-			megaMenu.map((colonna) => (
-				<nav class="ft-col" aria-label={colonna.titolo}>
+			megaMenu.map((colonna, i) => (
+				<nav class="ft-col" aria-label={colonna.titolo} data-anim="up" data-anim-delay={String(80 + i * 80)}>
 					<p class="ft-heading">{colonna.titolo}</p>
 					<ul class="ft-links">
 						{colonna.voci.map((voce) => (
@@ -244,7 +244,7 @@ const colonneFoto = [
 			))
 		}
 
-		<div class="ft-col">
+		<div class="ft-col" data-anim="up" data-anim-delay="320">
 			<p class="ft-heading">Info</p>
 			<ul class="ft-links">
 				{
@@ -276,15 +276,15 @@ const colonneFoto = [
 		<p class="ft-heading">Partner e istituzioni</p>
 		<ul class="ft-tiles">
 			{
-				partner.map((p) => (
-					<li class="ft-tile">
+				partner.map((p, i) => (
+					<li class="ft-tile" data-anim="up" data-anim-delay={String(i * 50)}>
 						<img src={p.src} alt={p.alt} loading="lazy" />
 					</li>
 				))
 			}
 			{
-				loghiCofinanziamento.map((l) => (
-					<li class="ft-tile">
+				loghiCofinanziamento.map((l, i) => (
+					<li class="ft-tile" data-anim="up" data-anim-delay={String((partner.length + i) * 50)}>
 						<a href="/contributo-regione-veneto">
 							<img src={l.src} alt={l.alt} loading="lazy" />
 						</a>
