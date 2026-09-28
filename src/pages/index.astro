@@ -5,7 +5,6 @@
 // di colore (arancione/nero), non solo i testi.
 import Layout from '../layouts/Layout.astro';
 import ActivityGrid from '../components/ActivityGrid.astro';
-import MediaCarousel from '../components/MediaCarousel.astro';
 import PhotoMarquee from '../components/PhotoMarquee.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import StrutturaRow from '../components/StrutturaRow.astro';
@@ -231,12 +230,6 @@ const accordionItems = [
 	},
 ];
 
-const strutturaCarousel = [
-	{ src: '/wp-content/uploads/2025/07/Body-Energie-rose.jpg' },
-	{ src: '/wp-content/uploads/2025/08/AIR-PARK-6-TRIFORM.jpg' },
-	{ src: '/wp-content/uploads/2025/08/IMG20230523150812-scaled-1.jpg' },
-];
-
 const testimonianze = [
 	{
 		nome: 'Ines Ischiale',
@@ -391,13 +384,22 @@ const testimonianze = [
 		// larghezza va quindi calcolata dal bordo del blocco fino alla fine
 		// del testo del titolo, non e' un valore fisso.
 		function allineaLineeAttivita() {
-			document.querySelectorAll<HTMLElement>('.attivita__line').forEach((linea) => {
-				const blocco = linea.closest<HTMLElement>('.attivita__block');
+			// Titoli allineati a sinistra (attivita, struttura): la linea parte
+			// dal bordo della sezione e arriva fino alla fine del testo.
+			document.querySelectorAll<HTMLElement>('.attivita__line, .struttura__line').forEach((linea) => {
+				const blocco = linea.closest<HTMLElement>('.attivita__block') ?? linea.closest<HTMLElement>('section');
 				const titolo = blocco?.querySelector('h2');
 				if (!blocco || !titolo) return;
 				const bloccoRect = blocco.getBoundingClientRect();
 				const titoloRect = titolo.getBoundingClientRect();
 				linea.style.width = `${titoloRect.right - bloccoRect.left}px`;
+			});
+
+			// Titolo allineato a destra (testimonianze): la linea segue
+			// semplicemente la larghezza del testo, non quella della sezione.
+			document.querySelectorAll<HTMLElement>('.testimonianze__line').forEach((linea) => {
+				const titolo = linea.closest('section')?.querySelector('h2');
+				if (titolo) linea.style.width = `${titolo.getBoundingClientRect().width}px`;
 			});
 		}
 
@@ -445,33 +447,57 @@ const testimonianze = [
 		<div class="container-wide">
 			<h2 class="struttura__title">La Struttura</h2>
 		</div>
+		<span class="struttura__line" data-anim="line" />
 		<StrutturaRow items={accordionItems.slice(0, 2)} />
 		<StrutturaRow items={accordionItems.slice(2, 4)} />
 		<StrutturaRow items={accordionItems.slice(4, 6)} />
 		<StrutturaRow items={accordionItems.slice(6, 7)} />
 	</section>
 
-	<section class="block--black">
-		<div class="container-wide cta-planning__inner">
-			<div>
-				<h2>Body Energie</h2>
-				<p>Sport, movimento e benessere che si incontrano.</p>
-				<p>Scopri il Planning delle nostre attività e programma la tua settimana di Sport e Benessere!</p>
-				<a class="btn" href="/orari">Planning settimanale</a>
+	<section class="planning">
+		<div class="container-wide planning__wrap">
+			<div class="planning__inner">
+				<div class="planning__media">
+					<img
+						class="planning__img planning__img--main"
+						src="/wp-content/uploads/2025/07/Body-Energie-rose.jpg"
+						alt="Soci e trainer di Body Energie all'Air Park"
+						loading="lazy"
+						data-anim="scale"
+					/>
+					<img
+						class="planning__img planning__img--accent"
+						src="/wp-content/uploads/2025/08/AIR-PARK-6-TRIFORM.jpg"
+						alt="La struttura Triform dell'Air Park"
+						loading="lazy"
+						data-anim="scale"
+						data-anim-delay="150"
+					/>
+				</div>
+				<div class="planning__text">
+					<h2>Orari di Body Energie</h2>
+					<p>Sport, movimento e benessere che si incontrano.</p>
+					<p>Scopri il Planning delle nostre attività e programma la tua settimana di Sport e Benessere!</p>
+					<a class="btn" href="/orari">Planning settimanale</a>
+				</div>
 			</div>
-			<MediaCarousel images={strutturaCarousel} />
 		</div>
+	</section>
 
-		<div class="container-wide section testimonianze">
-			<p class="eyebrow">I nostri Soci</p>
-			<h2 class="testimonianze__title">Non fidarti solo di quello che diciamo noi</h2>
+	<section class="block--black section testimonianze">
+		<div class="container-wide">
+			<h2 class="testimonianze__title">Cosa pensano i nostri soci</h2>
+			<span class="testimonianze__line" data-anim="line" />
 			<div class="testimonianze__grid">
 				{
-					testimonianze.map((t) => (
-						<figure class="testimonianza">
+					testimonianze.map((t, i) => (
+						<figure class="testimonianza" data-anim="scale" data-anim-delay={String(i * 120)}>
 							<div class="testimonianza__stars" aria-hidden="true">★★★★★</div>
-							<blockquote>{t.testo}</blockquote>
-							<figcaption>{t.nome}</figcaption>
+							<blockquote class="testimonianza__testo">{t.testo}</blockquote>
+							<figcaption class="testimonianza__autore">
+								<span class="testimonianza__avatar" aria-hidden="true">{t.nome.charAt(0)}</span>
+								<span class="testimonianza__nome">{t.nome}</span>
+							</figcaption>
 						</figure>
 					))
 				}
@@ -638,62 +664,160 @@ const testimonianze = [
 		font-size: 40px;
 		font-weight: 800;
 		color: var(--text-on-dark);
-		margin: 0 0 56px;
+		margin: 0;
+		/* Serve che il box combaci col testo: la linea sotto misura la
+		   larghezza reale del titolo, come nei titoli "attivita". */
+		width: fit-content;
 	}
 
-.cta-planning__inner {
-		padding-top: 0;
+	.struttura__line {
+		display: block;
+		height: 3px;
+		margin: 18px 0 35px;
+		background: var(--text);
+		transform-origin: left;
+	}
+
+	/* Fondo scuro continuo con le testimonianze sotto; il contenuto sta in
+	   una card dello stesso colore dell'header. */
+	section.planning {
+		background: var(--bg-dark);
+	}
+
+	.planning__wrap {
 		padding-bottom: 56px;
+	}
+
+	.planning__inner {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 32px;
-		align-items: start;
+		gap: 56px;
+		align-items: center;
+		padding: 40px;
+		border-radius: var(--radius-lg);
+		background: var(--bg-alt);
 	}
 
-	.testimonianze {
-		text-align: center;
+	/* Foto principale verticale + seconda foto piu' piccola sovrapposta in
+	   basso a destra, con cornice bianca (layout "Chi siamo" di Ronchiverdi). */
+	.planning__media {
+		position: relative;
+		padding: 0 1.5rem 2.5rem 0;
 	}
 
-	.eyebrow {
-		color: var(--accent);
-		text-transform: uppercase;
-		font-weight: 700;
-		margin-bottom: 4px;
+	.planning__img {
+		display: block;
+		width: 100%;
+		object-fit: cover;
+		border-radius: 16px;
+	}
+
+	/* Altezza legata allo schermo, non alla larghezza: l'intera sezione
+	   (fascia sopra 56px + header fisso ~75px + padding card 2x40px +
+	   spazio sotto la seconda foto 2.5rem + margine inferiore 56px) deve
+	   stare in una schermata. */
+	.planning__img--main {
+		height: clamp(300px, calc(100vh - 310px), 580px);
+		height: clamp(300px, calc(100svh - 310px), 580px);
+	}
+
+	.planning__img--accent {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		width: 58%;
+		aspect-ratio: 4 / 3;
+		border: 6px solid var(--bg-alt);
+		box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.35);
+	}
+
+	.planning__text p {
+		color: var(--text);
+	}
+
+	.planning__text .btn {
+		margin-top: 12px;
 	}
 
 	.testimonianze__title {
 		color: var(--text-on-dark);
-		max-width: 700px;
-		margin-inline: auto;
+		margin: 0;
+		/* Come i titoli allineati a sinistra: il box deve combaciare col
+		   testo, poi lo si spinge sul bordo destro della sezione. */
+		width: fit-content;
+		margin-left: auto;
+	}
+
+	.testimonianze__line {
+		display: block;
+		height: 3px;
+		margin: 18px 0 0 auto;
+		background: var(--accent);
+		transform-origin: right;
 	}
 
 	.testimonianze__grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 24px;
-		margin-top: 32px;
+		margin-top: 40px;
 		text-align: left;
 	}
 
+	/* Card "recensione" in stile Trustpilot: badge voto in alto, testo,
+	   e in fondo l'autore separato da una riga sottile. */
 	.testimonianza {
 		margin: 0;
+		display: flex;
+		flex-direction: column;
+		background: var(--bg-alt);
+		border-radius: var(--radius-lg);
+		padding: 28px;
+		box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
 	}
 
 	.testimonianza__stars {
 		color: var(--accent);
-		letter-spacing: 2px;
-		margin-bottom: 12px;
+		font-size: 20px;
+		letter-spacing: 3px;
+		margin-bottom: 18px;
 	}
 
-	.testimonianza blockquote {
-		margin: 0 0 12px;
-		color: #cccccc;
+	.testimonianza__testo {
+		flex-grow: 1;
+		margin: 0 0 20px;
+		color: var(--text);
+		font-size: var(--text-sm);
+		line-height: 1.6;
 	}
 
-	.testimonianza figcaption {
+	.testimonianza__autore {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding-top: 16px;
+		border-top: 1px solid var(--border);
+	}
+
+	.testimonianza__avatar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background: var(--accent);
+		color: var(--text-on-dark);
+		font-family: var(--font-heading);
+		font-weight: 800;
+	}
+
+	.testimonianza__nome {
 		font-weight: 700;
-		color: var(--accent);
+		color: var(--text);
 		text-transform: uppercase;
+		font-size: var(--text-sm);
 	}
 
 	@media (max-width: 900px) {
@@ -725,15 +849,32 @@ const testimonianze = [
 			padding-left: 0;
 		}
 
-		.testimonianze__grid,
-		.cta-planning__inner {
+		.testimonianze__grid {
 			grid-template-columns: 1fr 1fr;
+		}
+
+		.planning__inner {
+			grid-template-columns: 1fr;
+			gap: 24px;
+			padding: 24px;
+		}
+
+		.planning__media {
+			max-width: 32rem;
+			width: 100%;
+			margin: 0 auto;
+			padding: 0 1.25rem 2.25rem 0;
+		}
+
+		/* In colonna le foto stanno sopra al testo: devono lasciargli
+		   abbastanza posto per restare entrambi in una schermata. */
+		.planning__img--main {
+			height: clamp(170px, 26svh, 320px);
 		}
 	}
 
 	@media (max-width: 560px) {
-		.testimonianze__grid,
-		.cta-planning__inner {
+		.testimonianze__grid {
 			grid-template-columns: 1fr;
 		}
 	}

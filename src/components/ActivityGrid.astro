@@ -217,11 +217,11 @@ const { items, columns = 3, gapTop = 56, startIndex = 0 } = Astro.props;
 		border-radius: 100px;
 	}
 
-	/* Niente zoom qui: il pallino sta dentro due contenitori con
-	   overflow:hidden (.card__clip e .card__hover) troppo stretti, lo zoom
-	   lo tagliava ai bordi. */
-	.card__more:hover {
-		transform: none;
+	/* Il pallino sta vicino al bordo basso/sinistro di due contenitori con
+	   overflow:hidden: lo zoom deve crescere verso sinistra e verso l'alto
+	   (non verso destra/basso, dove verrebbe tagliato). */
+	.card__more {
+		transform-origin: left bottom;
 	}
 
 	@media (max-width: 900px) {
