@@ -91,4 +91,5 @@ export default defineConfig({
 	integrations: [sitemap()],
 	adapter: vercel(),
 	devToolbar: { enabled: false },
+	server: { port: Number(process.env.PORT) || 4321 },
 });

@@ -50,10 +50,20 @@ import { megaMenu } from '../data/nav';
 <script>
 	const toggle = document.querySelector('[data-hd-toggle]');
 	const nav = document.querySelector('[data-hd-nav]');
-	toggle?.addEventListener('click', () => {
-		const aperto = nav?.classList.toggle('hd__nav--aperto');
-		toggle.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+	const impostaMenu = (aperto) => {
+		nav?.classList.toggle('hd__nav--aperto', aperto);
+		toggle?.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+		toggle?.setAttribute('aria-label', aperto ? 'Chiudi il menu' : 'Apri il menu');
+		document.documentElement.classList.toggle('hd-lock', aperto);
+	};
+	toggle?.addEventListener('click', () => impostaMenu(!nav?.classList.contains('hd__nav--aperto')));
+	// Si chiude con un tap su un link o sul bottone contatti, con Esc o
+	// tornando a una larghezza desktop.
+	nav?.addEventListener('click', (e) => {
+		if (e.target instanceof Element && e.target.closest('a, button')) impostaMenu(false);
 	});
+	document.addEventListener('keydown', (e) => e.key === 'Escape' && impostaMenu(false));
+	window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => e.matches && impostaMenu(false));
 
 	// L'header cambia colore (sfondo a gradiente, voci col colore che
 	// prima era lo sfondo) appena si inizia a scorrere la pagina.
@@ -65,39 +75,37 @@ import { megaMenu } from '../data/nav';
 
 <style>
 	.hd {
-		background: transparent;
-		border-bottom: 1px solid transparent;
+		/* Sfondo bianco leggermente trasparente sempre (anche in cima):
+		   logo e simbolo del menu' sono neri e si perderebbero sulle
+		   sezioni scure. */
+		--hd-h: 61px;
+		border-bottom: 1px solid var(--border);
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 40;
-		transition: background 0.3s ease, border-color 0.3s ease;
 	}
 
-	/* In cima alla pagina l'header e' trasparente (sopra la hero scura):
-	   voci di menu' bianche. Appena si scorre torna l'header originale,
-	   sfondo crema pieno, voci di menu' nel colore originale (nero). */
+	/* Lo sfondo sta in un pseudo-elemento: backdrop-filter sull'header stesso
+	   farebbe da contenitore al menu' mobile (position: fixed) e lo
+	   ridurrebbe all'altezza della barra. */
+	.hd::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: rgba(255, 255, 255, 0.82);
+		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
+	}
+
 	.hd__col-title,
 	.hd__chevron {
-		color: var(--text-on-dark);
-	}
-
-	.hd__col + .hd__col::before {
-		background: var(--text-on-dark);
-	}
-
-	.hd.hd--scrolled {
-		background: var(--bg-alt);
-		border-bottom-color: var(--border);
-	}
-
-	.hd--scrolled .hd__col-title,
-	.hd--scrolled .hd__chevron {
 		color: var(--text);
 	}
 
-	.hd--scrolled .hd__col + .hd__col::before {
+	.hd__col + .hd__col::before {
 		background: var(--accent);
 	}
 
@@ -230,14 +238,6 @@ import { megaMenu } from '../data/nav';
 	}
 
 	.hd__cta--contact {
-		--btn-border: var(--text-on-dark);
-		--btn-hover-text: var(--accent);
-	}
-
-	/* Header scrollato: l'header torna crema, quindi il bottone torna al
-	   bordo/testo neri (con la stessa regola dell'hover: bordo nero ->
-	   testo in hover arancione). */
-	.hd--scrolled .hd__cta--contact {
 		--btn-border: var(--text);
 		--btn-hover-text: var(--accent);
 	}
@@ -245,37 +245,173 @@ import { megaMenu } from '../data/nav';
 	@media (max-width: 900px) {
 		.hd__toggle {
 			display: flex;
+			position: relative;
+			z-index: 2;
+			width: 44px;
+			height: 44px;
+			align-items: center;
+			justify-content: center;
+			margin-right: -8px;
+			-webkit-tap-highlight-color: transparent;
 		}
 
+		/* Le tre linee diventano una X */
+		.hd__toggle span {
+			position: absolute;
+			width: 24px;
+			transition: transform 0.35s var(--ease-out-crit), opacity 0.2s ease;
+		}
+		.hd__toggle span:nth-child(1) { transform: translateY(-7px); }
+		.hd__toggle span:nth-child(3) { transform: translateY(7px); }
+		.hd__toggle[aria-expanded='true'] span:nth-child(1) { transform: rotate(45deg); }
+		.hd__toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+		.hd__toggle[aria-expanded='true'] span:nth-child(3) { transform: rotate(-45deg); }
+
+		/* Pannello a tutto schermo sotto la barra */
 		.hd__nav {
 			position: fixed;
-			inset: 72px 0 0 0;
-			background: var(--bg-alt);
+			inset: var(--hd-h) 0 0 0;
+			z-index: 1;
+			flex: none;
 			flex-direction: column;
 			align-items: stretch;
-			padding: 20px;
+			justify-content: space-between;
+			gap: 28px;
+			padding: 28px 24px max(24px, env(safe-area-inset-bottom));
 			overflow-y: auto;
-			display: none;
+			overscroll-behavior: contain;
+			color: var(--text-on-dark);
+			background:
+				radial-gradient(120% 60% at 100% 0%, rgba(236, 116, 15, 0.22), transparent 60%),
+				var(--bg-dark);
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-12px);
+			transition: opacity 0.3s ease, transform 0.45s var(--ease-out-crit), visibility 0s 0.45s;
 		}
 
 		.hd__nav.hd__nav--aperto {
-			display: flex;
+			opacity: 1;
+			visibility: visible;
+			transform: none;
+			transition: opacity 0.3s ease, transform 0.45s var(--ease-out-crit), visibility 0s;
+		}
+
+		:global(html.hd-lock) {
+			overflow: hidden;
 		}
 
 		.hd__mega {
 			flex-direction: column;
-			gap: 20px;
+			align-items: stretch;
+			gap: 26px;
+			margin: 0;
+			counter-reset: sezione;
 		}
 
+		.hd__col {
+			counter-increment: sezione;
+			padding-top: 18px;
+			border-top: 1px solid rgba(255, 255, 255, 0.14);
+		}
+
+		.hd__col + .hd__col::before {
+			display: none;
+		}
+
+		.hd__col-title {
+			display: flex;
+			align-items: baseline;
+			gap: 12px;
+			margin-bottom: 12px;
+			color: var(--text-on-dark);
+			font-size: 1.35rem;
+			font-weight: 700;
+			letter-spacing: -0.01em;
+		}
+
+		.hd__col-title::before {
+			content: counter(sezione, decimal-leading-zero);
+			color: var(--accent);
+			font-size: 0.75rem;
+			font-weight: 600;
+			letter-spacing: 0.08em;
+		}
+
+		.hd__chevron {
+			display: none;
+		}
+
+		/* Le voci in due colonne, cosi' entra tutto senza troppo scroll */
 		.hd__col > ul {
 			position: static;
 			opacity: 1;
 			visibility: visible;
 			transform: none;
+			min-width: 0;
+			background: none;
 			box-shadow: none;
 			border: none;
-			padding: 8px 0 0 12px;
-			display: block;
+			border-radius: 0;
+			padding: 0;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 2px 16px;
+		}
+
+		.hd__col > ul li a {
+			padding: 9px 0;
+			color: rgba(255, 255, 255, 0.78);
+			font-size: 0.95rem;
+			font-weight: 500;
+		}
+
+		.hd__col > ul li a:hover,
+		.hd__col > ul li a:active {
+			color: var(--accent);
+		}
+
+		.hd__actions {
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.hd__cta {
+			width: 100%;
+			padding: 14px 16px;
+			font-size: 15px;
+		}
+
+		.hd__cta--contact {
+			--btn-border: var(--text-on-dark);
+			--btn-hover-text: var(--accent);
+		}
+
+		/* Ingresso a cascata dei contenuti */
+		.hd__col,
+		.hd__actions {
+			opacity: 0;
+			transform: translateY(14px);
+			transition: opacity 0.4s ease, transform 0.5s var(--ease-out-crit);
+		}
+
+		.hd__nav--aperto .hd__col,
+		.hd__nav--aperto .hd__actions {
+			opacity: 1;
+			transform: none;
+		}
+
+		.hd__nav--aperto .hd__col:nth-child(1) { transition-delay: 0.08s; }
+		.hd__nav--aperto .hd__col:nth-child(2) { transition-delay: 0.16s; }
+		.hd__nav--aperto .hd__col:nth-child(3) { transition-delay: 0.24s; }
+		.hd__nav--aperto .hd__actions { transition-delay: 0.32s; }
+	}
+
+	@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+		.hd__nav,
+		.hd__col,
+		.hd__actions {
+			transition: none !important;
 		}
 	}
 </style>
