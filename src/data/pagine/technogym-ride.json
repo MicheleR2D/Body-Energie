@@ -1,0 +1,75 @@
+{
+	"tipo": "corso",
+	"slug": "technogym-ride",
+	"nome": "Technogym Ride",
+	"seo": {
+		"title": "Technogym Ride - Body Energie | Villafranca di Verona",
+		"description": "Con Technogym Ride l’indoor cycling diventa davvero smart! La geometria ispirata alle bici da strada e lo schermo integrato con app e sessioni di…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "technogym",
+		"parole": [
+			"ride"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-23-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "technogym ride",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Con Technogym Ride l’indoor cycling diventa davvero smart! La geometria ispirata alle bici da strada e lo schermo integrato con app e sessioni di allenamento offrono un’esperienza realistica e coinvolgente. Sali in sella e vivi una pedalata fluida, dinamica e adatta a ogni livello.</p>",
+			"video": "/wp-content/uploads/2025/12/Technogym-Ride-1.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 65
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 25
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 10
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

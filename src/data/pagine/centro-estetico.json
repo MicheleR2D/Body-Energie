@@ -1,0 +1,55 @@
+{
+	"tipo": "servizio",
+	"slug": "centro-estetico",
+	"nome": "Centro Estetico",
+	"seo": {
+		"title": "Centro Estetico - Body Energie | Villafranca di Verona",
+		"description": "Il centro estetico di Body Energie è uno spazio dedicato alla cura del corpo e al benessere , dove professionalità e tecnologie avanzate si uniscono per…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "CENTRO",
+		"parole": [
+			"ESTETICO"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-66-scaled.jpg",
+		"pulsanti": []
+	},
+	"percorsi": null,
+	"blocchi": [
+		{
+			"id": null,
+			"titolo": "CENTRO ESTETICO",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il centro estetico di Body Energie è uno <strong>spazio dedicato alla cura del corpo e al benessere</strong>, dove professionalità e tecnologie avanzate si uniscono per offrire <strong>trattamenti efficaci e personalizzati</strong>. Qui puoi intraprendere percorsi dimagranti studiati sulle tue esigenze, con protocolli mirati a <strong>rimodellare la silhouette, migliorare la tonicità dei tessuti e favorire il drenaggio dei liquidi in eccesso</strong>. Per una pelle liscia e duratura, proponiamo l’<strong>epilazione laser di ultima generazione</strong>, sicura e adatta a diversi fototipi, ideale per ridurre progressivamente la crescita dei peli e ottenere un risultato uniforme e stabile nel tempo. Completano l’esperienza i nostri <strong>massaggi personalizzati</strong>, creati su misura per alleviare tensioni muscolari, favorire la circolazione, rilassare la mente e restituire equilibrio psicofisico. Ogni trattamento viene eseguito da <strong>estetiste qualificate</strong>, in un ambiente confortevole e pensato per farti <strong>vivere un momento di autentico benessere</strong>. Nel centro estetico di Body Energie ti aspetta un percorso completo per v<strong>alorizzare la tua bellezza, migliorare la tua forma fisica</strong> e ritrovare armonia e leggerezza.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-66-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-118-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-119-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-128-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-122-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

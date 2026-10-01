@@ -1,0 +1,70 @@
+{
+	"tipo": "servizio",
+	"slug": "ciclismo",
+	"nome": "Squadra Ciclistica",
+	"seo": {
+		"title": "Squadra Ciclistica - Body Energie | Villafranca di Verona",
+		"description": "EKOI Body Energie è la squadra ciclistica giovanile nata dalla collaborazione tra Body Energie e la storica Società Ciclistica Barlottini, attiva dal 2002…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "squadra ciclistica",
+		"parole": [],
+		"immagine": "/wp-content/uploads/2025/12/foto-squadra-ekoi-body-energie-scaled.jpg",
+		"pulsanti": [
+			{
+				"testo": "richiedi informazioni",
+				"interesse": "ciclismo"
+			}
+		]
+	},
+	"percorsi": null,
+	"blocchi": [
+		{
+			"id": null,
+			"titolo": null,
+			"sottotitolo": null,
+			"descrizioneHtml": "<p><strong>EKOI Body Energie</strong> è la squadra ciclistica giovanile nata dalla collaborazione tra Body Energie e la storica Società Ciclistica Barlottini, attiva dal 2002 e da sempre impegnata nella crescita di giovani atleti. Oggi il team si rivolge a ragazzi e ragazze dai 6 ai 12 anni, offrendo allenamenti sicuri su circuiti completamente chiusi al traffico e un percorso educativo dedicato alla pratica del ciclismo.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/ekoi-logo.png"
+			],
+			"adattamento": "contain",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": null,
+			"titolo": "squadra ciclistica",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Nel 2021 la società ha rinnovato il proprio direttivo e trasferito la sede operativa a Villafranca, all’interno del Centro Body Energie, dando vita alla squadra <strong>Barlottini – Body Energie</strong>. Dal 2022, grazie all’ingresso del marchio francese <strong>Ekoi</strong> come sponsor tecnico, la squadra assume il nome <strong>EKOI Body Energie</strong>, rafforzando ulteriormente l’impegno nella formazione di giovani ciclisti con metodologie moderne e un ambiente motivante.</p><p>La missione del progetto è rendere il ciclismo accessibile, educativo e divertente, promuovendo valori come disciplina, impegno e spirito di squadra. Il gruppo opera senza scopo di lucro, garantendo ogni anno circa 180 allenamenti e 60 gare dedicate ai giovani atleti.</p><p>La squadra organizza inoltre eventi sul territorio, come il <em>Trofeo EKOI Body Energie – Memorial Luciano Nicolis</em>, e collabora con realtà specializzate come <strong>Cicli Fontana</strong> per il noleggio delle biciclette.<br>Gli allenamenti si svolgono principalmente al ciclodromo “Giancarlo Chiesa” di Caselle di Sommacampagna, con possibilità di attività su pista presso il velodromo di Pescantina.</p><p>Oltre all’attività agonistica, EKOI Body Energie promuove l’uso sicuro della bicicletta con iniziative aperte alle famiglie e progetti di educazione stradale rivolti alle scuole primarie.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/foto-squadra-ekoi-body-energie-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

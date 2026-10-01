@@ -1,4 +1,6 @@
 ---
+import Img from './Img.astro';
+
 interface Props {
 	images: string[];
 }
@@ -32,7 +34,10 @@ const keyframesCss = `
 	<div class="hc__slides">
 		{
 			images.map((src, i) => (
-				<div class="hc__slide" style={`background-image:url(${src}); animation-delay:${i * STAGGER_MS}ms`} />
+				<div class="hc__slide" style={`animation-delay:${i * STAGGER_MS}ms`}>
+					{/* Solo la prima foto e' in cima alla pagina: va caricata subito. */}
+					<Img src={src} class="img-cover" sizes="100vw" priority={i === 0} />
+				</div>
 			))
 		}
 	</div>
@@ -48,6 +53,7 @@ const keyframesCss = `
 	.hc {
 		position: relative;
 		min-height: 100vh;
+		min-height: 100svh;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -64,8 +70,6 @@ const keyframesCss = `
 	.hc__slide {
 		position: absolute;
 		inset: 0;
-		background-size: cover;
-		background-position: center;
 		opacity: 0;
 		animation-name: hc-fade;
 		animation-duration: var(--hc-duration);
@@ -86,9 +90,21 @@ const keyframesCss = `
 		padding: 32px 20px;
 	}
 
-	@media (max-width: 767px) {
+	@media (max-width: 900px) {
 		.hc {
 			min-height: 74vh;
+			min-height: 74svh;
+		}
+	}
+
+	/* Con "riduci movimento" niente dissolvenze continue: resta ferma la prima foto. */
+	@media (prefers-reduced-motion: reduce) {
+		.hc__slide {
+			animation: none;
+		}
+
+		.hc__slide:first-child {
+			opacity: 1;
 		}
 	}
 </style>

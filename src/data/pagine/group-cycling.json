@@ -1,0 +1,75 @@
+{
+	"tipo": "corso",
+	"slug": "group-cycling",
+	"nome": "Group Cycling",
+	"seo": {
+		"title": "Group Cycling - Body Energie | Villafranca di Verona",
+		"description": "Il Group Cycling è un allenamento indoor moderno che unisce energia, divertimento e sicurezza. Pedalerai a ritmo di musica su bike GROUP CYCLE™ CONNECT by…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "group",
+		"parole": [
+			"cycling"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-23-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "group cycling",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il Group Cycling è un allenamento indoor moderno che unisce energia, divertimento e sicurezza. Pedalerai a ritmo di musica su bike <strong>GROUP CYCLE™ CONNECT by Technogym</strong>, per un’esperienza fluida e coinvolgente.<br>Un’attività ad alto impatto che migliora la resistenza cardiovascolare, aiuta a bruciare calorie e potenzia la muscolatura delle gambe, il tutto in un ambiente motivante e dinamico.</p>",
+			"video": "/wp-content/uploads/2026/06/Group-Cycling.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 70
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 20
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 10
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

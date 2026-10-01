@@ -1,0 +1,117 @@
+{
+	"tipo": "servizio",
+	"slug": "nuoto-bimbi",
+	"nome": "Nuoto Bimbi",
+	"seo": {
+		"title": "Nuoto Bimbi - Body Energie | Villafranca di Verona",
+		"description": "I corsi di nuoto baby di Body Energie accompagnano i più piccoli — dai 4 mesi ai 3 anni — in un’esperienza unica di scoperta, gioco e relazione in acqua.…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "nuoto",
+		"parole": [
+			"baby",
+			"kids"
+		],
+		"immagine": "/wp-content/uploads/2025/10/lavi-perchik-ksGmUF1aE2I-unsplash-scaled.jpg",
+		"pulsanti": [
+			{
+				"testo": "richiedi informazioni",
+				"interesse": "nuoto-bimbi"
+			}
+		]
+	},
+	"percorsi": null,
+	"blocchi": [
+		{
+			"id": null,
+			"titolo": "nuoto baby",
+			"sottotitolo": "dai 4 mesi ai 3 anni",
+			"descrizioneHtml": "<p>I corsi di nuoto baby di Body Energie accompagnano i più piccoli — dai 4 mesi ai 3 anni — in un’esperienza unica di scoperta, gioco e relazione in acqua.<br>Grazie alla presenza del genitore e alla guida di <strong>istruttori qualificati</strong>, ogni lezione diventa un momento di crescita motoria, emotiva e affettiva.<br>L’acqua, ambiente naturale e rassicurante, stimola lo sviluppo psicomotorio del bambino, ne rafforza la fiducia e ne favorisce la socialità attraverso il movimento e il contatto.<br>Attraverso il gioco e la condivisione, il bimbo apprende in modo naturale le basi del nuoto, vivendo un’esperienza di benessere e armonia insieme al genitore.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/10/faride-araujo-OL6oUi6XAuU-unsplash-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [
+				{
+					"testo": "da settembre a giugno",
+					"icona": "far fa-calendar-alt"
+				},
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"extra": null,
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "CIABATTE",
+					"immagine": "/wp-content/uploads/2025/11/5.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "COSTUME",
+					"immagine": "/wp-content/uploads/2025/11/4.png"
+				}
+			],
+			"intensita": []
+		},
+		{
+			"id": null,
+			"titolo": "nuoto kids",
+			"sottotitolo": "ai 3 anni in poi",
+			"descrizioneHtml": "<p>I corsi di nuoto per bambini di Body Energie sono condotti da <strong>istruttori specializzati e certificati FIN</strong>, che accompagnano ogni piccolo nuotatore in un percorso di crescita tecnica, motoria e personale.<br>Le lezioni, strutturate in base all’età e al livello di abilità, partono dall’ambientamento in acqua fino alla <strong>padronanza dei quattro stili</strong> – stile libero, dorso, rana e delfino – sviluppando coordinazione, sicurezza e fiducia in sé stessi.<br>Grazie alla <strong>Progressive Card</strong>, ogni bambino potrà seguire i propri progressi passo dopo passo, trasformando ogni traguardo in una conquista.<br>Un’esperienza educativa e divertente che unisce gioco, apprendimento e socialità in un ambiente sereno e stimolante.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/10/kevin-paes-1AZzPJWhyMQ-unsplash-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [
+				{
+					"testo": "da settembre a giugno",
+					"icona": "far fa-calendar-alt"
+				},
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"extra": null,
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "CIABATTE",
+					"immagine": "/wp-content/uploads/2025/11/5.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "COSTUME",
+					"immagine": "/wp-content/uploads/2025/11/4.png"
+				}
+			],
+			"intensita": []
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

@@ -1,27 +1,41 @@
 ---
 import { megaMenu } from '../data/nav';
+
+interface Props {
+	/** Trasparente in cima, sopra una hero scura; si riempie scorrendo.
+	 *  Se false l'header e' sempre pieno (pagine con sfondo chiaro). */
+	overlay?: boolean;
+}
+const { overlay = false } = Astro.props;
 ---
 
-<header class="hd">
+<header class:list={['hd', { 'hd--scrolled': !overlay }]} data-overlay={overlay ? 'true' : 'false'}>
 	<div class="hd__bar container">
 		<a class="hd__logo" href="/" aria-label="Body Energie - Home"></a>
 
-		<button class="hd__toggle" type="button" aria-label="Apri il menu" aria-expanded="false" data-hd-toggle>
+		<button
+			class="hd__toggle"
+			type="button"
+			aria-label="Apri il menu"
+			aria-expanded="false"
+			aria-controls="hd-nav"
+			data-hd-toggle
+		>
 			<span></span><span></span><span></span>
 		</button>
 
-		<nav class="hd__nav" data-hd-nav>
+		<nav class="hd__nav" id="hd-nav" aria-label="Principale" data-hd-nav>
 			<ul class="hd__mega">
 				{
-					megaMenu.map((colonna) => (
-						<li class="hd__col">
-							<span class="hd__col-title">
+					megaMenu.map((colonna, i) => (
+						<li class="hd__col" data-hd-col>
+							<button class="hd__col-title" type="button" aria-expanded="false" aria-controls={`hd-sub-${i}`}>
 								{colonna.titolo}
 								<svg class="hd__chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
 									<path d="M1 5l4-4 4 4" stroke="currentColor" stroke-width="1.5" fill="none" />
 								</svg>
-							</span>
-							<ul>
+							</button>
+							<ul id={`hd-sub-${i}`}>
 								{colonna.voci.map((voce) => (
 									<li>
 										<a href={voce.href}>{voce.label}</a>
@@ -34,50 +48,108 @@ import { megaMenu } from '../data/nav';
 			</ul>
 			<div class="hd__actions">
 				<button
-					class="btn btn--outline hd__cta hd__cta--contact"
+					class="btn btn--sm btn--light hd__cta hd__cta--contact"
 					type="button"
 					data-open-contact
 					data-interest="informazioni"
 				>
 					Contattaci
 				</button>
-				<a class="btn hd__cta hd__cta--primary" href="/abbonamenti">I nostri abbonamenti</a>
+				<button class="btn btn--sm hd__cta" type="button" data-open-contact data-interest="abbonamento">I nostri abbonamenti</button>
 			</div>
 		</nav>
 	</div>
 </header>
 
 <script>
-	const toggle = document.querySelector('[data-hd-toggle]');
-	const nav = document.querySelector('[data-hd-nav]');
-	toggle?.addEventListener('click', () => {
-		const aperto = nav?.classList.toggle('hd__nav--aperto');
-		toggle.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+	const header = document.querySelector<HTMLElement>('.hd');
+	const toggle = document.querySelector<HTMLButtonElement>('[data-hd-toggle]');
+	const nav = document.querySelector<HTMLElement>('[data-hd-nav]');
+
+	// --- Menu mobile -----------------------------------------------------
+	function setNavOpen(open: boolean) {
+		nav?.classList.toggle('hd__nav--aperto', open);
+		document.body.classList.toggle('hd-menu-open', open);
+		toggle?.setAttribute('aria-expanded', String(open));
+		toggle?.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+	}
+	toggle?.addEventListener('click', () => setNavOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+
+	// --- Mega-menu desktop: disclosure raggiungibile da tastiera ----------
+	// Mouse: si apre al passaggio. Tastiera e touch: il titolo e' un bottone
+	// (Invio/Spazio/tocco). Esc chiude e riporta il focus sul titolo.
+	const cols = Array.from(document.querySelectorAll<HTMLElement>('[data-hd-col]'));
+	function setColOpen(col: HTMLElement, open: boolean) {
+		col.classList.toggle('is-open', open);
+		col.querySelector('.hd__col-title')?.setAttribute('aria-expanded', String(open));
+	}
+	function closeAllCols(except?: HTMLElement) {
+		cols.forEach((c) => c !== except && setColOpen(c, false));
+	}
+
+	cols.forEach((col) => {
+		const btn = col.querySelector<HTMLButtonElement>('.hd__col-title');
+		col.addEventListener('pointerenter', (e) => {
+			if (e.pointerType !== 'mouse') return;
+			closeAllCols(col);
+			setColOpen(col, true);
+		});
+		col.addEventListener('pointerleave', (e) => {
+			if (e.pointerType !== 'mouse') return;
+			if (!col.contains(document.activeElement)) setColOpen(col, false);
+		});
+		btn?.addEventListener('click', (e) => {
+			// Un clic di mouse arriva con il menu gia' aperto dal passaggio.
+			if ((e as PointerEvent).pointerType === 'mouse') return;
+			const open = !col.classList.contains('is-open');
+			closeAllCols(col);
+			setColOpen(col, open);
+		});
+		col.addEventListener('focusout', (e) => {
+			if (!col.contains(e.relatedTarget as Node | null)) setColOpen(col, false);
+		});
 	});
 
-	// L'header cambia colore (sfondo a gradiente, voci col colore che
-	// prima era lo sfondo) appena si inizia a scorrere la pagina.
-	const header = document.querySelector('.hd');
-	const aggiornaScroll = () => header?.classList.toggle('hd--scrolled', window.scrollY > 10);
-	aggiornaScroll();
-	window.addEventListener('scroll', aggiornaScroll, { passive: true });
+	document.addEventListener('keydown', (e) => {
+		if (e.key !== 'Escape') return;
+		const open = cols.find((c) => c.classList.contains('is-open'));
+		if (open) {
+			setColOpen(open, false);
+			open.querySelector<HTMLButtonElement>('.hd__col-title')?.focus();
+		}
+		if (toggle?.getAttribute('aria-expanded') === 'true') {
+			setNavOpen(false);
+			toggle.focus();
+		}
+	});
+	document.addEventListener('click', (e) => {
+		if (!(e.target as Element).closest('[data-hd-col]')) closeAllCols();
+	});
+
+	// --- Header trasparente -> pieno scorrendo (solo con hero scura) ------
+	if (header?.dataset.overlay === 'true') {
+		const aggiornaScroll = () => header.classList.toggle('hd--scrolled', window.scrollY > 10);
+		aggiornaScroll();
+		window.addEventListener('scroll', aggiornaScroll, { passive: true });
+	}
 </script>
 
 <style>
 	.hd {
-		background: transparent;
-		border-bottom: 1px solid transparent;
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 40;
+		height: var(--header-h);
+		background: transparent;
+		border-bottom: 1px solid transparent;
 		transition: background 0.3s ease, border-color 0.3s ease;
 	}
 
-	/* In cima alla pagina l'header e' trasparente (sopra la hero scura):
-	   voci di menu' bianche. Appena si scorre torna l'header originale,
-	   sfondo crema pieno, voci di menu' nel colore originale (nero). */
+	/* In cima, sopra la hero scura: voci di menu, logo e hamburger chiari.
+	   Appena si scorre (o su pagine senza hero scura) torna l'header pieno,
+	   sfondo crema, voci nere, logo scuro. */
 	.hd__col-title,
 	.hd__chevron {
 		color: var(--text-on-dark);
@@ -112,38 +184,50 @@ import { megaMenu } from '../data/nav';
 		flex-wrap: wrap;
 	}
 
+	/* L'altezza la decide --header-h: la barra la riempie, il contenuto si centra. */
 	.hd__bar {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-block: 8px;
+		height: 100%;
 	}
 
+	/* Due livelli: il logo chiaro (hero scura) e quello scuro (header pieno),
+	   entrambi caricati subito, si alterna solo la dimensione: niente lampi. */
 	.hd__logo {
-		text-decoration: none;
 		display: block;
-		-webkit-tap-highlight-color: transparent;
 		width: 113px;
 		height: 44px;
-		background-image: url('/wp-content/uploads/2025/10/Logo-Body-Energie-header.png');
+		text-decoration: none;
+		-webkit-tap-highlight-color: transparent;
+		background-image: url('/images/logo-body-energie-chiaro.png'), url('/wp-content/uploads/2025/10/Logo-Body-Energie-header.png');
 		background-repeat: no-repeat;
-		background-position: left center;
-		background-size: contain;
+		background-position: left center, left center;
+		background-size: contain, 0 0;
+	}
+
+	.hd--scrolled .hd__logo {
+		background-size: 0 0, contain;
 	}
 
 	.hd__toggle {
 		display: none;
 		flex-direction: column;
 		gap: 5px;
+		padding: 14px 8px;
 		background: none;
 		border: none;
-		padding: 8px;
+		cursor: pointer;
 	}
 
 	.hd__toggle span {
 		display: block;
 		width: 24px;
 		height: 2px;
+		background: var(--text-on-dark);
+	}
+
+	.hd--scrolled .hd__toggle span {
 		background: var(--text);
 	}
 
@@ -182,7 +266,11 @@ import { megaMenu } from '../data/nav';
 		font-family: var(--font-heading);
 		font-weight: 600;
 		font-size: 16px;
-		cursor: default;
+		line-height: inherit;
+		padding: 6px 0;
+		background: none;
+		border: none;
+		cursor: pointer;
 	}
 
 	.hd__col > ul {
@@ -203,8 +291,7 @@ import { megaMenu } from '../data/nav';
 		transition: 0.15s ease;
 	}
 
-	.hd__col:hover > ul,
-	.hd__col:focus-within > ul {
+	.hd__col.is-open > ul {
 		opacity: 1;
 		visibility: visible;
 		transform: translateY(0);
@@ -218,28 +305,28 @@ import { megaMenu } from '../data/nav';
 		font-size: var(--text-sm);
 	}
 
-	.hd__col > ul li a:hover {
+	.hd__col > ul li a:hover,
+	.hd__col > ul li a:focus-visible {
 		color: var(--accent);
 	}
 
+	.hd__col-title:focus-visible,
+	.hd__toggle:focus-visible,
+	.hd__logo:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	/* Bottoni piccoli che vanno a capo solo se proprio necessario. */
 	.hd__cta {
 		white-space: normal;
-		font-size: 14px;
-		padding: 10px 16px;
 		text-align: center;
 	}
 
-	.hd__cta--contact {
-		--btn-border: var(--text-on-dark);
-		--btn-hover-text: var(--accent);
-	}
-
-	/* Header scrollato: l'header torna crema, quindi il bottone torna al
-	   bordo/testo neri (con la stessa regola dell'hover: bordo nero ->
-	   testo in hover arancione). */
+	/* Il bottone "Contattaci" ha bordo bianco sopra la hero scura e nero
+	   sull'header pieno (stessa regola dell'hover: bordo nero -> testo arancione). */
 	.hd--scrolled .hd__cta--contact {
 		--btn-border: var(--text);
-		--btn-hover-text: var(--accent);
 	}
 
 	@media (max-width: 900px) {
@@ -247,9 +334,11 @@ import { megaMenu } from '../data/nav';
 			display: flex;
 		}
 
+		/* Il pannello mobile e' sempre crema, quindi le sue voci sono sempre
+		   scure, qualunque sia lo stato dell'header sotto (trasparente o pieno). */
 		.hd__nav {
 			position: fixed;
-			inset: 72px 0 0 0;
+			inset: var(--header-h) 0 0 0;
 			background: var(--bg-alt);
 			flex-direction: column;
 			align-items: stretch;
@@ -262,9 +351,22 @@ import { megaMenu } from '../data/nav';
 			display: flex;
 		}
 
+		.hd__nav .hd__col-title,
+		.hd__nav .hd__chevron {
+			color: var(--text);
+		}
+
+		.hd__nav .hd__cta--contact {
+			--btn-border: var(--text);
+		}
+
 		.hd__mega {
 			flex-direction: column;
 			gap: 20px;
+		}
+
+		.hd__col + .hd__col::before {
+			display: none;
 		}
 
 		.hd__col > ul {
@@ -277,5 +379,24 @@ import { megaMenu } from '../data/nav';
 			padding: 8px 0 0 12px;
 			display: block;
 		}
+
+		.hd__chevron {
+			display: none;
+		}
+	}
+
+	/* Il passaggio del mouse apre il menu solo dove esiste un mouse vero. */
+	@media (hover: hover) and (pointer: fine) and (min-width: 901px) {
+		.hd__col:hover > ul {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+	}
+</style>
+
+<style is:global>
+	body.hd-menu-open {
+		overflow: hidden;
 	}
 </style>

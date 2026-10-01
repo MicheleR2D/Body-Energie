@@ -52,7 +52,38 @@
   /* Raggi: 10px sui bottoni, 20px sulle immagini nel sito originale */
   --radius: 10px;
   --radius-lg: 20px;
+  --radius-pill: 999px;
 
   /* Larghezza massima contenuto, dai breakpoint del kit Elementor */
   --container-max-width: 1140px;
+
+  /* Margine laterale delle sezioni a tutta larghezza. In vw (non %) cosi'
+     le righe dei titoli, che partono dal bordo pagina, si allineano al pixel. */
+  --gutter: 5vw;
+
+  /* Altezza dell'header fisso: e' l'unica fonte, l'header la impone e tutto
+     il resto (sezioni a schermo intero, anchor, menu mobile) la legge da qui. */
+  --header-h: 75px;
+  --screen-h: calc(100vh - var(--header-h));
+}
+
+/* Altezza utile = schermo meno header; svh evita i salti della barra URL
+   sui telefoni. */
+@supports (height: 100svh) {
+  :root {
+    --screen-h: calc(100svh - var(--header-h));
+  }
+}
+
+/*
+ * Breakpoint condivisi (le media query non leggono le variabili, quindi vanno
+ * scritti a mano: usare SOLO questi tre):
+ *   560px  telefono
+ *   900px  tablet / header a hamburger
+ *   1100px desktop stretto
+ */
+@media (max-width: 900px) {
+  :root {
+    --header-h: 61px;
+  }
 }

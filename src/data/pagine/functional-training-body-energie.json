@@ -1,0 +1,75 @@
+{
+	"tipo": "corso",
+	"slug": "functional-training-body-energie",
+	"nome": "Functional Training",
+	"seo": {
+		"title": "Functional Training - Body Energie | Villafranca di Verona",
+		"description": "Functional Training ti spinge oltre i tuoi limiti attraverso allenamenti a circuito ad alta intensità. Sfida le tue capacità di forza, resistenza e…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "Functional",
+		"parole": [
+			"Training"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Azioni-58-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "functional training",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p><strong>Functional Training</strong> ti spinge oltre i tuoi limiti attraverso allenamenti a circuito ad alta intensità. Sfida le tue capacità di forza, resistenza e coordinazione con esercizi funzionali che mimano i movimenti della vita quotidiana.</p><p>Ogni lezione utilizza attrezzi vari come kettlebell, manubri, TRX e il peso corporeo per un workout completo e dinamico. Il formato a circuito mantiene alta la frequenza cardiaca mentre lavori su tutti i gruppi muscolari.</p>",
+			"video": "/wp-content/uploads/2025/12/Functional-Training.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 40
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 50
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 10
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

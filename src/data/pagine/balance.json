@@ -1,0 +1,73 @@
+{
+	"tipo": "corso",
+	"slug": "balance",
+	"nome": "Shapes",
+	"seo": {
+		"title": "Shapes - Body Energie | Villafranca di Verona",
+		"description": "SHAPES combina il meglio del Pilates, del Barre e del Power Yoga in un unico allenamento dinamico e completo. Attraverso piccoli movimenti controllati e…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "shapes",
+		"parole": [],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-17-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "shapes",
+			"sottotitolo": "corso Les Mills®",
+			"descrizioneHtml": "<p><strong>SHAPES</strong> combina il meglio del <strong>Pilates, del Barre e del Power Yoga</strong> in un unico allenamento dinamico e completo. Attraverso piccoli movimenti controllati e la ripetizione, questo corso ti permette di <strong>scolpire e rinforzare tutte le zone del corpo</strong>.</p><p>Ogni lezione lavora su <strong>forza, equilibrio e flessibilità</strong>, creando muscoli tonici e allungati. L'approccio mirato e la precisione dei movimenti garantiscono risultati visibili, <strong>migliorando postura e consapevolezza corporea</strong>.</p>",
+			"video": "/wp-content/uploads/2025/12/Pilates.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 15
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 50
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 35
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

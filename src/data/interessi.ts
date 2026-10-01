@@ -13,6 +13,20 @@ export const interessi: Record<string, string> = {
 	'body-camp': 'Body Summer Camp',
 	ciclismo: 'Squadra Ciclistica',
 	termario: 'Termario',
+	'back-school': 'Back School',
+	'balance-2': 'Balance',
+	'balance': 'Shapes',
+	'body-pump-body-energie': 'Body Pump',
+	'functional-training-body-energie': 'Functional Training',
+	'group-cycling': 'Group Cycling',
+	'pilates-matwork': 'Pilates Matwork',
+	'powerlifting-body-energie': 'Powerlifting',
+	'step-body-energie': 'Step',
+	'strenght-development': 'Strenght Development',
+	'technogym-ride': 'Technogym Ride',
+	'trx-3': 'TRX',
+	'yoga': 'Yoga',
+	'zumba-body-energie': 'Zumba',
 };
 
 export function etichettaInteresse(id: string | null | undefined): string {

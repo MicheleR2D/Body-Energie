@@ -30,9 +30,12 @@ function corpoTesto(d: DatiLead): string {
 }
 
 // Stesso pattern degli altri siti del gruppo (Sito-Ronchiverdi/notificaLead.ts):
-// fetch raw verso l'API di SendGrid, nessun SDK. Non lancia mai: un fallimento
-// nell'invio email non deve mai far fallire la risposta dell'API route.
-export async function notificaLead(d: DatiLead): Promise<void> {
+// fetch raw verso l'API di SendGrid, nessun SDK. Non lancia mai: dice com'e'
+// andata ('sent', 'not_configured', 'failed') e sta al chiamante decidere
+// se la richiesta e' comunque al sicuro (es. gia' salvata su Supabase).
+export type EsitoNotifica = 'sent' | 'not_configured' | 'failed';
+
+export async function notificaLead(d: DatiLead): Promise<EsitoNotifica> {
 	const apiKey = import.meta.env.SENDGRID_API_KEY;
 	const a = import.meta.env.EMAIL_NOTIFICHE_A;
 	const da = import.meta.env.SENDGRID_FROM_EMAIL;
@@ -40,7 +43,7 @@ export async function notificaLead(d: DatiLead): Promise<void> {
 
 	if (!apiKey || !a || !da) {
 		console.log('Notifica email non inviata: variabili SendGrid non configurate su Vercel.');
-		return;
+		return 'not_configured';
 	}
 
 	try {
@@ -60,8 +63,11 @@ export async function notificaLead(d: DatiLead): Promise<void> {
 		});
 		if (!risposta.ok) {
 			console.error('SendGrid ha rifiutato la richiesta:', risposta.status, await risposta.text());
+			return 'failed';
 		}
+		return 'sent';
 	} catch (e) {
 		console.error('Notifica email non inviata:', e);
+		return 'failed';
 	}
 }

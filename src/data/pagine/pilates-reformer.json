@@ -1,0 +1,62 @@
+{
+	"tipo": "corso",
+	"slug": "pilates-reformer",
+	"nome": "Pilates Reformer",
+	"seo": {
+		"title": "Pilates Reformer - Body Energie | Villafranca di Verona",
+		"description": "Il Pilates Reformer del centro Body Energie è un allenamento completo e coinvolgente che migliora la flessibilità, aumenta la resistenza muscolare e…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "pilates",
+		"parole": [
+			"reformer"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Azioni-19-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "pilates reformer",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il Pilates Reformer del centro Body Energie è un <strong>allenamento completo e coinvolgente</strong> che migliora la flessibilità, aumenta la resistenza muscolare e favorisce un migliore equilibrio. Grazie al l<strong>avoro fluido e controllato sulla macchina Reformer</strong>, si rafforzano in profondità i muscoli del core, delle gambe e delle braccia, ottenendo un corpo più forte, stabile e armonioso. <strong>Le lezioni sono adatte a tutti</strong>, dal sedentario che vuole riprendere a muoversi all’atleta più esperto che desidera perfezionare tecnica e performance: ogni esercizio viene modulato e personalizzato per garantire sicurezza, progressione e risultati visibili. Con il <strong>supporto degli istruttori qualificati di Body Energie</strong>, il Reformer diventa <strong>un vero percorso di benessere</strong> che unisce consapevolezza, precisione e potenziamento, aiutandoti a ritrovare energia, postura corretta e libertà di movimento.</p>",
+			"video": "/wp-content/uploads/2026/06/Pilates-Reformer.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "CIABATTE",
+					"immagine": "/wp-content/uploads/2025/11/5.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": []
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

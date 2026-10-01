@@ -1,0 +1,73 @@
+{
+	"tipo": "corso",
+	"slug": "zumba-body-energie",
+	"nome": "Zumba",
+	"seo": {
+		"title": "Zumba - Body Energie | Villafranca di Verona",
+		"description": "ZUMBA è puro divertimento a ritmo di musica! Lasciati trascinare da ritmi latini travolgenti e movimenti sinuosi in un mix esplosivo che allena la…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "zumba",
+		"parole": [],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-18-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "zumba",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p><strong>ZUMBA</strong> è puro divertimento a ritmo di musica! Lasciati trascinare da ritmi latini travolgenti e movimenti sinuosi in un mix esplosivo che allena la componente aerobica.</p><p>Ogni lezione è una festa danzante dove bruci calorie senza accorgertene, migliorando resistenza cardiovascolare, coordinazione e umore. I passi semplici e coinvolgenti rendono ZUMBA accessibile a tutti, indipendentemente dal livello di esperienza.</p>",
+			"video": "/wp-content/uploads/2025/12/Zumba.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 75
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 10
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 15
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

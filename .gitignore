@@ -20,3 +20,6 @@ node_modules/
 
 # Vercel
 .vercel/
+
+# foto ottimizzate (generate da scripts/optimize-images.mjs)
+public/_img/

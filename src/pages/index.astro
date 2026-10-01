@@ -8,6 +8,9 @@ import ActivityGrid from '../components/ActivityGrid.astro';
 import PhotoMarquee from '../components/PhotoMarquee.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import StrutturaRow from '../components/StrutturaRow.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Img from '../components/Img.astro';
+import { stats, formattaNumero } from '../data/stats';
 
 const heroImages = [
 	'/wp-content/uploads/2025/12/Body-Energie-Ambienti-57-scaled.jpg',
@@ -28,12 +31,7 @@ const fotoCarosello = [
 	{ src: '/wp-content/uploads/2025/11/Body-Energie-Ambienti-48-scaled.jpg' },
 ];
 
-const contatori = [
-	{ target: 5500, suffisso: '', titolo: 'Metri quadri', sotto: 'dedicati al benessere' },
-	{ target: 150, suffisso: '+', titolo: 'Corsi a settimana', sotto: 'tra corsi, acqua e sala pesi' },
-	{ target: 40, suffisso: '+', titolo: 'Trainers qualificati', sotto: 'sempre al tuo fianco' },
-	{ target: 2000, suffisso: '+', titolo: 'Iscritti', sotto: 'che si allenano con noi' },
-];
+const contatori = stats;
 
 const attivitaAdulti = [
 	{
@@ -247,13 +245,15 @@ const testimonianze = [
 ---
 
 <Layout
+	headerTone="overlay"
+	stack
 	title="Body Energie - Villafranca di Verona | Sport, Fitness e Salute"
 	description="Body Energie: fitness, benessere e sport a Villafranca di Verona. Sala pesi, corsi fitness, acqua fitness, Body Lab e molto altro su oltre 5.500 mq."
 >
 	<HeroCarousel images={heroImages}>
-		<h1 class="hero__title" data-anim="up">BODY <span class="accent-text">ENERGIE</span></h1>
-		<p class="hero__lead" data-anim="up" data-anim-delay="200">Dove sport, movimento e benessere si incontrano.</p>
-		<div data-anim="up" data-anim-delay="400">
+		<h1 class="hero__title" data-intro>BODY <span class="accent-text">ENERGIE</span></h1>
+		<p class="hero__lead" data-intro style="--intro-delay: 0.2s">Dove sport, movimento e benessere si incontrano.</p>
+		<div data-intro style="--intro-delay: 0.4s">
 			<button class="btn hero__btn" type="button" data-open-contact data-interest="prova-gratuita">Prova ora</button>
 		</div>
 	</HeroCarousel>
@@ -269,8 +269,14 @@ const testimonianze = [
 			<div
 				class="storia__foto"
 				data-anim="from-left"
-				style="background-image:url(/wp-content/uploads/2025/07/stabile-body-energie.jpg)"
-			/>
+			>
+				<Img
+					src="/wp-content/uploads/2025/07/stabile-body-energie.jpg"
+					alt="La sede di Body Energie a Villafranca di Verona"
+					class="img-cover"
+					sizes="(max-width: 900px) 100vw, 46vw"
+				/>
+			</div>
 			<div class="storia__testo-col">
 				<blockquote class="storia__quote" data-anim="from-right">La nostra Storia,<br />il tuo Benessere</blockquote>
 				<div class="storia__testo" data-anim="fade">
@@ -299,7 +305,7 @@ const testimonianze = [
 				contatori.map((c, i) => (
 					<div class="contatore" data-anim="up" data-anim-delay={String(i * 120)}>
 						<span class="contatore__numero" data-counter data-target={c.target} data-suffix={c.suffisso}>
-							0
+							{formattaNumero(c.target)}{c.suffisso}
 						</span>
 						<span class="contatore__titolo">{c.titolo}</span>
 						<span class="contatore__sub">{c.sotto}</span>
@@ -310,10 +316,13 @@ const testimonianze = [
 	</section>
 
 	<script>
+		import { formattaNumero } from '../data/stats';
+
+		// L'HTML contiene gia' il valore finale (crawler, lettori di schermo, niente
+		// JS): qui lo si azzera e lo si fa salire solo come effetto, e solo se la
+		// persona non ha chiesto di ridurre i movimenti.
 		const counters = document.querySelectorAll('[data-counter]');
-		// Il sito originale mostra i numeri con la virgola (5,500) invece del
-		// punto italiano: replichiamo lo stesso formato, non e' un refuso nostro.
-		const formatta = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		const riduciMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const anima = (el: Element) => {
 			const target = Number(el.getAttribute('data-target'));
 			const suffix = el.getAttribute('data-suffix') || '';
@@ -322,9 +331,9 @@ const testimonianze = [
 			function tick(ora: number) {
 				const progresso = Math.min(1, (ora - inizio) / durata);
 				const valore = Math.floor(progresso * target);
-				el.textContent = formatta(valore) + suffix;
+				el.textContent = formattaNumero(valore) + suffix;
 				if (progresso < 1) requestAnimationFrame(tick);
-				else el.textContent = formatta(target) + suffix;
+				else el.textContent = formattaNumero(target) + suffix;
 			}
 			requestAnimationFrame(tick);
 		};
@@ -339,7 +348,12 @@ const testimonianze = [
 			},
 			{ threshold: 0.4 }
 		);
-		counters.forEach((c) => observer.observe(c));
+		if (!riduciMovimento) {
+			counters.forEach((c) => {
+				c.textContent = '0' + (c.getAttribute('data-suffix') || '');
+				observer.observe(c);
+			});
+		}
 	</script>
 
 	<script>
@@ -378,87 +392,40 @@ const testimonianze = [
 		}
 
 		allineaFotoStoria();
-		window.addEventListener('resize', allineaFotoStoria);
+		let frame = 0;
+		window.addEventListener('resize', () => {
+			cancelAnimationFrame(frame);
+			frame = requestAnimationFrame(allineaFotoStoria);
+		});
 		document.fonts?.ready.then(allineaFotoStoria);
 	</script>
 
-	<script>
-		// La linea sotto ai titoli "attivita" parte dal bordo della sezione
-		// (non dal rientro del testo) e sottolinea tutto il titolo: la sua
-		// larghezza va quindi calcolata dal bordo del blocco fino alla fine
-		// del testo del titolo, non e' un valore fisso.
-		function allineaLineeAttivita() {
-			// Titoli allineati a sinistra (attivita, struttura): la linea parte
-			// dal bordo della sezione e arriva fino alla fine del testo.
-			document.querySelectorAll<HTMLElement>('.attivita__line, .struttura__line').forEach((linea) => {
-				const blocco = linea.closest<HTMLElement>('.attivita__block') ?? linea.closest<HTMLElement>('section');
-				const titolo = blocco?.querySelector<HTMLElement>('h2');
-				if (!blocco || !titolo) return;
-				const fineTitolo = bordoSinistro(titolo) + titolo.offsetWidth;
-				linea.style.width = `${fineTitolo - bordoSinistro(blocco)}px`;
-			});
-
-			// Titolo allineato a destra (testimonianze): la linea segue
-			// semplicemente la larghezza del testo, non quella della sezione.
-			document.querySelectorAll<HTMLElement>('.testimonianze__line').forEach((linea) => {
-				const titolo = linea.closest('section')?.querySelector<HTMLElement>('h2');
-				if (titolo) linea.style.width = `${titolo.offsetWidth}px`;
-			});
-		}
-
-		// Misure di layout (offset*), non getBoundingClientRect: i titoli con
-		// animazione in entrata restano traslati finche' non compaiono.
-		function bordoSinistro(el: HTMLElement) {
-			let x = 0;
-			for (let n: HTMLElement | null = el; n; n = n.offsetParent as HTMLElement | null) x += n.offsetLeft;
-			return x;
-		}
-
-		allineaLineeAttivita();
-		window.addEventListener('resize', allineaLineeAttivita);
-		document.fonts?.ready.then(allineaLineeAttivita);
-	</script>
 
 	<section class="attivita">
 		<div class="attivita__block" style="--block-bg:var(--bg-dark-deep)">
-			<div class="container-wide">
-				<h2>Attività <span class="attivita__accent" data-anim="from-left">per adulti</span></h2>
-			</div>
-			<span class="attivita__line" data-anim="line" />
+			<SectionTitle accent="per adulti" gap={0}>Attività</SectionTitle>
 			<ActivityGrid items={attivitaAdulti} gapTop={35} />
 		</div>
 
 		<div class="attivita__block" style="--block-bg:var(--bg-dark)">
-			<div class="container-wide">
-				<h2>Attività <span class="attivita__accent" data-anim="from-left">per bambini</span></h2>
-			</div>
-			<span class="attivita__line" data-anim="line" />
+			<SectionTitle accent="per bambini" gap={0}>Attività</SectionTitle>
 			<ActivityGrid items={attivitaBambini} gapTop={35} />
 		</div>
 
 		<div class="attivita__block" style="--block-bg:var(--bg-dark-soft)">
-			<div class="container-wide">
-				<h2>Body <span class="attivita__accent" data-anim="from-left">Lab</span></h2>
-			</div>
-			<span class="attivita__line" data-anim="line" />
+			<SectionTitle accent="Lab" gap={0}>Body</SectionTitle>
 			<ActivityGrid items={bodyLab.slice(0, 3)} gapTop={35} />
 			<ActivityGrid items={bodyLab.slice(3)} columns={2} startIndex={3} gapTop={20} />
 		</div>
 
 		<div class="attivita__block" style="--block-bg:var(--bg-dark-deep)">
-			<div class="container-wide">
-				<h2>Servizi <span class="attivita__accent" data-anim="from-left">extra</span></h2>
-			</div>
-			<span class="attivita__line" data-anim="line" />
+			<SectionTitle accent="extra" gap={0}>Servizi</SectionTitle>
 			<ActivityGrid items={serviziExtra} columns={2} gapTop={35} />
 		</div>
 	</section>
 
 	<section class="block--orange section">
-		<div class="container-wide">
-			<h2 class="struttura__title" data-anim="from-left">La Struttura</h2>
-		</div>
-		<span class="struttura__line" data-anim="line" />
+		<SectionTitle tone="on-accent">La Struttura</SectionTitle>
 		<StrutturaRow items={accordionItems.slice(0, 2)} />
 		<StrutturaRow items={accordionItems.slice(2, 4)} />
 		<StrutturaRow items={accordionItems.slice(4, 6)} />
@@ -469,18 +436,18 @@ const testimonianze = [
 		<div class="container-wide planning__wrap">
 			<div class="planning__inner" data-anim="up">
 				<div class="planning__media">
-					<img
+					<Img
 						class="planning__img planning__img--main"
 						src="/wp-content/uploads/2025/07/Body-Energie-rose.jpg"
 						alt="Soci e trainer di Body Energie all'Air Park"
-						loading="lazy"
+						sizes="(max-width: 900px) 90vw, 36vw"
 						data-anim="scale"
 					/>
-					<img
+					<Img
 						class="planning__img planning__img--accent"
 						src="/wp-content/uploads/2025/08/AIR-PARK-6-TRIFORM.jpg"
 						alt="La struttura Triform dell'Air Park"
-						loading="lazy"
+						sizes="(max-width: 900px) 55vw, 22vw"
 						data-anim="scale"
 						data-anim-delay="150"
 					/>
@@ -496,9 +463,8 @@ const testimonianze = [
 	</section>
 
 	<section class="block--black section testimonianze">
+		<SectionTitle align="right" line="text" gap={40}>Cosa pensano i nostri soci</SectionTitle>
 		<div class="container-wide">
-			<h2 class="testimonianze__title" data-anim="from-right">Cosa pensano i nostri soci</h2>
-			<span class="testimonianze__line" data-anim="line" />
 			<div class="testimonianze__grid">
 				{
 					testimonianze.map((t, i) => (
@@ -543,9 +509,8 @@ const testimonianze = [
 		padding-block: 56px;
 	}
 
-	/* La sezione "La Struttura" e' gia' preceduta dalla fascia di 56px tra
-	   sezioni (vedi "section ~ section" in global.css): niente doppio
-	   padding, solo quello della fascia. */
+	/* Le sezioni sono gia' precedute dalla fascia di 56px tra sezioni (vedi
+	   ".main--stack" in global.css): niente doppio padding in alto. */
 	section.section {
 		padding-top: 0;
 	}
@@ -561,30 +526,6 @@ const testimonianze = [
 		padding-top: 0;
 	}
 
-	.attivita h2 {
-		font-size: 40px;
-		font-weight: 800;
-		margin-bottom: 0;
-		color: var(--text-on-dark);
-		/* Serve che il box combaci col testo (non con tutta la larghezza
-		   disponibile): la linea sotto misura la larghezza reale del titolo. */
-		width: fit-content;
-	}
-
-	.attivita__accent {
-		color: var(--accent);
-		font-style: italic;
-		font-weight: 400;
-	}
-
-	.attivita__line {
-		display: block;
-		height: 3px;
-		margin-top: 18px;
-		background: var(--accent);
-		transform-origin: left;
-	}
-
 	.storia__inner {
 		display: grid;
 		grid-template-columns: 46% 1fr;
@@ -593,8 +534,8 @@ const testimonianze = [
 	}
 
 	.storia__foto {
-		background-size: cover;
-		background-position: center;
+		position: relative;
+		overflow: hidden;
 		border-radius: 0 20px 20px 0;
 		align-self: start;
 	}
@@ -627,7 +568,7 @@ const testimonianze = [
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		gap: 0;
-		padding: 24px 5% 12px;
+		padding: 24px var(--gutter) 12px;
 	}
 
 	.contatore {
@@ -671,24 +612,6 @@ const testimonianze = [
 		color: var(--text);
 	}
 
-	.struttura__title {
-		font-size: 40px;
-		font-weight: 800;
-		color: var(--text-on-dark);
-		margin: 0;
-		/* Serve che il box combaci col testo: la linea sotto misura la
-		   larghezza reale del titolo, come nei titoli "attivita". */
-		width: fit-content;
-	}
-
-	.struttura__line {
-		display: block;
-		height: 3px;
-		margin: 18px 0 35px;
-		background: var(--text);
-		transform-origin: left;
-	}
-
 	/* Fondo scuro continuo con le testimonianze sotto; il contenuto sta in
 	   una card dello stesso colore dell'header. */
 	section.planning {
@@ -716,23 +639,22 @@ const testimonianze = [
 		padding: 0 1.5rem 2.5rem 0;
 	}
 
-	.planning__img {
+	.planning__media :global(.planning__img) {
 		display: block;
 		width: 100%;
 		object-fit: cover;
 		border-radius: 16px;
 	}
 
-	/* Altezza legata allo schermo, non alla larghezza: l'intera sezione
-	   (fascia sopra 56px + header fisso ~75px + padding card 2x40px +
-	   spazio sotto la seconda foto 2.5rem + margine inferiore 56px) deve
-	   stare in una schermata. */
-	.planning__img--main {
-		height: clamp(300px, calc(100vh - 310px), 580px);
-		height: clamp(300px, calc(100svh - 310px), 580px);
+	/* Altezza legata allo schermo, non alla larghezza: l'intera sezione deve
+	   stare in una schermata. Sottratto allo spazio sotto l'header: fascia
+	   sopra 56px + padding card 2x40px + spazio sotto la seconda foto 2.5rem
+	   + margine inferiore 56px = 235px. */
+	.planning__media :global(.planning__img--main) {
+		height: clamp(300px, calc(var(--screen-h) - 235px), 580px);
 	}
 
-	.planning__img--accent {
+	.planning__media :global(.planning__img--accent) {
 		position: absolute;
 		right: 0;
 		bottom: 0;
@@ -750,28 +672,10 @@ const testimonianze = [
 		margin-top: 12px;
 	}
 
-	.testimonianze__title {
-		color: var(--text-on-dark);
-		margin: 0;
-		/* Come i titoli allineati a sinistra: il box deve combaciare col
-		   testo, poi lo si spinge sul bordo destro della sezione. */
-		width: fit-content;
-		margin-left: auto;
-	}
-
-	.testimonianze__line {
-		display: block;
-		height: 3px;
-		margin: 18px 0 0 auto;
-		background: var(--accent);
-		transform-origin: right;
-	}
-
 	.testimonianze__grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 24px;
-		margin-top: 40px;
 		text-align: left;
 	}
 
@@ -879,7 +783,7 @@ const testimonianze = [
 
 		/* In colonna le foto stanno sopra al testo: devono lasciargli
 		   abbastanza posto per restare entrambi in una schermata. */
-		.planning__img--main {
+		.planning__media :global(.planning__img--main) {
 			height: clamp(170px, 26svh, 320px);
 		}
 	}

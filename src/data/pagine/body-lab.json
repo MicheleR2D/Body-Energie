@@ -1,0 +1,161 @@
+{
+	"tipo": "servizio",
+	"slug": "body-lab",
+	"nome": "Body Lab",
+	"seo": {
+		"title": "Body Lab - Body Energie | Villafranca di Verona",
+		"description": "Il Body Lab di Body Energie nasce come spazio dedicato alla salute, alla prevenzione e al miglioramento del benessere personale. Qui convergono diverse…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "body lab",
+		"parole": [
+			"nutrizionista",
+			"osteopatia",
+			"fisioterapia"
+		],
+		"immagine": "/wp-content/uploads/2025/07/stabile-body-energie.jpg",
+		"pulsanti": []
+	},
+	"percorsi": {
+		"titolo": "Scopri i nostri percorsi",
+		"voci": [
+			{
+				"testo": "Palestra della Salute",
+				"href": "#salute"
+			},
+			{
+				"testo": "Nutrizione",
+				"href": "#nutrizionista"
+			},
+			{
+				"testo": "Osteopatia",
+				"href": "#osteopata"
+			},
+			{
+				"testo": "Fisioterapia",
+				"href": "#fisioterapista"
+			},
+			{
+				"testo": "Posturologia",
+				"href": "#posturologia"
+			}
+		]
+	},
+	"blocchi": [
+		{
+			"id": null,
+			"titolo": "Scopri body lab",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il <strong>Body Lab di Body Energie</strong> nasce come spazio dedicato alla salute, alla prevenzione e al miglioramento del benessere personale. Qui convergono diverse competenze professionali, integrate in percorsi studiati per supportare la persona sotto ogni aspetto: movimento, postura, nutrizione e trattamenti manuali.</p><p>La Palestra della Salute consente un’attività fisica strutturata e sicura anche in presenza di patologie croniche stabilizzate, mentre i servizi di nutrizione, osteopatia, massoterapia e posturologia offrono interventi mirati, basati su valutazioni accurate e programmi personalizzati.</p><p>Un approccio multidisciplinare, scientifico e coordinato, pensato per migliorare funzionalità, equilibrio, performance e qualità della vita.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/07/Body-Energie-rose.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "salute",
+			"titolo": "palestra della salute",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>La <strong>Palestra della Salute</strong> di Body Energie è una struttura innovativa, pensata non solo per le tradizionali attività da palestra, ma anche per accogliere persone con <strong>patologie croniche non trasmissibili stabilizzate</strong>. Grazie ai requisiti certificati dalla Regione Veneto, ogni programma di esercizio fisico è personalizzato e prescritto da un medico, garantendo sicurezza ed efficacia.</p><p>Tutti gli allenamenti sono supervisionati da operatori qualificati con <strong>Laurea Magistrale in Scienze delle Attività Motorie Preventive e Adattate</strong>, per offrire percorsi mirati al miglioramento della salute, del benessere e della qualità della vita.</p><p>Tra le principali patologie croniche non trasmissibili che possono essere seguite in palestra troviamo:</p><ul><li><p><strong>Malattie cardiovascolari</strong>: cardiopatia ischemica cronica, scompenso cardiaco, ipertensione arteriosa.</p></li><li><p><strong>Malattie respiratorie croniche</strong>: BPCO (bronchite cronica ostruttiva e altre condizioni respiratorie).</p></li><li><p><strong>Malattie oncologiche</strong>: percorsi di supporto per pazienti in fase di recupero o stabilizzazione.</p></li><li><p><strong>Malattie muscoloscheletriche</strong>: artrosi, osteoporosi e altri disturbi che richiedono esercizi mirati per forza, mobilità e postura.</p></li></ul><p>Ogni percorso è personalizzato, scientificamente guidato e mirato a <strong>prevenire rischi, migliorare la funzionalità fisica e promuovere il benessere globale</strong>, con un approccio sicuro e professionale.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/Logo-Palestre-della-Salute.png"
+			],
+			"adattamento": "contain",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "nutrizionista",
+			"titolo": "Nutrizione",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il servizio di nutrizione offre <strong>percorsi alimentari completamente personalizzati</strong>, pensati per rispondere alle esigenze specifiche e allo stile di vita di ogni persona. <strong>Ogni programma nasce da un’analisi approfondita delle abitudini alimentari, del livello di attività fisica e degli obiettivi individuali</strong>, con l’obiettivo di <strong>migliorare la salute, il benessere generale e le performance sportive</strong>.</p> <p>I percorsi sono studiati per essere <strong>pratici, sostenibili e adattabili alla vita quotidiana</strong>, in modo da favorire <strong>risultati concreti e duraturi</strong>. Grazie alla competenza dei Dottori Cristiano Caporali e Giuseppe Forte, nutrizionisti specializzati, ogni piano nutrizionale viene elaborato con attenzione ai dettagli, assicurando <strong>un equilibrio tra nutrienti, gusto e funzionalità</strong>. Il servizio accompagna ogni individuo lungo <strong>un percorso di consapevolezza alimentare</strong>, promuovendo <strong>scelte salutari e sostenibili nel tempo</strong>, senza rinunciare al piacere del cibo.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/vista-dall-alto-del-cibo-vegetariano-sano-ed-equilibrato-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "osteopata",
+			"titolo": "osteopatia",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il servizio di osteopatia e massoterapia offre <strong>percorsi personalizzati per migliorare la salute generale e il benessere</strong>, combinando competenze osteopatiche e massoterapiche.</p><p>In ambito osteopatico, i trattamenti si concentrano sul principio che <strong>il benessere dipende dall’armonia tra ossa, muscoli, legamenti e tessuti connettivi</strong>, e sono progettati per <strong>ridurre dolori muscoloscheletrici, lombari, cervicali, sciatici e articolari.</strong></p><p>In ambito massoterapico, vengono applicate <strong>tecniche terapeutiche mirate ad alleviare il dolore, ridurre la tensione muscolare e migliorare la circolazione</strong>, favorendo <strong>rilassamento, recupero post-traumatico e detossificazione dell’organismo</strong>. Ogni percorso garantisce un approccio professionale e attento in collaborazione con lo Studio Maraia.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-89-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-98-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-107-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "fisioterapista",
+			"titolo": "fisioterapia",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il servizio di fisioterapia consiste in <strong>una serie di interventi volti a favorire la totale guarigione</strong> del paziente e il recupero delle funzionalità motorie, grazie ad <strong>un programma personalizzato, composto da esercizi, tecniche manuali, terapie fisiche e strumental</strong>i. In collaborazione <strong>con lo Studio Maraia</strong>, ogni intervento viene progettato con attenzione ai dettagli, assicurando soluzioni efficaci e personalizzate, capaci di <strong>prevenire compensi errati e favorire il pieno recupero funzionale del corpo</strong>.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-114-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-112-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-115-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "posturologia",
+			"titolo": "posturologia",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il servizio di <strong>chinesiologia clinica e posturologia</strong> offre <strong>percorsi personalizzati per identificare e correggere disfunzioni muscolari primarie</strong>, spesso responsabili di dolore e di atteggiamenti posturali compensativi errati. <strong>Attraverso un’attenta analisi motoria e posturale globale</strong>, è possibile valutare in maniera completa il corpo e definire interventi mirati al <strong>recupero funzionale, all’equilibrio e alla mobilità ottimale</strong>.</p><p>I percorsi si concentrano su diversi ambiti, tra cui:</p><ul><li><p><strong>Recupero post trauma</strong>, per favorire il ritorno alla funzionalità completa;</p></li><li><p><strong>Rieducazione motoria e posturale</strong>, mirata a correggere atteggiamenti compensativi e migliorare l’efficienza del movimento;</p></li><li><p><strong>Prevenzione e risoluzione delle algie vertebrali localizzate</strong>, come lombalgia, cervicalgia e altri dolori specifici;</p></li><li><p><strong>Preparazione sportiva e miglioramento delle performance</strong>, con programmi studiati per ottimizzare forza, coordinazione e stabilità.</p></li></ul><p>Ogni percorso è progettato per essere <strong>personalizzato, efficace e sostenibile</strong>, con la supervisione della Dott.ssa Alice Carradore, posturologa, che assicura <strong>attenzione ai dettagli, precisione e risultati concreti</strong>.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/pilates-di-pratica-della-donna-alla-palestra-di-yoga-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

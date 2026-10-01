@@ -1,0 +1,158 @@
+{
+	"tipo": "servizio",
+	"slug": "body-camp",
+	"nome": "Body Summer Camp",
+	"seo": {
+		"title": "Body Summer Camp - Body Energie | Villafranca di Verona",
+		"description": "Il Body Camp è il centro estivo di Body Energie , dedicato a bambini e ragazzi dai 4 ai 13 anni . Un’esperienza unica che unisce sport, gioco, creatività…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "BODY",
+		"parole": [
+			"SUMMER CAMP"
+		],
+		"immagine": "/wp-content/uploads/2025/10/Body-Camp-villafranca-di-verona-750x480-1.jpg",
+		"pulsanti": [
+			{
+				"testo": "RICHIEDI INFORMAZIONI",
+				"interesse": "body-camp"
+			}
+		]
+	},
+	"percorsi": null,
+	"blocchi": [
+		{
+			"id": null,
+			"titolo": "body camp",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il <strong>Body Camp</strong> è il centro estivo di <strong>Body Energie</strong>, dedicato a bambini e ragazzi dai <strong>4 ai 13 anni</strong>.<br>Un’esperienza unica che unisce <strong>sport, gioco, creatività e amicizia</strong>, in un ambiente sicuro, stimolante e sempre seguito dai nostri <strong>istruttori qualificati</strong>.<br>Ogni giornata è pensata per offrire ai bambini la possibilità di muoversi, divertirsi e crescere, tra attività all’aperto e spazi climatizzati del centro.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/10/mi-pham-xtd3zYWxEs4-unsplash-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [
+				{
+					"testo": "Dall'8 giugno al 4 settembre",
+					"icona": null
+				}
+			],
+			"extra": {
+				"titolo": "Orari e Modalità di Frequenza",
+				"html": "<p>Il Body Camp è attivo da <strong>giugno a settembre</strong> con diverse opzioni di frequenza:</p><ul><li><p><strong>Full time:</strong> dalle 7:30 alle 17:00/17:30</p></li><li><p><strong>Mattino:</strong> dalle 7:30 alle 12:00/12:30 o 14:00/14:30</p></li><li><p><strong>Pomeriggio:</strong> dalle 12:00 alle 17:00/17:30</p></li></ul><p>Il servizio include la possibilità di usufruire della <strong>ristorazione interna</strong> e di <strong>buoni pasto acquistabili presso il bar del centro</strong>.<br><br><strong>Ogni settimana organizziamo gite</strong> (con quota extra) in base al numero di iscritti. Nei giorni di uscita, le attività standard del Camp non sono garantite per chi sceglie di non partecipare. Ogni settimana si attiva con un minimo di 8 bambini. <strong>Il Camp rimarrà chiuso dal 10 al 16 agosto 2026</strong>.</p>"
+			},
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": null,
+			"titolo": "Body Camp – Il Grest Estivo di Body Energie",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p><strong>Ogni attività del Body Camp è pensata per favorire:</strong></p><ul><li><p>La <strong>socializzazione</strong> e la creazione di nuove amicizie</p></li><li><p>Il rispetto reciproco e la collaborazione</p></li><li><p>L’autonomia personale e la crescita emotiva</p></li><li><p>La consapevolezza delle proprie capacità</p></li></ul>",
+			"video": null,
+			"immagini": [],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": null,
+			"titolo": "Corsi di Nuoto e giochi d'acqua",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>I corsi di nuoto, tenuti da <strong>istruttori certificati FIN</strong>, rappresentano una delle attività principali del Body Camp.<br>Le lezioni si svolgono in piscina al mattino e/o al pomeriggio, con gruppi organizzati per <strong>età e livello di abilità</strong>, in modo da garantire un apprendimento efficace, sicuro e divertente.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/10/nuoto-bambini-villafranca-di-verona-750x480-1.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": null,
+			"titolo": "PADEL",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Fai scoprire a tuo figlio il padel in modo sicuro e divertente! Il nostro <strong>corso di padel per bambini</strong> è pensato per insegnare le basi di questo sport attraverso giochi, percorsi motori e piccole sfide.</p><p>Sotto la guida di istruttori qualificati, i piccoli atleti impareranno a colpire la palla e a muoversi in campo, ottenendo grandi benefici per la loro crescita:</p><ul><li><p><strong>Sviluppo motorio:</strong> miglioramento rapido di coordinazione, riflessi ed equilibrio.</p></li><li><p><strong>Spirito di squadra:</strong> collaborazione con i compagni e nascita di nuove amicizie.</p></li><li><p><strong>Fiducia in sé stessi:</strong> sport sano in un ambiente positivo... sempre con il sorriso!</p></li></ul>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2026/03/high-angle-tennis-palette-balls-arrangement-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": null,
+			"titolo": "Calcio e Giochi di Squadra",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p><strong>Calcio, pallavolo, basket, rugby e preatletica!</strong> Un'occasione perfetta per imparare le regole degli sport di squadra, migliorare le capacità motorie e divertirsi con nuovi amici. In più,<strong> percorsi di educazione stradale con prove pratiche</strong> in sella a BMX, mountain bike e bici da strada!</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/omar-ramadan-eEhOyEtBGMQ-unsplash-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": null,
+			"titolo": "E-Cross Kids",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>L’attività <strong>E-Cross Kids</strong> è il primo metodo di <strong>allenamento funzionale per bambini e ragazzi</strong>, che unisce movimento, gioco e sfida.<br>Attraverso percorsi e circuiti adattati a ogni livello, i partecipanti allenano <strong>forza, resistenza, equilibrio e coordinazione</strong>, sviluppando consapevolezza del corpo e fiducia in sé stessi.<br>Un modo innovativo e divertente per imparare a muoversi bene e crescere con energia e autostima.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/pexels-rdne-8033972-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": null,
+			"titolo": "Compiti, Cinema e Relax",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Due ore al giorno sono dedicate ai <strong>ragazzi più grandi</strong>, per svolgere i compiti delle vacanze con l’aiuto dei nostri educatori.<br>Per i più piccoli, invece, è previsto un momento di <strong>tranquillità e riposo</strong>, con la possibilità di rilassarsi o guardare un film insieme agli animatori.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/pexels-august-de-richelieu-4260475-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

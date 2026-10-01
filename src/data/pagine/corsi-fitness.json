@@ -1,0 +1,117 @@
+{
+	"tipo": "elenco",
+	"slug": "corsi-fitness",
+	"nome": "Corsi Fitness",
+	"seo": {
+		"title": "Corsi Fitness - Body Energie | Villafranca di Verona",
+		"description": "Scopri i Corsi Fitness di Body Energie , pensati per ogni obiettivo: con Respira ritrovi equilibrio e consapevolezza, con Ride vivi l’adrenalina…"
+	},
+	"hero": {
+		"eyebrow": "",
+		"titolo": "CORSI",
+		"parole": [
+			"FITNESS"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-14-scaled.jpg",
+		"pulsanti": [
+			{
+				"testo": "PROVA ORA",
+				"interesse": "corsi-fitness"
+			},
+			{
+				"testo": "PLANNING SETTIMANALE",
+				"href": "/orari"
+			}
+		]
+	},
+	"intro": {
+		"titolo": "Respira, pedala, vivi la tua energia.",
+		"html": "<p><strong>Scopri i Corsi Fitness di Body Energie</strong>, pensati per ogni obiettivo: con <strong><em>Respira</em></strong> ritrovi equilibrio e consapevolezza, con <strong><em>Ride</em></strong> vivi l’adrenalina dell’indoor cycling e con <strong><em>Dinamica e Attiva</em></strong> ti alleni con energia, forza e divertimento.</p>"
+	},
+	"gruppi": [
+		{
+			"titolo": "RESPIRA",
+			"html": "<p>Corsi per il benessere e l’equilibrio tra corpo e mente: con Pilates, Back School, Balance e Yoga migliori postura e flessibilità, allevi i dolori e ritrovi armonia interiore.</p>",
+			"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-25-scaled.jpg",
+			"corsi": [
+				{
+					"nome": "BACK SCHOOL",
+					"slug": "back-school"
+				},
+				{
+					"nome": "BALANCE",
+					"slug": "balance-2"
+				},
+				{
+					"nome": "PILATES MATWORK",
+					"slug": "pilates-matwork"
+				},
+				{
+					"nome": "YOGA",
+					"slug": "yoga"
+				}
+			]
+		},
+		{
+			"titolo": "RIDE",
+			"html": "<p>Indoor cycling che combina energia, musica e tecnologia: con Group Cycling vivi un allenamento coinvolgente, con Technogym Ride® pedali in un’esperienza smart ispirata al ciclismo su strada.</p>",
+			"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-23-scaled.jpg",
+			"corsi": [
+				{
+					"nome": "TECHNOGYM RIDE®",
+					"slug": "technogym-ride"
+				},
+				{
+					"nome": "GROUP CYCLING",
+					"slug": "group-cycling"
+				}
+			]
+		},
+		{
+			"titolo": "DINAMICA",
+			"html": "<p>Allenamenti dinamici per energia e risultati concreti: con BodyPump® e Core tonifichi e rinforzi il corpo, Shapes unisce Pilates, Barre e Power Yoga, mentre Zumba® e Step portano ritmo, divertimento e coordinazione.</p>",
+			"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-13-scaled.jpg",
+			"corsi": [
+				{
+					"nome": "BODY PUMP®",
+					"slug": "body-pump-body-energie"
+				},
+				{
+					"nome": "STRENGHT DEVELOPMENT®",
+					"slug": "strenght-development"
+				},
+				{
+					"nome": "SHAPES®",
+					"slug": "balance"
+				},
+				{
+					"nome": "ZUMBA®",
+					"slug": "zumba-body-energie"
+				},
+				{
+					"nome": "STEP",
+					"slug": "step-body-energie"
+				}
+			]
+		},
+		{
+			"titolo": "ATTIVA",
+			"html": "<p>Allenamenti intensi per superare i tuoi limiti e potenziare forza e performance: con il Functional Training migliori resistenza e coordinazione, il Powerlifting sviluppa tecnica e potenza, mentre il TRX® allena forza, equilibrio e flessibilità.</p>",
+			"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-10.jpg",
+			"corsi": [
+				{
+					"nome": "FUNCTIONAL TRAINING",
+					"slug": "functional-training-body-energie"
+				},
+				{
+					"nome": "POWERLIFTING",
+					"slug": "powerlifting-body-energie"
+				},
+				{
+					"nome": "TRX®",
+					"slug": "trx-3"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,73 @@
+{
+	"tipo": "corso",
+	"slug": "trx-3",
+	"nome": "TRX",
+	"seo": {
+		"title": "TRX - Body Energie | Villafranca di Verona",
+		"description": "Un allenamento intenso e altamente funzionale che utilizza il peso del corpo per sviluppare forza, stabilità ed equilibrio. Attraverso esercizi in…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "TRX",
+		"parole": [],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Azioni-69-1-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "trx",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Un <strong>allenamento intenso e altamente funzionale</strong> che utilizza il peso del corpo per sviluppare forza, stabilità ed equilibrio. Attraverso esercizi in sospensione, il corso <strong>coinvolge il core in ogni movimento, migliorando controllo, postura e coordinazione.</strong><br>Un training versatile e dinamico, <strong>ideale per chi cerca un allenamento completo che aumenti la resistenza muscolare e potenzi la mobilità</strong>, adattabile a tutti i livelli.</p>",
+			"video": "/wp-content/uploads/2026/06/Trx.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 30
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 60
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 10
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

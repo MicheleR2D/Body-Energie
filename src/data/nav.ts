@@ -32,16 +32,15 @@ export const megaMenu: ColonnaMenu[] = [
 		],
 	},
 	{
-		// NOTA: nel sito originale queste 5 voci non avevano una pagina "page" propria
-		// (probabilmente ancore sulla pagina /body-lab/) — da verificare col cliente
-		// prima del lancio e collegare alle sezioni corrette.
+		// Le 5 voci sono sezioni (ancore) della pagina /body-lab: nel sito originale
+		// non avevano pagine proprie.
 		titolo: 'Body Lab',
 		voci: [
-			{ label: 'Palestra della salute', href: '/body-lab#palestra-della-salute' },
+			{ label: 'Palestra della salute', href: '/body-lab#salute' },
 			{ label: 'Nutrizionista', href: '/body-lab#nutrizionista' },
-			{ label: 'Fisioterapia', href: '/body-lab#fisioterapia' },
+			{ label: 'Fisioterapia', href: '/body-lab#fisioterapista' },
 			{ label: 'Posturologia', href: '/body-lab#posturologia' },
-			{ label: 'Osteopatia', href: '/body-lab#osteopatia' },
+			{ label: 'Osteopatia', href: '/body-lab#osteopata' },
 		],
 	},
 ];

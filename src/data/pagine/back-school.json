@@ -1,0 +1,75 @@
+{
+	"tipo": "corso",
+	"slug": "back-school",
+	"nome": "Back School",
+	"seo": {
+		"title": "Back School - Body Energie | Villafranca di Verona",
+		"description": "Impara a conoscere e a utilizzare correttamente la tua colonna vertebrale attraverso esercizi mirati a colmare eventuali carenze di mobilità, elasticità e…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "back",
+		"parole": [
+			"school"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-25-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "back school",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Impara a conoscere e a utilizzare correttamente la tua colonna vertebrale attraverso esercizi mirati a colmare eventuali carenze di mobilità, elasticità e forza. Un percorso che ti aiuta a prevenire e a ridurre il mal di schiena e i disturbi cervicali.</p>",
+			"video": "/wp-content/uploads/2026/07/Back-School.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 20
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 40
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 55
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

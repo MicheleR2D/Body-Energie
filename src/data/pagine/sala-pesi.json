@@ -1,0 +1,155 @@
+{
+	"tipo": "servizio",
+	"slug": "sala-pesi",
+	"nome": "Sala Pesi",
+	"seo": {
+		"title": "Sala Pesi - Body Energie | Villafranca di Verona",
+		"description": "Le due sale Gym Floor, l'Area LoftGym e l'Air Park di Body Energie offrono un’esperienza di allenamento completa, tra innovazione e natura. Spazi moderni…"
+	},
+	"hero": {
+		"eyebrow": "Scopri le QUATTRO AREE",
+		"titolo": "gym",
+		"parole": [
+			"floor",
+			"LOFT",
+			"AIR PARK"
+		],
+		"immagine": "/wp-content/uploads/2025/08/IMG20230522180309-scaled-1.jpg",
+		"pulsanti": [
+			{
+				"testo": "PROVA ORA",
+				"interesse": "sala-pesi"
+			},
+			{
+				"testo": "PLANNING SETTIMANALE",
+				"href": "/orari"
+			}
+		]
+	},
+	"percorsi": {
+		"voci": [
+			{
+				"testo": "Gym Floor (piano terra)",
+				"href": "#gymfloor1"
+			},
+			{
+				"testo": "Gym Floor (primo piano)",
+				"href": "#gymfloor2"
+			},
+			{
+				"testo": "Loft Gym",
+				"href": "#loftgym"
+			},
+			{
+				"testo": "Air Park",
+				"href": "#airpark"
+			}
+		]
+	},
+	"blocchi": [
+		{
+			"id": null,
+			"titolo": null,
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Le <strong>due sale </strong><strong>Gym Floor, l'Area </strong><strong>LoftGym e l'Air Park</strong> di Body Energie offrono un’esperienza di allenamento completa, tra innovazione e natura.</p><p><strong>Spazi moderni e attrezzature Technogym</strong> di ultima generazione si uniscono alla libertà dell’allenamento all’aperto, per <strong>migliorare forza, resistenza e benessere</strong> in un ambiente stimolante e ricco di energia.</p>",
+			"video": null,
+			"immagini": [],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "gymfloor1",
+			"titolo": "GYM FLOOR",
+			"sottotitolo": "piano terra",
+			"descrizioneHtml": "<p>La Gym Floor al piano terra di Body Energie è un ambiente moderno e attrezzato per un allenamento libero, efficace e completo. Tra gli attrezzi di punta trovi <strong>Hack Squat, Leg Press, Olympic Half Rack, Multipower, Chest Press e Lat Machine</strong>, ideali per sviluppare forza e tono muscolare in modo sicuro. Non mancano panche regolabili, bilancieri olimpionici e stazioni via cavo per esercizi mirati su tutto il corpo. Uno spazio funzionale e stimolante, dove i nostri trainer qualificati sono sempre disponibili per supportarti e guidarti verso i tuoi obiettivi.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/11/Body-Energie-Ambienti-51-scaled.jpg",
+				"/wp-content/uploads/2025/11/Body-Energie-Ambienti-53-scaled.jpg",
+				"/wp-content/uploads/2025/11/Body-Energie-Ambienti-58-scaled.jpg",
+				"/wp-content/uploads/2025/11/Body-Energie-Azioni-50-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "gymfloor2",
+			"titolo": "GYM FLOOR",
+			"sottotitolo": "PIANO RIALZATO",
+			"descrizioneHtml": "<p>La Gym Floor al piano rialzato di Body Energie è uno spazio moderno dedicato all’allenamento libero e funzionale, con attrezzature di ultima generazione per forza, resistenza e condizionamento. Tra gli strumenti principali trovi <strong>Technogym Ride, Climb 1000, SkillRow, SkillMill e Run Excite</strong>, perfetti per cardio e allenamenti ad alta intensità, insieme a macchine per gambe e glutei come <strong>Hip Thrust, Standing Abductor e Belt Squat</strong>. <br><br>L’area <strong>Glute Circuit Training</strong> è progettata per un allenamento mirato ed efficace dei glutei.<br>Il circuito comprende <strong>6 macchinari specifici</strong>, tra cui <strong>Dead Lift</strong> e <strong>Belt Squat</strong>, ideali per sviluppare forza, tono e stabilità attraverso un lavoro strutturato e progressivo.<br><br>Completano l’area panche regolabili, attrezzi per addominali e stazioni per il rinforzo posturale. Uno spazio stimolante e versatile, dove i nostri trainer qualificati ti accompagnano in ogni sessione per aiutarti a raggiungere i tuoi obiettivi con efficacia e motivazione.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/11/Body-Energie-Ambienti-45-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-1-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-4-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-11-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "loftgym",
+			"titolo": "LOFT GYM",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>All’aperto ma con tutto il comfort di una palestra, la <strong>LoftGym</strong> è l’area esterna di Body Energie dedicata all’allenamento della forza e al functional training.<br>Situata sul <strong>terrazzo sotto il pergolato fotovoltaico</strong>, offre attrezzi di ultima generazione immersi nel verde, con <strong>giochi di luce suggestivi</strong> e una <strong>zona relax con lettini prendisole</strong> per rigenerarti dopo la sessione.</p><p>Allenarsi qui significa respirare energia, godere di un ambiente unico e vivere il fitness in modo naturale, intenso e rigenerante.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/11/Body-Energie-Azioni-62-scaled.jpg",
+				"/wp-content/uploads/2025/08/IMG20230522180324-scaled-1.jpg",
+				"/wp-content/uploads/2025/11/Body-Energie-Azioni-61-scaled.jpg",
+				"/wp-content/uploads/2025/11/Body-Energie-Azioni-54-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		},
+		{
+			"id": "airpark",
+			"titolo": "AIR PARK",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>L’Air Park di Body Energie è l’<strong>area outdoor dedicata all’allenamento funzionale e al calisthenics</strong>, un ambiente stimolante e immerso nella natura dove puoi allenarti in modo completo ed efficace. La struttura Triform Functional Training Outdoor offre <strong>numerose postazioni per un training sempre vario</strong>, che sviluppa forza, equilibrio, coordinazione e flessibilità, adatto sia ai principianti sia agli atleti più esperti. Qui trovi anche <strong>uno spazio ideale per il Calisthenics</strong>, con sbarre, parallele e pavimentazione dedicata, libero per tutti i soci che praticano questa disciplina. L’Air Park è il <strong>luogo perfetto per vivere il fitness all’aria aperta</strong>, con energia, libertà e massima funzionalità.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/08/IMG20230523150820-scaled-1.jpg",
+				"/wp-content/uploads/2025/08/AIR-PARK-7-TRIFORM-1.jpg",
+				"/wp-content/uploads/2025/08/AIR-PARK-7-TRIFORM.jpg",
+				"/wp-content/uploads/2025/08/AIR-PARK-6-TRIFORM.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": null,
+			"portare": [],
+			"intensita": []
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

@@ -1,0 +1,78 @@
+{
+	"tipo": "servizio",
+	"slug": "personal-training",
+	"nome": "Personal Training",
+	"seo": {
+		"title": "Personal Training - Body Energie | Villafranca di Verona",
+		"description": "Il Personal Training di Body Energie è un servizio esclusivo pensato per chi desidera un percorso di allenamento completamente personalizzato , costruito…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "Personal",
+		"parole": [
+			"Training"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Azioni-52-scaled.jpg",
+		"pulsanti": [
+			{
+				"testo": "Prova ora",
+				"interesse": "personal-training"
+			},
+			{
+				"testo": "PLANNING SETTIMANALE",
+				"href": "/orari"
+			}
+		]
+	},
+	"percorsi": null,
+	"blocchi": [
+		{
+			"id": null,
+			"titolo": "Personal Training",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il Personal Training di Body Energie è un servizio esclusivo pensato per chi desidera un <strong>percorso di allenamento completamente personalizzato</strong>, costruito sulle proprie esigenze e seguito passo dopo passo <strong>da personal trainer qualificati</strong>. Ogni seduta viene progettata in base ai tuoi obiettivi, al tuo livello di partenza e alle tue caratteristiche fisiche, così da garantirti un lavoro mirato, sicuro ed efficace. Che tu voglia migliorare la forma fisica, tonificare, perdere peso, aumentare la forza o recuperare dopo un infortunio, <strong>il tuo trainer ti guiderà con programmi studiati su misura</strong>, monitorando i progressi e mantenendo sempre alta la motivazione. Con un approccio professionale e attento, il Personal Training di Body Energie ti permette di <strong>ottenere risultati concreti in minor tempo</strong>, allenandoti con continuità, precisione e la sicurezza di essere seguito da un esperto dedicato esclusivamente a te.</p>",
+			"video": null,
+			"immagini": [
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-102-scaled.jpg",
+				"/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-60-scaled.jpg"
+			],
+			"adattamento": "cover",
+			"dettagli": [],
+			"extra": null,
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "CIABATTE",
+					"immagine": "/wp-content/uploads/2025/11/5.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "COSTUME",
+					"immagine": "/wp-content/uploads/2025/11/4.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": []
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

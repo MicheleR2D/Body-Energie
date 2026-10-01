@@ -2,12 +2,14 @@
 // Striscia fotografica a scorrimento continuo, senza soluzione di
 // continuità (loop infinito), con sfumatura ai bordi come nel marquee
 // dei loghi partner di Ronchiverdi/Footer.astro.
-interface Img {
+import Img from './Img.astro';
+
+interface Photo {
 	src: string;
 	alt?: string;
 }
 interface Props {
-	images: Img[];
+	images: Photo[];
 	height?: number;
 	cardWidth?: number;
 	speed?: number; // px al secondo
@@ -19,17 +21,16 @@ const groupWidth = images.length * cardWidth + images.length * gap;
 const duration = Math.round(groupWidth / speed);
 ---
 
-<div class="pm">
+<div class="pm" style={`--pm-w:${cardWidth}px; --pm-h:${height}px; --pm-gap:${gap}px`}>
 	<div class="pm__track" style={`--pm-duration:${duration}s`}>
 		{
 			[0, 1].map((copy) => (
 				<div class="pm__group" aria-hidden={copy === 1 ? 'true' : undefined}>
 					{images.map((img) => (
-						<img
+						<Img
 							src={img.src}
 							alt={copy === 1 ? '' : img.alt || ''}
-							loading="lazy"
-							style={`width:${cardWidth}px; height:${height}px`}
+							sizes={`(max-width: 560px) 260px, (max-width: 900px) 340px, ${cardWidth}px`}
 						/>
 					))}
 				</div>
@@ -38,10 +39,10 @@ const duration = Math.round(groupWidth / speed);
 	</div>
 </div>
 
-<style define:vars={{ gap: `${gap}px` }}>
+<style>
 	.pm {
 		overflow: hidden;
-		padding: var(--gap) 0;
+		padding: 8px 0;
 		-webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 		mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 	}
@@ -59,14 +60,18 @@ const duration = Math.round(groupWidth / speed);
 	.pm__group {
 		display: flex;
 		flex-shrink: 0;
-		gap: var(--gap);
-		padding-right: var(--gap);
+		gap: var(--pm-gap);
+		padding-right: var(--pm-gap);
 	}
 
-	.pm__group img {
+	/* Le foto sono figli di <Img>, fuori dallo scope di questo componente: :global. */
+	.pm__group :global(img) {
 		flex-shrink: 0;
+		width: var(--pm-w);
+		height: var(--pm-h);
 		object-fit: cover;
 		display: block;
+		border-radius: var(--radius-lg);
 	}
 
 	@keyframes pm-scroll {
@@ -79,16 +84,16 @@ const duration = Math.round(groupWidth / speed);
 	}
 
 	@media (max-width: 900px) {
-		.pm__group img {
-			height: 240px !important;
-			width: 340px !important;
+		.pm__track {
+			--pm-w: 340px;
+			--pm-h: 240px;
 		}
 	}
 
 	@media (max-width: 560px) {
-		.pm__group img {
-			height: 200px !important;
-			width: 260px !important;
+		.pm__track {
+			--pm-w: 260px;
+			--pm-h: 200px;
 		}
 	}
 

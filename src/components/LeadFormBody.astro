@@ -6,43 +6,51 @@ interface Props {
 const { prefix } = Astro.props;
 ---
 
-<div class="lf__body" data-step="form">
+<form class="lf__body" data-step="form" novalidate>
 	<p class="lf__interesse" data-lf-interesse-label></p>
 	<input type="hidden" data-lf-interesse />
 
 	<div class="lf__grid">
 		<label for={`${prefix}-nome`}>Nome*</label>
-		<input id={`${prefix}-nome`} type="text" required autocomplete="given-name" />
+		<input id={`${prefix}-nome`} type="text" required autocomplete="given-name" maxlength="80" />
 
 		<label for={`${prefix}-cognome`}>Cognome*</label>
-		<input id={`${prefix}-cognome`} type="text" required autocomplete="family-name" />
+		<input id={`${prefix}-cognome`} type="text" required autocomplete="family-name" maxlength="80" />
 
 		<label for={`${prefix}-email`}>Email*</label>
-		<input id={`${prefix}-email`} type="email" required autocomplete="email" />
+		<input id={`${prefix}-email`} type="email" required autocomplete="email" maxlength="254" />
 
 		<label for={`${prefix}-cellulare`}>Cellulare*</label>
-		<input id={`${prefix}-cellulare`} type="tel" required autocomplete="tel" />
+		<input id={`${prefix}-cellulare`} type="tel" required autocomplete="tel" maxlength="30" />
 
 		<label for={`${prefix}-messaggio`}>Messaggio (opzionale)</label>
-		<textarea id={`${prefix}-messaggio`} rows="3"></textarea>
+		<textarea id={`${prefix}-messaggio`} rows="3" maxlength="2000"></textarea>
 	</div>
 
 	<label class="lf__checkbox">
 		<input id={`${prefix}-privacy`} type="checkbox" required />
-		Ho letto e accetto la <a href="/privacy-body-energie" target="_blank">privacy policy</a>*
+		Ho letto e accetto la <a href="/privacy-body-energie" target="_blank" rel="noopener">privacy policy</a>*
 	</label>
 	<label class="lf__checkbox">
 		<input id={`${prefix}-marketing`} type="checkbox" />
 		Accetto di ricevere comunicazioni promozionali
 	</label>
 
+	{/* Campo trappola antispam: fuori schermo, invisibile a tastiera e lettori di schermo. */}
+	<div class="lf__hp" aria-hidden="true">
+		<label for={`${prefix}-website`}>Non compilare questo campo</label>
+		<input id={`${prefix}-website`} type="text" tabindex="-1" autocomplete="off" />
+	</div>
+
 	<p class="lf__error" hidden role="alert"></p>
 
 	<div class="lf__actions">
-		<button class="btn" type="button" data-lf-submit>Invia richiesta</button>
+		<button class="btn" type="submit" data-lf-submit>Invia richiesta</button>
 	</div>
-</div>
+</form>
 
 <div class="lf__body" data-step="conferma" hidden>
-	<p class="lf__conferma">Grazie! Abbiamo ricevuto la tua richiesta, ti ricontatteremo al piu' presto.</p>
+	<p class="lf__conferma" data-lf-conferma role="status" tabindex="-1">
+		Grazie! Abbiamo ricevuto la tua richiesta, ti ricontatteremo al piu' presto.
+	</p>
 </div>

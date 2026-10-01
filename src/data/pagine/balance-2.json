@@ -1,0 +1,73 @@
+{
+	"tipo": "corso",
+	"slug": "balance-2",
+	"nome": "Balance",
+	"seo": {
+		"title": "Balance - Body Energie | Villafranca di Verona",
+		"description": "Un allenamento che unisce in modo armonioso Tai Chi, Yoga e Pilates , creando una pratica fluida e adatta a tutti. Grazie a movimenti lenti, controllati e…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "balance",
+		"parole": [],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-25-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "balance",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Un allenamento che<strong> unisce in modo armonioso Tai Chi, Yoga e Pilates</strong>, creando una pratica fluida e adatta a tutti. Grazie a movimenti lenti, controllati e consapevoli, questo corso <strong>favorisce equilibrio, stabilità e benessere globale</strong>.<br>Partecipando alle lezioni, <strong>migliorerai la concentrazione, aumenterai la flessibilità e ritroverai una sensazione di armonia tra corpo e mente</strong>.<br>Un’esperienza ideale per chi desidera <strong>un allenamento dolce ma completo</strong>, capace di rigenerare e potenziare allo stesso tempo.</p>",
+			"video": "/wp-content/uploads/2026/07/Balance-BE.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 20
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 30
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 50
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

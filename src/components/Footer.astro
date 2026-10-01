@@ -1,5 +1,9 @@
 ---
 import { megaMenu } from '../data/nav';
+import { site, social, legalLinks, mapsEmbedSrc, mapsDirectionsUrl } from '../data/site';
+import { orari, orariEstivi } from '../data/orari';
+import { stats, formattaNumero } from '../data/stats';
+import Img from './Img.astro';
 
 // Stesso contenuto reale del footer originale (post ID 1068 di Elementor) e stessi
 // loghi partner, riorganizzato in: CTA principale, "dove siamo" con mappa,
@@ -7,58 +11,8 @@ import { megaMenu } from '../data/nav';
 // La sezione "dove siamo" sostituisce con una mappa statica il widget a
 // pagamento Elfsight Store Locator del sito originale (stessi dati reali:
 // indirizzo, telefono, email), per non introdurre un nuovo servizio a pagamento.
-const address = 'Via Adamello, 1, 37069 Villafranca di Verona (VR)';
-const mapsEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
-const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
-
-// Icone SVG inline (viewBox 24x24): niente librerie esterne per tre simboli.
-const social = [
-	{
-		href: 'https://www.facebook.com/www.bodyenergie.it',
-		label: 'Facebook',
-		icon: '<path fill="currentColor" d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/>',
-	},
-	{
-		href: 'https://www.instagram.com/body_energie/',
-		label: 'Instagram',
-		icon: '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/>',
-	},
-	{
-		href: 'https://www.youtube.com/@bodyenergie1631',
-		label: 'YouTube',
-		icon: '<path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/>',
-	},
-];
-
-const orari = [
-	{
-		titolo: 'Orari Centro',
-		righe: [
-			{ giorni: 'Lun - Ven', ore: '5.00 - 22.00' },
-			{ giorni: 'Sabato', ore: '8.00 - 18.00' },
-			{ giorni: 'Domenica', ore: '8.00 - 13.30' },
-		],
-	},
-	{
-		titolo: 'Orari Termarium',
-		righe: [
-			{ giorni: 'Lun - Mar - Gio', ore: '10.00 - 21.00' },
-			{ giorni: 'Sabato', ore: '10.00 - 17.30' },
-			{ giorni: 'Domenica', ore: '10.00 - 13.00' },
-		],
-	},
-];
-
-const legalLinks = [
-	{ href: '/privacy-body-energie', label: 'Privacy' },
-	{ href: '/wp-content/uploads/2025/12/Regolamento-Body-Energie.pdf', label: 'Regolamento', esterno: true },
-	{
-		href: '/wp-content/uploads/2025/12/MODELLO-ORGANIZZATIVO-E-DI-CONTROLLO-DELLATTIVITA-SPORTIVA.pdf',
-		label: 'Modello Organizzativo',
-		esterno: true,
-	},
-	{ href: '/wp-content/uploads/2025/12/contributi.pdf', label: 'Contributi Pubblici', esterno: true },
-];
+// Sede, social, documenti, orari e numeri stanno in src/data/.
+const address = site.address;
 
 // Stessi loghi del sito originale, ritagliati dai margini vuoti (in
 // public/images/loghi/) per poterli mostrare tutti alla stessa scala.
@@ -88,19 +42,15 @@ const loghiCofinanziamento = [
 
 const info = [
 	{ href: '/orari', label: 'Planning settimanale' },
-	{ href: '/abbonamenti', label: 'Abbonamenti' },
+	// Sul vecchio sito era un modulo (Typeform), non una pagina: apre il modulo contatti.
+	{ interesse: 'abbonamento', label: 'Abbonamenti' },
 	// TODO: nel sito originale il bottone "Posizioni aperte" non aveva una destinazione configurata
 	{ href: '#', label: 'Lavora con noi' },
 ];
 
-// Stessi numeri della sezione contatori della home (e stesso formato con la
-// virgola del sito originale): qui fanno da prova sociale accanto alla CTA.
-const provaSociale = [
-	{ numero: '5,500', etichetta: 'mq di centro' },
-	{ numero: '150+', etichetta: 'corsi a settimana' },
-	{ numero: '40+', etichetta: 'trainer qualificati' },
-	{ numero: '2,000+', etichetta: 'iscritti' },
-];
+// Stessi numeri della sezione contatori della home: qui fanno da prova sociale
+// accanto alla CTA.
+const provaSociale = stats.map((x) => ({ numero: formattaNumero(x.target) + x.suffisso, etichetta: x.breve }));
 
 const colonneFoto = [
 	[
@@ -124,8 +74,8 @@ const colonneFoto = [
 <footer class="ft">
 	<section class="cta-final" aria-labelledby="cta-final-title">
 		<div class="cta-final__content">
-			<p class="cta-final__eyebrow" data-anim="pop">Inizia oggi!</p>
-			<h2 class="cta-final__title" id="cta-final-title" data-anim="up" data-anim-delay="120">
+			<p class="pill pill--dark cta-final__eyebrow" data-anim="pop">Inizia oggi!</p>
+			<h2 class="display-title cta-final__title" id="cta-final-title" data-anim="up" data-anim-delay="120">
 				Prova <span class="cta-final__title-accent">ora</span><br />il nostro centro
 			</h2>
 			<p class="cta-final__lead" data-anim="up" data-anim-delay="240">Lascia i tuoi dati: ti ricontattiamo noi per organizzare la tua prova.</p>
@@ -142,7 +92,7 @@ const colonneFoto = [
 			</ul>
 
 			<div class="cta-final__actions" data-anim="up" data-anim-delay="760">
-				<button class="btn cta-final__btn" type="button" data-open-contact data-interest="prova-gratuita">
+				<button class="btn btn--light btn--lg cta-final__btn" type="button" data-open-contact data-interest="prova-gratuita">
 					Attiva ora <span class="cta-final__btn-arrow" aria-hidden="true">→</span>
 				</button>
 			</div>
@@ -154,7 +104,7 @@ const colonneFoto = [
 					<div class={`cta-final__col ${i === 1 ? 'cta-final__col--down' : ''}`}>
 						<div class="cta-final__track">
 							{[...colonna, ...colonna].map((src) => (
-								<img src={src} alt="" loading="lazy" />
+								<Img src={src} sizes="(max-width: 900px) 30vw, 14vw" />
 							))}
 						</div>
 					</div>
@@ -165,8 +115,8 @@ const colonneFoto = [
 
 	<section class="find-us" aria-labelledby="find-us-title">
 		<div class="find-us__content">
-			<p class="find-us__eyebrow" data-anim="pop">Dove siamo</p>
-			<h2 class="find-us__title" id="find-us-title" data-anim="up" data-anim-delay="120">
+			<p class="pill find-us__eyebrow" data-anim="pop">Dove siamo</p>
+			<h2 class="display-title find-us__title" id="find-us-title" data-anim="up" data-anim-delay="120">
 				Vieni a <span class="find-us__title-accent">trovarci</span>
 			</h2>
 
@@ -250,24 +200,33 @@ const colonneFoto = [
 				{
 					info.map((l) => (
 						<li>
-							<a href={l.href}>{l.label}</a>
+							{l.interesse ? (
+								<button type="button" data-open-contact data-interest={l.interesse}>
+									{l.label}
+								</button>
+							) : (
+								<a href={l.href}>{l.label}</a>
+							)}
 						</li>
 					))
 				}
 			</ul>
 			<details class="ft-estivi">
 				<summary>Orari estivi</summary>
-				<p class="ft-estivi__title">Centro</p>
-				<ul>
-					<li>Lun - Ven: 5.00 - 22.00</li>
-					<li>Sabato: 8.00 - 13.30</li>
-					<li>Domenica: 8.00 - 13.30</li>
-				</ul>
-				<p class="ft-estivi__title">Termarium</p>
-				<ul>
-					<li>Lunedì: 18.00 - 21.00</li>
-					<li>Giovedì: 10.00 - 21.00</li>
-				</ul>
+				{
+					orariEstivi.map((blocco) => (
+						<>
+							<p class="ft-estivi__title">{blocco.titolo}</p>
+							<ul>
+								{blocco.righe.map((r) => (
+									<li>
+										{r.giorni}: {r.ore}
+									</li>
+								))}
+							</ul>
+						</>
+					))
+				}
 			</details>
 		</div>
 	</div>
@@ -296,7 +255,7 @@ const colonneFoto = [
 
 	<div class="ft-bottom">
 		<div class="ft-bottom__row">
-			<p>© {new Date().getFullYear()} Body Energie ssd a.r.l. · P.IVA 03716930239 · {address}</p>
+			<p>© {new Date().getFullYear()} {site.legalName} · P.IVA {site.vat} · {address}</p>
 			<ul class="ft-legal">
 				{
 					legalLinks.map((l) => (
@@ -332,13 +291,12 @@ const colonneFoto = [
 	}
 
 	/* --- CTA principale del sito: testo a sinistra, muro di foto a destra --- */
-	/* Alta esattamente una schermata, al netto dell'header fisso (~75px). */
+	/* Alta esattamente una schermata, al netto dell'header fisso (--screen-h). */
 	.cta-final {
 		position: relative;
 		display: grid;
 		grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-		height: calc(100vh - 75px);
-		height: calc(100svh - 75px);
+		height: var(--screen-h);
 		min-height: 560px;
 		overflow: hidden;
 		background: var(--accent);
@@ -351,30 +309,15 @@ const colonneFoto = [
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		padding: 60px 72px 60px 5vw;
+		padding: 60px 72px 60px var(--gutter);
 	}
 
 	.cta-final__eyebrow {
-		display: inline-block;
 		align-self: flex-start;
 		margin: 0 0 20px;
-		padding: 6px 14px;
-		border-radius: 999px;
-		background: var(--text);
-		color: var(--text-on-dark);
-		font-family: var(--font-heading);
-		font-size: var(--text-xs);
-		font-weight: 800;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
 	}
 
 	.ft .cta-final__title {
-		margin: 0;
-		font-size: clamp(2.4rem, 4.4vw, 4.25rem);
-		font-weight: 900;
-		line-height: 0.95;
-		letter-spacing: -0.02em;
 		color: var(--text);
 	}
 
@@ -435,22 +378,18 @@ const colonneFoto = [
 		margin-top: 32px;
 	}
 
-	/* Bordo bianco -> in hover riempimento bianco e testo arancione. */
+	/* Colore e taglia: .btn--light .btn--lg (globali). Qui solo freccia e anello pulsante. */
 	.cta-final__btn {
-		--btn-border: var(--text-on-dark);
-		--btn-hover-text: var(--accent);
 		display: inline-flex;
 		align-items: center;
 		gap: 14px;
-		padding: 22px 44px;
-		font-size: 18px;
 		letter-spacing: 0.04em;
 		animation: cta-pulse 2.4s ease-out infinite;
 	}
 
 	.cta-final__btn-arrow {
 		display: inline-block;
-		transition: transform 0.3s var(--ease-out-crit, ease);
+		transition: transform 0.3s var(--ease-out-crit);
 	}
 
 	.cta-final__btn:hover .cta-final__btn-arrow {
@@ -475,7 +414,7 @@ const colonneFoto = [
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 14px;
-		padding-right: 5vw;
+		padding-right: var(--gutter);
 		overflow: hidden;
 		-webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
 		mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
@@ -529,18 +468,16 @@ const colonneFoto = [
 	}
 
 	/* In colonna: testo sopra, le foto riempiono lo spazio rimasto fino a
-	   fine schermata (header mobile ~61px). */
+	   fine schermata. */
 	@media (max-width: 900px) {
 		.cta-final {
 			display: flex;
 			flex-direction: column;
-			height: calc(100vh - 61px);
-			height: calc(100svh - 61px);
 			min-height: 0;
 		}
 
 		.cta-final__content {
-			padding: 36px 5vw 24px;
+			padding: 36px var(--gutter) 24px;
 		}
 
 		.cta-final__lead {
@@ -565,7 +502,7 @@ const colonneFoto = [
 		.cta-final__wall {
 			flex: 1;
 			min-height: 140px;
-			padding-inline: 5vw;
+			padding-inline: var(--gutter);
 		}
 	}
 
@@ -584,8 +521,7 @@ const colonneFoto = [
 	.find-us {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-		height: calc(100vh - 75px);
-		height: calc(100svh - 75px);
+		height: var(--screen-h);
 		min-height: 560px;
 		background: var(--bg);
 		color: var(--text);
@@ -597,29 +533,15 @@ const colonneFoto = [
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		padding: 60px 5vw 60px 72px;
+		padding: 60px var(--gutter) 60px 72px;
 	}
 
 	.find-us__eyebrow {
 		align-self: flex-start;
 		margin: 0 0 20px;
-		padding: 6px 14px;
-		border-radius: 999px;
-		background: var(--accent);
-		color: var(--text);
-		font-family: var(--font-heading);
-		font-size: var(--text-xs);
-		font-weight: 800;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
 	}
 
 	.ft .find-us__title {
-		margin: 0;
-		font-size: clamp(2.4rem, 4.4vw, 4.25rem);
-		font-weight: 900;
-		line-height: 0.95;
-		letter-spacing: -0.02em;
 		color: var(--text);
 	}
 
@@ -632,7 +554,7 @@ const colonneFoto = [
 		grid-column: 1;
 		grid-row: 1;
 		position: relative;
-		margin: 60px 0 60px 5vw;
+		margin: 60px 0 60px var(--gutter);
 		overflow: hidden;
 		border-radius: var(--radius-lg);
 	}
@@ -714,14 +636,13 @@ const colonneFoto = [
 		display: grid;
 		grid-template-columns: minmax(0, 1.6fr) repeat(4, minmax(0, 1fr));
 		gap: 40px;
-		padding: 64px 5vw 48px;
+		padding: 64px var(--gutter) 48px;
 	}
 
 	.ft-brand__logo {
 		display: block;
 		height: 40px;
 		width: auto;
-		border-radius: 0;
 		margin-bottom: 20px;
 	}
 
@@ -775,14 +696,25 @@ const colonneFoto = [
 		gap: 10px;
 	}
 
-	.ft-links a {
+	.ft-links a,
+	.ft-links button {
 		font-size: var(--text-sm);
 		color: var(--text-on-dark);
 		text-decoration: none;
 		transition: color 0.2s ease;
 	}
 
-	.ft-links a:hover {
+	.ft-links button {
+		padding: 0;
+		border: 0;
+		background: none;
+		font-family: inherit;
+		text-align: left;
+		cursor: pointer;
+	}
+
+	.ft-links a:hover,
+	.ft-links button:hover {
 		color: var(--accent);
 	}
 
@@ -819,7 +751,7 @@ const colonneFoto = [
 	   colori e alla stessa scala. Su schermi stretti la riga si scorre a
 	   mano invece di andare a capo. */
 	.ft-loghi {
-		padding: 40px 5vw;
+		padding: 40px var(--gutter);
 		border-top: 1px solid rgba(255, 255, 255, 0.12);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 	}
@@ -865,14 +797,13 @@ const colonneFoto = [
 		width: auto;
 		height: auto;
 		object-fit: contain;
-		border-radius: 0;
 	}
 
 	/* --- Riga finale --- */
 	.ft-bottom {
 		display: grid;
 		gap: 12px;
-		padding: 24px 5vw 32px;
+		padding: 24px var(--gutter) 32px;
 		font-size: var(--text-xs);
 		color: var(--text-on-dark);
 	}
@@ -923,7 +854,6 @@ const colonneFoto = [
 
 	.ft-firma img {
 		display: block;
-		border-radius: 0;
 		opacity: 0.75;
 	}
 
@@ -945,13 +875,11 @@ const colonneFoto = [
 		.find-us {
 			display: flex;
 			flex-direction: column;
-			height: calc(100vh - 61px);
-			height: calc(100svh - 61px);
 			min-height: 0;
 		}
 
 		.find-us__content {
-			padding: 36px 5vw 20px;
+			padding: 36px var(--gutter) 20px;
 		}
 
 		.find-us__orari {
@@ -977,11 +905,11 @@ const colonneFoto = [
 		.find-us__map {
 			flex: 1;
 			min-height: 180px;
-			margin: 0 5vw 24px;
+			margin: 0 var(--gutter) 24px;
 		}
 	}
 
-	@media (max-width: 700px) {
+	@media (max-width: 900px) {
 		.ft-main {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 			gap: 32px 24px;

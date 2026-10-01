@@ -1,0 +1,176 @@
+{
+	"tipo": "corso",
+	"slug": "acqua",
+	"nome": "Acquagym",
+	"seo": {
+		"title": "Acquagym - Body Energie | Villafranca di Verona",
+		"description": "Un allenamento completo e coinvolgente che migliora la capacità aerobica e tonifica tutto il corpo, sfruttando la resistenza naturale dell’acqua. In un…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "acqua",
+		"parole": [
+			"fitness",
+			"gym",
+			"bike"
+		],
+		"immagine": "/wp-content/uploads/2025/12/Body-Energie-Piscina-3-scaled.jpg"
+	},
+	"galleria": [
+		"/wp-content/uploads/2025/12/Body-Energie-Piscina-2-scaled.jpg",
+		"/wp-content/uploads/2025/12/Body-Energie-Piscina-5-scaled.jpg",
+		"/wp-content/uploads/2025/12/Body-Energie-Piscina-23-scaled.jpg",
+		"/wp-content/uploads/2025/12/Body-Energie-Piscina-27-scaled.jpg"
+	],
+	"blocchi": [
+		{
+			"titolo": "ACQUAGYM",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Un allenamento completo e coinvolgente che migliora la capacità aerobica e tonifica tutto il corpo, sfruttando la resistenza naturale dell’acqua. In un ambiente privo di impatto e ricco di leggerezza, ogni movimento diventa fluido, armonioso e divertente.<br>Ideale per migliorare circolazione, postura e resistenza, l’acquagym unisce efficacia, sicurezza e benessere, regalando energia e buonumore ad ogni lezione.</p>",
+			"video": "/wp-content/uploads/2025/12/Acquagym1.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "CIABATTE",
+					"immagine": "/wp-content/uploads/2025/11/5.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "COSTUME",
+					"immagine": "/wp-content/uploads/2025/11/4.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 20
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 40
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 40
+				}
+			]
+		},
+		{
+			"titolo": "ACQUAbike",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Unisce il piacere della pedalata al benessere dell’acqua, per un allenamento dinamico, tonificante e a basso impatto.<br>Pedalando in acqua migliori la resistenza aerobica e cardiovascolare, stimoli la circolazione e tonifichi gambe e glutei in modo efficace e sicuro. L’effetto massaggiante dell’acqua riduce la fatica muscolare e favorisce il drenaggio, rendendo ogni lezione un’esperienza rigenerante e divertente.</p>",
+			"video": "/wp-content/uploads/2025/12/Acquabike-1.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "CIABATTE",
+					"immagine": "/wp-content/uploads/2025/11/5.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "COSTUME",
+					"immagine": "/wp-content/uploads/2025/11/4.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 20
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 40
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 55
+				}
+			]
+		},
+		{
+			"titolo": "NUOTO LIBERO",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il modo più naturale e completo per allenare tutto il corpo in totale libertà. Ideale per migliorare resistenza, tono muscolare e capacità respiratoria, il nuoto libero ti permette di muoverti al tuo ritmo, scaricare lo stress e ritrovare equilibrio e concentrazione.<br>Un momento di benessere personale in un ambiente tranquillo, sicuro e sempre accogliente.</p>",
+			"video": null,
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "CIABATTE",
+					"immagine": "/wp-content/uploads/2025/11/5.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "COSTUME",
+					"immagine": "/wp-content/uploads/2025/11/4.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 20
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 40
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 55
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

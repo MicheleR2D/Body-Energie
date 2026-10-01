@@ -37,8 +37,15 @@ import { interessi } from '../data/interessi';
 	document.querySelector('[data-lf-close]')?.addEventListener('click', chiudiEPulisci);
 
 	// Chiusura dal backdrop: il click cade sul <dialog> stesso, non sul pannello.
+	// Conta solo se anche la pressione e' partita dal backdrop: selezionare del
+	// testo in un campo e rilasciare fuori non deve chiudere e cancellare il form.
+	let pressioneSuBackdrop = false;
+	modal.addEventListener('mousedown', (e) => {
+		pressioneSuBackdrop = e.target === modal;
+	});
 	modal.addEventListener('click', (e) => {
-		if (e.target === modal) chiudiEPulisci();
+		if (e.target === modal && pressioneSuBackdrop) chiudiEPulisci();
+		pressioneSuBackdrop = false;
 	});
 
 	document.addEventListener('click', (e) => {
@@ -59,6 +66,7 @@ import { interessi } from '../data/interessi';
 		padding: 0;
 		width: min(560px, calc(100vw - 32px));
 		max-height: min(680px, calc(100vh - 32px));
+		max-height: min(680px, calc(100dvh - 32px));
 	}
 
 	.lf::backdrop {
@@ -84,13 +92,29 @@ import { interessi } from '../data/interessi';
 	}
 
 	.lf__close {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 44px;
+		height: 44px;
+		margin: -8px -8px 0 0;
 		background: none;
 		border: none;
+		border-radius: 50%;
 		font-size: 28px;
 		line-height: 1;
 		padding: 0;
 		color: var(--text);
 		cursor: pointer;
+	}
+
+	.lf__close:hover {
+		color: var(--accent);
+	}
+
+	.lf__close:focus-visible {
+		outline: 2px solid var(--accent);
 	}
 
 	.lf__interesse {
@@ -148,5 +172,19 @@ import { interessi } from '../data/interessi';
 		font-size: var(--text-md);
 		text-align: center;
 		padding: 24px 0;
+	}
+
+	/* Ha il focus per essere letta dai lettori di schermo: niente contorno. */
+	.lf__conferma:focus {
+		outline: none;
+	}
+
+	/* Campo trappola antispam: fuori schermo, non fa rumore per nessuno. */
+	.lf__hp {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
 	}
 </style>

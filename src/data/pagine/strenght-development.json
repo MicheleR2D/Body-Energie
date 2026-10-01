@@ -1,0 +1,75 @@
+{
+	"tipo": "corso",
+	"slug": "strenght-development",
+	"nome": "Strenght Development",
+	"seo": {
+		"title": "Strenght Development - Body Energie | Villafranca di Verona",
+		"description": "Un programma inedito per sviluppare la forza in tutte le sue forme. LES MILLS Strength Development™ è pensato per chi vuole costruire forza vera,…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "strenght",
+		"parole": [
+			"development"
+		],
+		"immagine": "/wp-content/uploads/2025/12/2024-SEPT-ADIDAS-X-LES-MILLS-FW24-BERLIN-STRENGTH-IMAGE-3-scaled-1.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "strenght development",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Un programma inedito per sviluppare la forza in tutte le sue forme.<br><strong>LES MILLS Strength Development™</strong> è pensato per chi vuole costruire forza vera, migliorare la potenza e accrescere la propria capacità atletica, grazie a un approccio scientifico e progressivo all’allenamento con i pesi.</p><p>Ogni lezione è strutturata per valorizzare i principi fondamentali dell’allenamento di forza: movimenti controllati e consapevoli, esercizi funzionali e training specifico per il core.</p>",
+			"video": "/wp-content/uploads/2026/06/Strenght-Development.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 20
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 40
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 55
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

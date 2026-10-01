@@ -1,0 +1,73 @@
+{
+	"tipo": "corso",
+	"slug": "yoga",
+	"nome": "Yoga",
+	"seo": {
+		"title": "Yoga - Body Energie | Villafranca di Verona",
+		"description": "Il corso Yoga ti guiderà verso un equilibrio perfetto tra corpo e mente, attraverso movimenti fluidi, stretching profondo e un'armoniosa connessione al…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "yoga",
+		"parole": [],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-25-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "yoga",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Il corso <strong>Yoga</strong> ti guiderà verso un equilibrio perfetto tra corpo e mente, attraverso movimenti fluidi, stretching profondo e un'armoniosa connessione al respiro. Ogni lezione è pensata per favorire il rilassamento e la consapevolezza, mentre le pratiche di meditazione e le asana ti aiuteranno a sviluppare forza, flessibilità e serenità interiore. Con <strong>Yoga</strong>, scoprirai come migliorare la postura, aumentare la concentrazione e ridurre lo stress, ritrovando il tuo centro.</p>",
+			"video": "/wp-content/uploads/2026/06/Yoga.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 20
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 40
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 40
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

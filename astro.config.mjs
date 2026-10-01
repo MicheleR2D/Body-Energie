@@ -35,10 +35,10 @@ const redirectWordpress = {
 	'/allenamento-body-energie/': '/corsi-fitness',
 	'/partners/': '/', // TODO: destinazione originale "/promo" non esiste nel backup
 	'/iorestoacasa/': '/', // TODO: destinazione originale "/promo" non esiste nel backup
-	'/acquista-servizi/': '/abbonamenti',
-	'/carrello/': '/abbonamenti',
-	'/checkout/': '/abbonamenti',
-	'/acquista-servizi/small-group-personal-trainer/': '/abbonamenti',
+	'/acquista-servizi/': '/', // TODO: destinazione originale "/abbonamenti" non esiste nel backup
+	'/carrello/': '/', // TODO: destinazione originale "/abbonamenti" non esiste nel backup
+	'/checkout/': '/', // TODO: destinazione originale "/abbonamenti" non esiste nel backup
+	'/acquista-servizi/small-group-personal-trainer/': '/', // TODO: destinazione originale "/abbonamenti" non esiste nel backup
 	'/area-riservata/': '/',
 	'/privacy-policy/': '/privacy-body-energie',
 	'/home-backup-30-06-20/': '/',
@@ -46,7 +46,7 @@ const redirectWordpress = {
 	'/prova2/': '/',
 	'/prevendita-re-opening-body-energie/': '/',
 	'/nutri-energie-la-nutrizione-consapevole/': '/',
-	'/acquista-servizi-new/': '/abbonamenti',
+	'/acquista-servizi-new/': '/', // TODO: destinazione originale "/abbonamenti" non esiste nel backup
 	'/condizioni-di-vendita/': '/wp-content/uploads/2025/12/Regolamento-Body-Energie.pdf',
 	'/la-corsa-delle-renne-concorso-natale-2021/': '/', // TODO: destinazione originale "/promo" non esiste nel backup
 	'/catalogo-premi-concorso-la-corsa-delle-renne/': '/', // TODO: destinazione originale "/promo" non esiste nel backup

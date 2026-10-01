@@ -1,0 +1,73 @@
+{
+	"tipo": "corso",
+	"slug": "step-body-energie",
+	"nome": "Step",
+	"seo": {
+		"title": "Step - Body Energie | Villafranca di Verona",
+		"description": "Step è un allenamento aerobico dinamico che allena coordinazione e concentrazione attraverso coreografie coinvolgenti su e giù dallo step. Ogni lezione…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "step",
+		"parole": [],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-7-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "step",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p><strong>Step</strong> è un allenamento aerobico dinamico che allena coordinazione e concentrazione attraverso coreografie coinvolgenti su e giù dallo step.</p><p>Ogni lezione combina movimenti ritmici e sequenze coreografiche che migliorano la resistenza cardiovascolare, tonificano gambe e glutei e bruciano calorie in modo efficace. L'altezza dello step è regolabile, permettendo a ciascuno di adattare l'intensità al proprio livello.</p>",
+			"video": null,
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 70
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 20
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 10
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

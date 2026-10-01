@@ -1,0 +1,73 @@
+{
+	"tipo": "corso",
+	"slug": "powerlifting-body-energie",
+	"nome": "Powerlifting",
+	"seo": {
+		"title": "Powerlifting - Body Energie | Villafranca di Verona",
+		"description": "POWERLIFTING è il corso dedicato all'apprendimento della tecnica corretta e all'aumento della forza nei tre esercizi fondamentali: squat, panca piana e…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "powerlifting",
+		"parole": [],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-45.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "powerlifting",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p><strong>POWERLIFTING</strong> è il corso dedicato all'apprendimento della tecnica corretta e all'aumento della forza nei tre esercizi fondamentali: squat, panca piana e stacco da terra.</p><p>Ogni lezione si concentra sulla perfetta esecuzione dei movimenti, sulla progressione dei carichi e sullo sviluppo della forza massimale. Sotto la guida di istruttori qualificati, imparerai le basi biomeccaniche e tecniche per sollevare in sicurezza ed efficacia.</p>",
+			"video": "/wp-content/uploads/2026/06/Power-Lifting.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 5
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 90
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 5
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}

@@ -8,19 +8,35 @@ import LeadModal from '../components/LeadModal.astro';
 interface Props {
 	title: string;
 	description?: string;
+	/** "overlay": header trasparente sopra una hero scura (la home).
+	 *  "solid" (default): header pieno, il contenuto parte sotto di esso. */
+	headerTone?: 'overlay' | 'solid';
+	/** Sezioni a blocchi con fasce di colore tra l'una e l'altra (la home). */
+	stack?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, headerTone = 'solid', stack = false } = Astro.props;
+const overlay = headerTone === 'overlay';
+
+const metaDescription =
+	description ?? 'Body Energie: fitness, benessere e sport a Villafranca di Verona. Palestra, piscina, corsi e Centro del Benessere.';
 
 const gtmId = import.meta.env.PUBLIC_GTM_ID;
 const cookieyesId = import.meta.env.PUBLIC_COOKIEYES_ID;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/wp-content/uploads/2025/12/Body-Energie-Ambienti-57-scaled.jpg', Astro.site).href;
 ---
 
 <!doctype html>
 <html lang="it">
 	<head>
 		<meta charset="utf-8" />
+
+		<!-- Segnala che c'e' JavaScript: le animazioni in entrata nascondono gli
+		     elementi solo in questo caso, cosi' senza JS il contenuto si vede. -->
+		<script is:inline>
+			document.documentElement.classList.add('js');
+		</script>
 
 		<!-- Google Consent Mode v2: default a "denied" prima di qualunque altro tag, come sugli altri siti del gruppo -->
 		<script is:inline>
@@ -68,18 +84,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<!-- Font del brand: solo Montserrat, ovunque (titoli e testo) -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-			rel="stylesheet"
-		/>
+		<!-- Font del brand: solo Montserrat, ovunque (titoli e testo), servito dal sito
+		     (vedi @font-face in global.css); si precarica solo il tondo. -->
+		<link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
 
 		<link rel="icon" href="/wp-content/uploads/2025/12/Favicon-body-Energie.png" />
-		<meta name="description" content={description} />
+		<meta name="description" content={metaDescription} />
 		<link rel="canonical" href={canonicalURL} />
 		<title>{title}</title>
+
+		<!-- Anteprima quando il link viene condiviso (WhatsApp, Facebook, LinkedIn...) -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Body Energie" />
+		<meta property="og:locale" content="it_IT" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
 	</head>
 	<body>
 		{
@@ -95,8 +117,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 			)
 		}
 
-		<Header />
-		<main>
+		<a class="skip-link" href="#main">Vai al contenuto</a>
+		<Header overlay={overlay} />
+		<main id="main" class:list={{ 'main--stack': stack, 'main--offset': !overlay }}>
 			<slot />
 		</main>
 		<Footer />

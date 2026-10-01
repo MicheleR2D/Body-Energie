@@ -1,0 +1,214 @@
+---
+/*
+ * Template "elenco": la pagina dei Corsi Fitness. Hero, introduzione e un blocco per
+ * ogni famiglia di corsi (Respira, Ride, Dinamica, Attiva) con le card che portano
+ * alla scheda di ciascun corso. Le card sono solo testo: sul vecchio sito le schede di
+ * una famiglia condividevano la stessa foto, che qui fa da sfondo al blocco.
+ */
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Img from '../components/Img.astro';
+
+interface Props {
+	pagina: {
+		slug: string;
+		nome: string;
+		seo: { title: string; description: string };
+		hero: { eyebrow: string; titolo: string; parole?: string[]; immagine: string; pulsanti?: { testo: string; interesse?: string; href?: string }[] };
+		intro: { titolo: string; html: string };
+		gruppi: { titolo: string; html: string; immagine: string; corsi: { nome: string; slug: string }[] }[];
+	};
+}
+
+const { pagina } = Astro.props;
+---
+
+<Layout title={pagina.seo.title} description={pagina.seo.description} headerTone="overlay">
+	<PageHero image={pagina.hero.immagine} eyebrow={pagina.hero.eyebrow} title={pagina.hero.titolo} words={pagina.hero.parole}>
+		{
+			pagina.hero.pulsanti?.map((p) =>
+				p.interesse ? (
+					<button class="btn btn--lg" type="button" data-open-contact data-interest={p.interesse}>
+						{p.testo}
+					</button>
+				) : (
+					<a class="btn btn--light btn--lg" href={p.href}>
+						{p.testo}
+					</a>
+				)
+			)
+		}
+	</PageHero>
+
+	<section class="ce-intro">
+		<div class="ce-intro__grid container-wide">
+			<h2 class="ce-intro__title display-title" data-anim="from-left">{pagina.intro.titolo}</h2>
+			<div class="ce-intro__text" data-anim="from-right" data-anim-delay="80" set:html={pagina.intro.html} />
+		</div>
+	</section>
+
+	{
+		pagina.gruppi.map((g) => (
+			<section class="ce-gruppo">
+				<Img src={g.immagine} alt="" class="img-cover" sizes="100vw" />
+				<div class="ce-gruppo__velo" />
+				<div class="ce-gruppo__grid">
+					<div class="ce-gruppo__testo">
+						<SectionTitle tone="dark-bg" flush gap={22}>
+							{g.titolo}
+						</SectionTitle>
+						<div class="ce-gruppo__desc" set:html={g.html} />
+					</div>
+					<ul class="ce-gruppo__card" data-anim="up">
+						{g.corsi.map((c) => (
+							<li>
+								<a class="ce-card" href={`/${c.slug}`}>
+									<span class="ce-card__nome">{c.nome}</span>
+									<svg class="ce-card__freccia" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+										<path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+		))
+	}
+</Layout>
+
+<style>
+	.ce-intro {
+		padding-block: clamp(48px, 7vw, 96px);
+		background: var(--bg);
+	}
+
+	.ce-intro__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: clamp(24px, 5vw, 72px);
+		align-items: center;
+	}
+
+	.ce-intro__title {
+		font-size: clamp(2rem, 3.6vw, 3.25rem);
+		line-height: 1.05;
+		color: var(--text);
+	}
+
+	.ce-intro__text {
+		font-size: var(--text-md);
+		line-height: 1.7;
+	}
+
+	.ce-intro__text :global(p) {
+		margin: 0 0 1em;
+	}
+
+	/* ---- Una famiglia di corsi ---- */
+	.ce-gruppo {
+		position: relative;
+		overflow: hidden;
+		padding-block: clamp(48px, 7vw, 96px);
+		background: var(--bg-dark);
+		color: var(--text-on-dark);
+	}
+
+	.ce-gruppo__velo {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.66);
+	}
+
+	.ce-gruppo__grid {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+		gap: clamp(28px, 5vw, 72px);
+		align-items: center;
+		padding-inline: var(--gutter);
+	}
+
+	.ce-gruppo__desc {
+		font-size: var(--text-md);
+		line-height: 1.7;
+	}
+
+	.ce-gruppo__desc :global(p) {
+		margin: 0;
+	}
+
+	.ce-gruppo__card {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+		gap: 14px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	/* ---- Card di un corso (vetro sopra la foto) ---- */
+	.ce-card {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		min-height: 84px;
+		padding: 16px 20px;
+		border: 1px solid rgba(255, 255, 255, 0.35);
+		border-radius: var(--radius-lg);
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(6px);
+		color: var(--text-on-dark);
+		text-decoration: none;
+		transition: background var(--dur-base), border-color var(--dur-base), color var(--dur-base);
+	}
+
+	.ce-card__nome {
+		font-weight: 800;
+		font-size: var(--text-sm);
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.ce-card__freccia {
+		flex: none;
+		transition: transform var(--dur-base) var(--ease-out-crit);
+	}
+
+	.ce-card:hover,
+	.ce-card:focus-visible {
+		border-color: var(--accent);
+		background: var(--accent);
+		color: var(--text);
+	}
+
+	.ce-card:hover .ce-card__freccia,
+	.ce-card:focus-visible .ce-card__freccia {
+		transform: translateX(4px);
+	}
+
+	.ce-card:focus-visible {
+		outline: 3px solid var(--text-on-dark);
+		outline-offset: 3px;
+	}
+
+	@media (max-width: 900px) {
+		.ce-intro__grid,
+		.ce-gruppo__grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+
+	@media (max-width: 560px) {
+		.ce-gruppo__card {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.ce-card {
+			min-height: 72px;
+			padding: 12px 14px;
+		}
+	}
+</style>

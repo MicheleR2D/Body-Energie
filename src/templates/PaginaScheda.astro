@@ -1,0 +1,143 @@
+---
+/*
+ * Template "scheda": hero con foto, eventuale striscia di foto, uno o piu' blocchi
+ * media+testo alternati, domande frequenti. Serve le schede corso (tipo "corso") e
+ * le pagine servizio (tipo "servizio": personal training, termario, nuoto, body
+ * camp, ciclismo, centro estetico, body lab). I contenuti arrivano dal JSON della
+ * pagina (src/data/pagine/<slug>.json), estratto dal sito WordPress originale.
+ */
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import PhotoMarquee from '../components/PhotoMarquee.astro';
+import CourseBlock from '../components/CourseBlock.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+
+interface Pulsante {
+	testo: string;
+	/** Apre il modulo contatti con questo "interesse". */
+	interesse?: string;
+	/** Oppure e' un normale collegamento. */
+	href?: string;
+}
+
+interface Props {
+	pagina: {
+		tipo: 'corso' | 'servizio';
+		slug: string;
+		nome: string;
+		seo: { title: string; description: string };
+		hero: { eyebrow: string; titolo: string; parole?: string[]; immagine: string; pulsanti?: Pulsante[] };
+		galleria?: string[];
+		/** Elenco di collegamenti alle sezioni della pagina (Body Lab). */
+		percorsi?: { titolo?: string; voci: { testo: string; href: string }[] } | null;
+		blocchi: any[];
+		faq: { domanda: string; risposta: string | null }[];
+	};
+}
+
+const { pagina } = Astro.props;
+const foto = (pagina.galleria ?? []).map((src) => ({ src }));
+
+// Le schede corso hanno sempre "Prova ora" e il planning; le altre pagine
+// portano i pulsanti che avevano sul vecchio sito (anche nessuno).
+const pulsanti: Pulsante[] =
+	pagina.hero.pulsanti ??
+	[
+		{ testo: 'Prova ora', interesse: pagina.slug },
+		{ testo: 'Planning settimanale', href: '/orari' },
+	];
+
+// Una scheda corso senza video usa una foto della pagina; le altre pagine no.
+const sfondoSenzaMedia = (i: number) =>
+	pagina.tipo !== 'corso' ? undefined : foto.length ? foto[i % foto.length].src : pagina.hero.immagine;
+---
+
+<Layout title={pagina.seo.title} description={pagina.seo.description} headerTone="overlay">
+	<PageHero
+		image={pagina.hero.immagine}
+		eyebrow={pagina.hero.eyebrow}
+		title={pagina.hero.titolo}
+		words={pagina.hero.parole}
+	>
+		{
+			pulsanti.map((p) =>
+				p.interesse ? (
+					<button class="btn btn--lg" type="button" data-open-contact data-interest={p.interesse}>
+						{p.testo}
+					</button>
+				) : (
+					<a class="btn btn--light btn--lg" href={p.href}>
+						{p.testo}
+					</a>
+				)
+			)
+		}
+	</PageHero>
+
+	{
+		foto.length > 0 && (
+			<section class="scheda-foto" aria-label={`Foto: ${pagina.nome}`}>
+				<PhotoMarquee images={foto} height={300} cardWidth={420} />
+			</section>
+		)
+	}
+
+	{
+		pagina.blocchi.map((blocco, i) => (
+			<>
+				<CourseBlock blocco={blocco} fallbackImage={sfondoSenzaMedia(i)} reverse={i % 2 === 1} tone={i % 2 === 1 ? 'cream' : 'light'} />
+				{i === 0 && pagina.percorsi && (
+					<nav class="percorsi" aria-label={pagina.percorsi.titolo ?? 'Sezioni della pagina'}>
+						{pagina.percorsi.titolo && (
+							<SectionTitle tone="dark-bg" gap={28}>
+								{pagina.percorsi.titolo}
+							</SectionTitle>
+						)}
+						<ul class="percorsi__lista container-wide" data-anim="up">
+							{pagina.percorsi.voci.map((v) => (
+								<li>
+									<a class="btn btn--light" href={v.href}>
+										{v.testo}
+									</a>
+								</li>
+							))}
+						</ul>
+					</nav>
+				)}
+			</>
+		))
+	}
+
+	<FaqAccordion faq={pagina.faq} />
+</Layout>
+
+<style>
+	.scheda-foto {
+		padding-block: 24px;
+		background: var(--bg-dark);
+	}
+
+	.percorsi {
+		padding-block: clamp(40px, 6vw, 72px);
+		background: var(--bg-dark);
+	}
+
+	.percorsi__lista {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin: 0;
+		list-style: none;
+	}
+
+	@media (max-width: 560px) {
+		.percorsi__lista {
+			flex-direction: column;
+		}
+
+		.percorsi__lista .btn {
+			display: block;
+		}
+	}
+</style>

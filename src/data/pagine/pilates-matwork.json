@@ -1,0 +1,75 @@
+{
+	"tipo": "corso",
+	"slug": "pilates-matwork",
+	"nome": "Pilates Matwork",
+	"seo": {
+		"title": "Pilates Matwork - Body Energie | Villafranca di Verona",
+		"description": "Rafforza il tuo corpo attraverso esercizi che aumentano il tono muscolare e migliorano la stabilità del core, contribuendo ad alleviare il mal di schiena.…"
+	},
+	"hero": {
+		"eyebrow": "Salute e Movimento con Body energie",
+		"titolo": "Pilates",
+		"parole": [
+			"Matwork"
+		],
+		"immagine": "/wp-content/uploads/2025/11/Body-Energie-Ambienti-25-scaled.jpg"
+	},
+	"galleria": [],
+	"blocchi": [
+		{
+			"titolo": "pilates matwork",
+			"sottotitolo": null,
+			"descrizioneHtml": "<p>Rafforza il tuo corpo attraverso esercizi che aumentano il tono muscolare e migliorano la stabilità del core, contribuendo ad alleviare il mal di schiena. Ogni movimento, eseguito con precisione e controllo, ti permette di sviluppare una maggiore consapevolezza del tuo corpo, favorendo postura, equilibrio e benessere generale.</p>",
+			"video": "/wp-content/uploads/2026/07/Pilates-Matwork.mp4",
+			"dettagli": [
+				{
+					"testo": "45 min.",
+					"icona": "far fa-clock"
+				}
+			],
+			"portareTitolo": "Cosa portare",
+			"portare": [
+				{
+					"etichetta": "SCARPE",
+					"immagine": "/wp-content/uploads/2025/11/6.png"
+				},
+				{
+					"etichetta": "ASCIUGAMANO",
+					"immagine": "/wp-content/uploads/2025/11/2.png"
+				},
+				{
+					"etichetta": "ACQUA",
+					"immagine": "/wp-content/uploads/2025/11/3.png"
+				}
+			],
+			"intensita": [
+				{
+					"etichetta": "Cardio",
+					"valore": 20
+				},
+				{
+					"etichetta": "Forza",
+					"valore": 45
+				},
+				{
+					"etichetta": "Flessibilità",
+					"valore": 35
+				}
+			]
+		}
+	],
+	"faq": [
+		{
+			"domanda": "Ho bisogno del Certificato Medico?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho acquistato una lezione singola, cosa succede in caso di disdetta?",
+			"risposta": null
+		},
+		{
+			"domanda": "Ho un Abbonamento attivo, è necessaria la prenotazione?",
+			"risposta": null
+		}
+	]
+}
