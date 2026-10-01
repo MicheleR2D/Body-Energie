@@ -34,6 +34,24 @@ html {
   overflow-x: clip;
 }
 
+/* Stesso motivo, ma sul contenuto: l'overflow-x del root non basta su molti telefoni
+   (la pagina si lascia trascinare di lato). Clippando main e footer le entrate da destra
+   non allargano mai l'area scorrevole. "clip" (non "hidden") non crea un contenitore di
+   scorrimento, quindi position: sticky continua a funzionare. */
+main,
+footer {
+  overflow-x: clip;
+}
+
+/* Browser senza "clip" (Safari prima della 16): "hidden" evita comunque lo scorrimento laterale
+   (li si perde solo lo sticky). */
+@supports not (overflow: clip) {
+  main,
+  footer {
+    overflow-x: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;

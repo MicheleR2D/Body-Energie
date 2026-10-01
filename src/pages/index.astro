@@ -111,7 +111,7 @@ const bodyLab = [
 		description: 'Programmi alimentari su misura per sport, forma fisica e benessere.',
 	},
 	{
-		href: '/body-lab#osteopatia',
+		href: '/body-lab#osteopata',
 		image: '/wp-content/uploads/2025/12/infermiera-che-si-prende-cura-del-paziente-scaled.jpg',
 		title: 'Osteopatia',
 		tagline: 'Trattamenti per migliorare mobilità, benessere e ridurre il dolore.',
@@ -125,14 +125,14 @@ const bodyLab = [
 		description: 'Valutazione della postura per individuare la causa di tensioni e dolori.',
 	},
 	{
-		href: '/body-lab#fisioterapia',
+		href: '/body-lab#fisioterapista',
 		image: '/wp-content/uploads/2025/12/pexels-karola-g-4506169-scaled.jpg',
 		title: 'Fisioterapia',
 		tagline: 'Trattamenti fisioterapici per recupero, prevenzione e mobilità.',
 		description: 'Percorsi personalizzati per recupero, prevenzione e ritorno allo sport.',
 	},
 	{
-		href: '/body-lab#palestra-della-salute',
+		href: '/body-lab#salute',
 		image: '/wp-content/uploads/2025/11/Body-Energie-Azioni-21-scaled.jpg',
 		title: 'Palestra della Salute',
 		tagline: 'Una palestra certificata per attività fisica sicura e guidata anche in presenza di patologie croniche.',
@@ -140,9 +140,10 @@ const bodyLab = [
 	},
 ];
 
+// Il RistoBar non ha una pagina propria: porta alla sezione "La Struttura" della home, che lo descrive.
 const serviziExtra = [
 	{
-		href: '/termario',
+		href: '/#struttura',
 		image: '/wp-content/uploads/2025/12/Body-Energie-Interni-Fisio-Esercizi-SPA-37-scaled.jpg',
 		title: 'RistoBar',
 		tagline: 'Colazioni, snack e aperitivi con piatti freschi e genuini, in un ambiente accogliente.',
@@ -424,7 +425,7 @@ const testimonianze = [
 		</div>
 	</section>
 
-	<section class="block--orange section">
+	<section class="block--orange section" id="struttura">
 		<SectionTitle tone="on-accent">La Struttura</SectionTitle>
 		<StrutturaRow items={accordionItems.slice(0, 2)} />
 		<StrutturaRow items={accordionItems.slice(2, 4)} />
@@ -503,6 +504,14 @@ const testimonianze = [
 	.hero__btn {
 		padding: 20px 55px;
 		font-size: 20px;
+	}
+
+	/* Mobile: pulsante piu' compatto. */
+	@media (max-width: 900px) {
+		.hero__btn {
+			padding: 13px 32px;
+			font-size: 16px;
+		}
 	}
 
 	.section {

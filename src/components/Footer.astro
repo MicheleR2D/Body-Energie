@@ -1,6 +1,6 @@
 ---
-import { megaMenu } from '../data/nav';
-import { site, social, legalLinks, mapsEmbedSrc, mapsDirectionsUrl } from '../data/site';
+import { megaMenu, voceOrari } from '../data/nav';
+import { site, social, legalLinks, mapsEmbedSrc } from '../data/site';
 import { orari, orariEstivi } from '../data/orari';
 import { stats, formattaNumero } from '../data/stats';
 import Img from './Img.astro';
@@ -44,8 +44,8 @@ const info = [
 	{ href: '/orari', label: 'Planning settimanale' },
 	// Sul vecchio sito era un modulo (Typeform), non una pagina: apre il modulo contatti.
 	{ interesse: 'abbonamento', label: 'Abbonamenti' },
-	// TODO: nel sito originale il bottone "Posizioni aperte" non aveva una destinazione configurata
-	{ href: '#', label: 'Lavora con noi' },
+	// Nel sito originale il bottone "Posizioni aperte" non aveva una destinazione: scrive all'email del centro.
+	{ href: `mailto:${site.email}?subject=${encodeURIComponent('Candidatura spontanea')}`, label: 'Lavora con noi' },
 ];
 
 // Stessi numeri della sezione contatori della home: qui fanno da prova sociale
@@ -120,7 +120,7 @@ const colonneFoto = [
 				Vieni a <span class="find-us__title-accent">trovarci</span>
 			</h2>
 
-			<div class="find-us__orari">
+			<div class="find-us__orari" style={`--righe:${1 + Math.max(...orari.map((o) => o.righe.length))}`}>
 				{
 					orari.map((o, i) => (
 						<div class="find-us__orari-card" data-anim="up" data-anim-delay={String(240 + i * 120)}>
@@ -139,9 +139,7 @@ const colonneFoto = [
 			</div>
 
 			<div class="find-us__cta" data-anim="up" data-anim-delay="480">
-				<a class="btn btn--outline" href={mapsDirectionsUrl} target="_blank" rel="noopener">
-					Indicazioni
-				</a>
+				<a class="btn btn--outline" href={voceOrari.href}>Orari corsi</a>
 				<button class="btn" type="button" data-open-contact data-interest="informazioni">Contattaci</button>
 			</div>
 		</div>
@@ -467,24 +465,38 @@ const colonneFoto = [
 		}
 	}
 
-	/* In colonna: testo sopra, le foto riempiono lo spazio rimasto fino a
-	   fine schermata. */
+	/* Mobile: eyebrow, titolo, testo e numeri, poi le foto (due colonne, piu' grandi) e
+	   il pulsante SOTTO le foto. Il contenitore del testo e' "display: contents" cosi'
+	   gli elementi si possono riordinare insieme al muro di foto. La sezione cresce con
+	   il contenuto (prima era alta una schermata fissa e le foto restavano minuscole). */
 	@media (max-width: 900px) {
 		.cta-final {
 			display: flex;
 			flex-direction: column;
+			height: auto;
 			min-height: 0;
+			padding: 36px var(--gutter) 32px;
 		}
 
 		.cta-final__content {
-			padding: 36px var(--gutter) 24px;
+			display: contents;
+		}
+
+		.cta-final__eyebrow {
+			order: 1;
+		}
+
+		.ft .cta-final__title {
+			order: 2;
 		}
 
 		.cta-final__lead {
+			order: 3;
 			margin-top: 16px;
 		}
 
 		.cta-final__proof {
+			order: 4;
 			grid-template-columns: repeat(2, auto);
 			row-gap: 16px;
 			margin-top: 20px;
@@ -495,14 +507,21 @@ const colonneFoto = [
 			border-left: none;
 		}
 
-		.cta-final__actions {
+		.cta-final__wall {
+			order: 5;
+			grid-template-columns: repeat(2, 1fr);
+			height: clamp(300px, 52svh, 420px);
 			margin-top: 24px;
+			padding-right: 0;
 		}
 
-		.cta-final__wall {
-			flex: 1;
-			min-height: 140px;
-			padding-inline: var(--gutter);
+		.cta-final__col:nth-child(3) {
+			display: none;
+		}
+
+		.cta-final__actions {
+			order: 6;
+			margin-top: 24px;
 		}
 	}
 
@@ -572,11 +591,20 @@ const colonneFoto = [
 	.find-us__orari {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		gap: 16px;
 		margin-top: 36px;
 	}
 
+	/* Le righe delle due card stanno sulle stesse righe della griglia (subgrid): se in una
+	   un testo va a capo, l'altra si allunga uguale e le righe restano parallele. */
+	.find-us__orari {
+		column-gap: 16px;
+		row-gap: 0;
+	}
+
 	.find-us__orari-card {
+		display: grid;
+		grid-template-rows: subgrid;
+		grid-row: span var(--righe);
 		padding: 24px 26px;
 		border-radius: var(--radius-lg);
 		background: var(--bg-alt);
@@ -593,7 +621,7 @@ const colonneFoto = [
 	}
 
 	.find-us__orari-list {
-		margin: 0;
+		display: contents;
 	}
 
 	.find-us__orari-list div {
@@ -747,9 +775,9 @@ const colonneFoto = [
 		gap: 4px;
 	}
 
-	/* --- Loghi: un'unica riga ferma, tutti nella stessa card bianca, a
-	   colori e alla stessa scala. Su schermi stretti la riga si scorre a
-	   mano invece di andare a capo. */
+	/* --- Loghi: fermi, a colori e alla stessa scala, ognuno nella sua card bianca. Su
+	   desktop un'unica riga; su schermi piu' stretti una griglia a colonne, cosi' si vedono
+	   tutti subito senza scorrere (nessuno scorrerebbe mai per vederli). */
 	.ft-loghi {
 		padding: 40px var(--gutter);
 		border-top: 1px solid rgba(255, 255, 255, 0.12);
@@ -797,6 +825,31 @@ const colonneFoto = [
 		width: auto;
 		height: auto;
 		object-fit: contain;
+	}
+
+	@media (max-width: 1100px) {
+		.ft-tiles {
+			display: grid;
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+			overflow: visible;
+		}
+
+		.ft-tile {
+			min-width: 0;
+		}
+	}
+
+	/* Telefono: sempre 5 colonne (3 righe da 5), tessere piu' piccole. */
+	@media (max-width: 560px) {
+		.ft-tiles {
+			gap: 6px;
+		}
+
+		.ft-tile {
+			height: 56px;
+			padding: 6px 3px;
+			border-radius: 8px;
+		}
 	}
 
 	/* --- Riga finale --- */
@@ -871,24 +924,52 @@ const colonneFoto = [
 		}
 	}
 
+	/* Mobile: tutto dentro il riquadro bianco, nell'ordine eyebrow, titolo, MAPPA, orari,
+	   pulsanti. Il contenitore del testo e' "display: contents" per poter mettere la mappa
+	   subito sotto il titolo. La sezione cresce con il contenuto (prima aveva l'altezza
+	   fissa di una schermata e la mappa sporgeva). */
 	@media (max-width: 900px) {
 		.find-us {
 			display: flex;
 			flex-direction: column;
+			height: auto;
 			min-height: 0;
+			padding: 36px var(--gutter) 32px;
 		}
 
 		.find-us__content {
-			padding: 36px var(--gutter) 20px;
+			display: contents;
+		}
+
+		.find-us__eyebrow {
+			order: 1;
+		}
+
+		.ft .find-us__title {
+			order: 2;
+		}
+
+		.find-us__map {
+			order: 3;
+			flex: none;
+			height: clamp(220px, 38svh, 320px);
+			margin: 20px 0 0;
 		}
 
 		.find-us__orari {
-			gap: 10px;
-			margin-top: 24px;
+			order: 4;
+			column-gap: 10px;
+			margin-top: 20px;
 		}
 
 		.find-us__orari-card {
 			padding: 14px;
+		}
+
+		/* Etichette piu' strette: "Orari Termarium" sta su una riga come "Orari Centro". */
+		.find-us__label {
+			font-size: 0.72rem;
+			letter-spacing: 0.06em;
 		}
 
 		/* Card strette: giorni sopra, orario sotto. */
@@ -899,13 +980,8 @@ const colonneFoto = [
 		}
 
 		.find-us__cta {
+			order: 5;
 			margin-top: 20px;
-		}
-
-		.find-us__map {
-			flex: 1;
-			min-height: 180px;
-			margin: 0 var(--gutter) 24px;
 		}
 	}
 

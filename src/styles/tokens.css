@@ -63,14 +63,21 @@
      le righe dei titoli, che partono dal bordo pagina, si allineano al pixel. */
   --gutter: 5vw;
 
-  /* Altezza dell'header fisso (barra: 8px + 44px logo + 8px, piu' il bordo):
-     tutto il resto (sezioni a schermo intero, anchor, menu mobile) la legge da qui. */
-  --header-h: 61px;
+  /* Altezza dell'header fisso: tutto il resto (sezioni a schermo intero, anchor, tab agganciati,
+     menu mobile) la legge da qui. Desktop: 74px (barra 60px + 2 x 16px di margine del menu,
+     bordo incluso); con l'hamburger (<= 900px): 61px. Se si cambia l'header, rimisurare. */
+  --header-h: 74px;
   --screen-h: calc(100vh - var(--header-h));
 }
 
 /* Altezza utile = schermo meno header; svh evita i salti della barra URL
    sui telefoni. */
+@media (max-width: 900px) {
+  :root {
+    --header-h: 61px;
+  }
+}
+
 @supports (height: 100svh) {
   :root {
     --screen-h: calc(100svh - var(--header-h));

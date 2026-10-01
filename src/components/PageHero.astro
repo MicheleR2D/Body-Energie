@@ -63,7 +63,7 @@ const { image, title, words = [], imageAlt = '' } = Astro.props;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		/* Stessa altezza della hero della home (HeroCarousel). */
+		/* Una schermata intera, come la hero della home (HeroCarousel), anche su mobile. */
 		min-height: 100vh;
 		min-height: 100svh;
 		padding: calc(var(--header-h) + 32px) var(--gutter) 56px;
@@ -112,6 +112,11 @@ const { image, title, words = [], imageAlt = '' } = Astro.props;
 		transform: none;
 	}
 
+	/* Stessa altezza per <button> e <a>: l'interlinea predefinita e' diversa. */
+	.ph__actions :global(.btn) {
+		line-height: 1.2;
+	}
+
 	.ph__actions {
 		display: flex;
 		flex-wrap: wrap;
@@ -120,17 +125,30 @@ const { image, title, words = [], imageAlt = '' } = Astro.props;
 		margin-top: 36px;
 	}
 
+	/* Mobile: pulsanti piu' compatti (i pulsanti sono passati dallo slot, quindi :global). */
 	@media (max-width: 900px) {
 		.ph {
-			min-height: 74vh;
-			min-height: 74svh;
+			padding-bottom: 40px;
+		}
+
+		.ph__actions {
+			gap: 10px;
+			margin-top: 24px;
+		}
+
+		.ph__actions :global(.btn) {
+			padding: 13px 24px;
+			font-size: 15px;
 		}
 	}
 
+	/* Telefono: pulsanti in colonna, tutti larghi come il piu' largo (non come il titolo). */
 	@media (max-width: 560px) {
 		.ph__actions {
 			flex-direction: column;
 			align-items: stretch;
+			width: fit-content;
+			margin-inline: auto;
 		}
 	}
 </style>
