@@ -2,12 +2,12 @@
 	"tipo": "servizio",
 	"slug": "sala-pesi",
 	"nome": "Sala Pesi",
+	"stile": "arancio",
 	"seo": {
 		"title": "Sala Pesi - Body Energie | Villafranca di Verona",
 		"description": "Le due sale Gym Floor, l'Area LoftGym e l'Air Park di Body Energie offrono un’esperienza di allenamento completa, tra innovazione e natura. Spazi moderni…"
 	},
 	"hero": {
-		"eyebrow": "Scopri le QUATTRO AREE",
 		"titolo": "gym",
 		"parole": [
 			"floor",
@@ -25,6 +25,10 @@
 				"href": "/orari"
 			}
 		]
+	},
+	"intro": {
+		"titolo": "Allenati tra innovazione e natura.",
+		"html": "<p>Le <strong>due sale </strong><strong>Gym Floor, l'Area </strong><strong>LoftGym e l'Air Park</strong> di Body Energie offrono un’esperienza di allenamento completa, tra innovazione e natura.</p><p><strong>Spazi moderni e attrezzature Technogym</strong> di ultima generazione si uniscono alla libertà dell’allenamento all’aperto, per <strong>migliorare forza, resistenza e benessere</strong> in un ambiente stimolante e ricco di energia.</p>"
 	},
 	"percorsi": {
 		"voci": [
@@ -47,20 +51,6 @@
 		]
 	},
 	"blocchi": [
-		{
-			"id": null,
-			"titolo": null,
-			"sottotitolo": null,
-			"descrizioneHtml": "<p>Le <strong>due sale </strong><strong>Gym Floor, l'Area </strong><strong>LoftGym e l'Air Park</strong> di Body Energie offrono un’esperienza di allenamento completa, tra innovazione e natura.</p><p><strong>Spazi moderni e attrezzature Technogym</strong> di ultima generazione si uniscono alla libertà dell’allenamento all’aperto, per <strong>migliorare forza, resistenza e benessere</strong> in un ambiente stimolante e ricco di energia.</p>",
-			"video": null,
-			"immagini": [],
-			"adattamento": "cover",
-			"dettagli": [],
-			"extra": null,
-			"portareTitolo": null,
-			"portare": [],
-			"intensita": []
-		},
 		{
 			"id": "gymfloor1",
 			"titolo": "GYM FLOOR",

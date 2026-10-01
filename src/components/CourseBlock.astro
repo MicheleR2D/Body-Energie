@@ -3,7 +3,10 @@
  * Un blocco di una scheda (corso o servizio): video, foto o carosello da un lato;
  * titolo, descrizione, durata, "cosa portare" e barre di intensita' dall'altro.
  * Una pagina ha uno o piu' blocchi: `reverse` li alterna sinistra/destra. Senza
- * media il testo occupa una colonna centrata.
+ * media il testo occupa una colonna di lettura.
+ *
+ * `tone="arancio"`: stesso layout su fondo arancione, con testo nero (come le fasce
+ * arancioni della home).
  *
  *   <CourseBlock blocco={…} fallbackImage="/wp-content/uploads/…jpg" reverse />
  */
@@ -36,20 +39,24 @@ interface Props {
 	fallbackImage?: string;
 	/** Media a destra e testo a sinistra. */
 	reverse?: boolean;
-	/** Sfondo: "light" bianco, "cream" crema (per alternare i blocchi). */
-	tone?: 'light' | 'cream';
+	/** Senza spazio sotto: un elenco di ancore segue subito dopo il blocco. */
+	compatto?: boolean;
+	/** Sfondo: "dark" nero, "soft" grigio scuro, "arancio" arancione con testo nero
+	 *  (per alternare i blocchi). */
+	tone?: 'dark' | 'soft' | 'arancio';
 }
 
-const { blocco, fallbackImage, reverse = false, tone = 'light' } = Astro.props;
+const { blocco, fallbackImage, reverse = false, tone = 'dark', compatto = false } = Astro.props;
 const mediaAnim = reverse ? 'from-right' : 'from-left';
 const textAnim = reverse ? 'from-left' : 'from-right';
 
 const immagini = blocco.immagini?.length ? blocco.immagini : !blocco.video && fallbackImage ? [fallbackImage] : [];
 const haMedia = !!blocco.video || immagini.length > 0;
 const nomeMedia = blocco.titolo ?? 'della pagina';
+const arancio = tone === 'arancio';
 ---
 
-<section id={blocco.id ?? undefined} class:list={['cb', `cb--${tone}`, { 'cb--reverse': reverse, 'cb--solo': !haMedia }]}>
+<section id={blocco.id ?? undefined} class:list={['cb', { 'on-dark': !arancio }, `cb--${tone}`, { 'cb--reverse': reverse, 'cb--solo': !haMedia, 'cb--compatto': compatto }]}>
 	<div class="cb__grid container-wide">
 		{
 			haMedia && (
@@ -77,12 +84,12 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 
 		<div class="cb__text" data-anim={haMedia ? textAnim : 'up'} data-anim-delay="80">
 			{blocco.titolo && (
-				<SectionTitle tone="light-bg" flush gap={22}>
+				<SectionTitle tone={arancio ? 'on-accent' : 'dark-bg'} flush gap={22}>
 					{blocco.titolo}
 				</SectionTitle>
 			)}
 
-			{blocco.sottotitolo && <p class="pill pill--dark cb__sub">{blocco.sottotitolo}</p>}
+			{blocco.sottotitolo && <p class:list={['pill', { 'pill--dark': arancio }, 'cb__sub']}>{blocco.sottotitolo}</p>}
 
 			<div class="cb__desc" set:html={blocco.descrizioneHtml} />
 
@@ -161,12 +168,54 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 <style>
 	.cb {
 		padding-block: clamp(48px, 7vw, 96px);
-		background: var(--bg);
+		background: var(--bg-dark);
+		color: var(--text-on-dark);
+	}
+
+	.cb--soft {
+		background: var(--bg-dark-soft);
+	}
+
+	/* ---- Variante arancione: fondo arancione, testo nero ---- */
+	.cb--arancio {
+		background: var(--accent);
 		color: var(--text);
 	}
 
-	.cb--cream {
-		background: var(--bg-cream);
+	.cb--arancio .cb__desc,
+	.cb--arancio .cb__h3 {
+		color: var(--text);
+	}
+
+	.cb--arancio .cb__desc :global(a) {
+		color: var(--text);
+	}
+
+	.cb--arancio .cb__chip {
+		border-color: var(--bg-dark);
+		background: var(--bg-dark);
+		color: var(--text-on-dark);
+	}
+
+	.cb--arancio .cb__extra {
+		background: rgba(0, 0, 0, 0.12);
+	}
+
+	.cb--arancio .cb__bring-item {
+		background: var(--bg-dark);
+		color: var(--text-on-dark);
+	}
+
+	.cb--arancio .cb__track {
+		background: rgba(0, 0, 0, 0.25);
+	}
+
+	.cb--arancio .cb__fill {
+		background: var(--bg-dark);
+	}
+
+	.cb--arancio .cb__bar-val {
+		color: var(--text);
 	}
 
 	.cb__grid {
@@ -180,10 +229,23 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 		order: 2;
 	}
 
-	/* Senza media: una sola colonna di testo, centrata e a misura di lettura. */
+	/* Senza media: una sola colonna di testo a misura di lettura, allineata a sinistra
+	   come il resto della pagina (stesso margine dei titoli e dei blocchi con foto). */
+	.cb--solo {
+		padding-block: clamp(32px, 4vw, 56px);
+	}
+
 	.cb--solo .cb__grid {
 		grid-template-columns: minmax(0, 60rem);
-		justify-content: center;
+		justify-content: start;
+	}
+
+	.cb--compatto {
+		padding-bottom: 0;
+	}
+
+	.cb--solo .cb__desc :global(p:last-child) {
+		margin-bottom: 0;
 	}
 
 	/* Loghi: interi, su fondo bianco, senza il ritaglio dei bordi. */
@@ -266,7 +328,7 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 	.cb__desc {
 		font-size: var(--text-md);
 		line-height: 1.7;
-		color: var(--text);
+		color: var(--text-on-dark);
 	}
 
 	.cb__desc :global(p) {
@@ -274,7 +336,7 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 	}
 
 	.cb__desc :global(a) {
-		color: var(--accent-hover);
+		color: var(--accent);
 	}
 
 	.cb__chips {
@@ -292,7 +354,8 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 		gap: 8px;
 		padding: 8px 16px;
 		border-radius: var(--radius-pill);
-		background: var(--bg-dark);
+		border: 1px solid var(--border-on-dark);
+		background: rgba(255, 255, 255, 0.08);
 		color: var(--text-on-dark);
 		font-size: var(--text-sm);
 		font-weight: 700;
@@ -306,11 +369,11 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 		margin-top: 28px;
 		padding: 22px 24px 8px;
 		border-radius: var(--radius-lg);
-		background: var(--bg-alt);
+		background: var(--bg-dark-soft);
 	}
 
-	.cb--cream .cb__extra {
-		background: var(--bg);
+	.cb--soft .cb__extra {
+		background: var(--bg-dark);
 	}
 
 	.cb__h3 {
@@ -319,7 +382,7 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 		font-weight: 800;
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		color: var(--text);
+		color: var(--text-on-dark);
 	}
 
 	/* ---- Cosa portare ---- */
@@ -343,15 +406,15 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 		gap: 10px;
 		padding: 16px 8px;
 		border-radius: var(--radius-lg);
-		background: var(--bg-alt);
+		background: var(--bg-dark-soft);
 		font-size: var(--text-xs);
 		font-weight: 800;
 		letter-spacing: 0.08em;
 		text-align: center;
 	}
 
-	.cb--cream .cb__bring-item {
-		background: var(--bg);
+	.cb--soft .cb__bring-item {
+		background: var(--bg-dark);
 	}
 
 	.cb__bring-item :global(img) {
@@ -384,7 +447,7 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 
 	.cb__bar-val {
 		text-align: right;
-		color: var(--text-muted);
+		color: var(--text-muted-on-dark);
 	}
 
 	.cb__track {
@@ -392,7 +455,7 @@ const nomeMedia = blocco.titolo ?? 'della pagina';
 		height: 10px;
 		overflow: hidden;
 		border-radius: var(--radius-pill);
-		background: var(--border-strong);
+		background: rgba(255, 255, 255, 0.18);
 	}
 
 	.cb__fill {

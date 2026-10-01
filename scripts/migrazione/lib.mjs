@@ -65,7 +65,8 @@ export const etichetta = (s) => {
 	return t.charAt(0).toUpperCase() + t.slice(1);
 };
 
-// Hero della pagina: foto di fondo, etichetta e titolo. Il titolo originale e' una
+// Hero della pagina: foto di fondo e titolo. Il sottotitolo del vecchio sito ("Salute e
+// Movimento con Body energie" e simili) non si porta: le hero non hanno sottotitoli. Il titolo originale e' una
 // "animated headline" Elementor in modalita' "rotate": testo iniziale + una o piu'
 // parole che ruotano (la prima si vede al caricamento). Il campo "highlighted_text"
 // ("Amazing") e' il segnaposto di default di Elementor e in questa modalita' non
@@ -78,7 +79,6 @@ export function heroDa(sezione) {
 		.map((p) => strip(p))
 		.filter(Boolean);
 	return {
-		eyebrow: strip(ws.find((w) => w.widgetType === 'heading')?.settings.title),
 		titolo: strip(an.before_text),
 		parole,
 		immagine: percorso(sezione.settings?.background_image?.url),

@@ -8,7 +8,8 @@ interface Item {
 	href: string;
 	image: string;
 	title: string;
-	description: string;
+	/** Se manca, in hover compare solo "Scopri di piu'". */
+	description?: string;
 }
 interface Props {
 	items: Item[];
@@ -39,7 +40,7 @@ const { items, columns = 3, gapTop = 56, startIndex = 0 } = Astro.props;
 						<span class="card__num">{String(startIndex + i + 1).padStart(2, '0')}</span>
 						<strong class="card__name">{item.title}</strong>
 						<div class="card__hover">
-							<p class="card__desc">{item.description}</p>
+							{item.description && <p class="card__desc">{item.description}</p>}
 							<span class="btn card__more">Scopri di più →</span>
 						</div>
 					</div>

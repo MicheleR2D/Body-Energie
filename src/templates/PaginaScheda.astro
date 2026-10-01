@@ -1,10 +1,11 @@
 ---
 /*
- * Template "scheda": hero con foto, eventuale striscia di foto, uno o piu' blocchi
- * media+testo alternati, domande frequenti. Serve le schede corso (tipo "corso") e
- * le pagine servizio (tipo "servizio": personal training, termario, nuoto, body
- * camp, ciclismo, centro estetico, body lab). I contenuti arrivano dal JSON della
- * pagina (src/data/pagine/<slug>.json), estratto dal sito WordPress originale.
+ * Template "scheda": hero con foto, eventuale introduzione (titolo grande + testo),
+ * eventuale striscia di foto, uno o piu' blocchi media+testo alternati, domande
+ * frequenti. Serve le schede corso (tipo "corso") e le pagine servizio (tipo
+ * "servizio": sala pesi, personal training, termario, nuoto, body camp, ciclismo,
+ * centro estetico, body lab). I contenuti arrivano dal JSON della pagina
+ * (src/data/pagine/<slug>.json), estratto dal sito WordPress originale.
  */
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
@@ -12,6 +13,8 @@ import PhotoMarquee from '../components/PhotoMarquee.astro';
 import CourseBlock from '../components/CourseBlock.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import SectionTitle from '../components/SectionTitle.astro';
+import IntroTitolo from '../components/IntroTitolo.astro';
+import IndiceAncore from '../components/IndiceAncore.astro';
 
 interface Pulsante {
 	testo: string;
@@ -24,12 +27,16 @@ interface Pulsante {
 interface Props {
 	pagina: {
 		tipo: 'corso' | 'servizio';
+		/** "arancio": i blocchi alterni (dopo il primo) sono arancioni invece che grigi. */
+		stile?: 'arancio';
 		slug: string;
 		nome: string;
 		seo: { title: string; description: string };
-		hero: { eyebrow: string; titolo: string; parole?: string[]; immagine: string; pulsanti?: Pulsante[] };
+		hero: { titolo: string; parole?: string[]; immagine: string; pulsanti?: Pulsante[] };
 		galleria?: string[];
-		/** Elenco di collegamenti alle sezioni della pagina (Body Lab). */
+		/** Introduzione con titolo grande (al posto di un primo blocco di solo testo). */
+		intro?: { titolo: string; html: string } | null;
+		/** Elenco di collegamenti alle sezioni della pagina (Body Lab, Sala Pesi). */
 		percorsi?: { titolo?: string; voci: { testo: string; href: string }[] } | null;
 		blocchi: any[];
 		faq: { domanda: string; risposta: string | null }[];
@@ -38,6 +45,9 @@ interface Props {
 
 const { pagina } = Astro.props;
 const foto = (pagina.galleria ?? []).map((src) => ({ src }));
+const arancio = pagina.stile === 'arancio';
+// L'introduzione conta come primo blocco nell'alternanza di colori e lati.
+const scarto = pagina.intro ? 1 : 0;
 
 // Le schede corso hanno sempre "Prova ora" e il planning; le altre pagine
 // portano i pulsanti che avevano sul vecchio sito (anche nessuno).
@@ -54,12 +64,7 @@ const sfondoSenzaMedia = (i: number) =>
 ---
 
 <Layout title={pagina.seo.title} description={pagina.seo.description} headerTone="overlay">
-	<PageHero
-		image={pagina.hero.immagine}
-		eyebrow={pagina.hero.eyebrow}
-		title={pagina.hero.titolo}
-		words={pagina.hero.parole}
-	>
+	<PageHero image={pagina.hero.immagine} title={pagina.hero.titolo} words={pagina.hero.parole}>
 		{
 			pulsanti.map((p) =>
 				p.interesse ? (
@@ -76,6 +81,14 @@ const sfondoSenzaMedia = (i: number) =>
 	</PageHero>
 
 	{
+		pagina.intro && (
+			<IntroTitolo titolo={pagina.intro.titolo} html={pagina.intro.html}>
+				{pagina.percorsi && <IndiceAncore voci={pagina.percorsi.voci} label={pagina.percorsi.titolo ?? 'Sezioni della pagina'} griglia />}
+			</IntroTitolo>
+		)
+	}
+
+	{
 		foto.length > 0 && (
 			<section class="scheda-foto" aria-label={`Foto: ${pagina.nome}`}>
 				<PhotoMarquee images={foto} height={300} cardWidth={420} />
@@ -86,24 +99,24 @@ const sfondoSenzaMedia = (i: number) =>
 	{
 		pagina.blocchi.map((blocco, i) => (
 			<>
-				<CourseBlock blocco={blocco} fallbackImage={sfondoSenzaMedia(i)} reverse={i % 2 === 1} tone={i % 2 === 1 ? 'cream' : 'light'} />
-				{i === 0 && pagina.percorsi && (
-					<nav class="percorsi" aria-label={pagina.percorsi.titolo ?? 'Sezioni della pagina'}>
+				<CourseBlock
+					blocco={blocco}
+					fallbackImage={sfondoSenzaMedia(i)}
+					reverse={(i + scarto) % 2 === 1}
+					tone={(i + scarto) % 2 === 1 ? (arancio ? 'arancio' : 'soft') : 'dark'}
+					compatto={!pagina.intro && i === 0 && !!pagina.percorsi}
+				/>
+				{!pagina.intro && i === 0 && pagina.percorsi && (
+					<div class="percorsi">
 						{pagina.percorsi.titolo && (
-							<SectionTitle tone="dark-bg" gap={28}>
+							<SectionTitle tone="dark-bg" gap={20}>
 								{pagina.percorsi.titolo}
 							</SectionTitle>
 						)}
-						<ul class="percorsi__lista container-wide" data-anim="up">
-							{pagina.percorsi.voci.map((v) => (
-								<li>
-									<a class="btn btn--light" href={v.href}>
-										{v.testo}
-									</a>
-								</li>
-							))}
-						</ul>
-					</nav>
+						<div class="container-wide">
+							<IndiceAncore voci={pagina.percorsi.voci} label={pagina.percorsi.titolo ?? 'Sezioni della pagina'} />
+						</div>
+					</div>
 				)}
 			</>
 		))
@@ -118,26 +131,9 @@ const sfondoSenzaMedia = (i: number) =>
 		background: var(--bg-dark);
 	}
 
+	/* Indice sotto il primo blocco (Body Lab): lo stesso spazio che c'e' tra hero e testo. */
 	.percorsi {
-		padding-block: clamp(40px, 6vw, 72px);
+		padding-block: 20px calc(clamp(32px, 4vw, 56px) - 10px);
 		background: var(--bg-dark);
-	}
-
-	.percorsi__lista {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-		margin: 0;
-		list-style: none;
-	}
-
-	@media (max-width: 560px) {
-		.percorsi__lista {
-			flex-direction: column;
-		}
-
-		.percorsi__lista .btn {
-			display: block;
-		}
 	}
 </style>

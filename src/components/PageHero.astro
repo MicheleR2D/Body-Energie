@@ -1,11 +1,11 @@
 ---
 /*
- * Hero di una pagina interna: foto a tutta larghezza con velo scuro, etichetta,
- * titolo grande (con una parola in evidenza) e i pulsanti passati come slot.
- * Va usata con <Layout headerTone="overlay">: la foto passa sotto l'header
- * (che e' fisso, chiaro e un po' trasparente). L'altezza e' contenuta (non a tutto schermo come la home).
+ * Hero di una pagina interna: foto a tutta larghezza con velo scuro, titolo grande
+ * (con parole che ruotano, se sono piu' d'una) e i pulsanti passati come slot.
+ * Va usata con <Layout headerTone="overlay">: la foto passa sotto l'header (fisso,
+ * chiaro e un po' trasparente). Alta come la hero della home. Nessun sottotitolo.
  *
- *   <PageHero image="/wp-content/uploads/…jpg" eyebrow="…" title="group" words={['cycling']}>
+ *   <PageHero image="/wp-content/uploads/…jpg" title="group" words={['cycling']}>
  *     <a class="btn btn--lg" href="/…">…</a>
  *   </PageHero>
  */
@@ -16,26 +16,17 @@ interface Props {
 	title: string;
 	/** Parola/e che chiudono il titolo. Se sono piu' di una ruotano (la prima si vede subito). */
 	words?: string[];
-	/** Etichetta sopra il titolo. */
-	eyebrow?: string;
 	/** Descrizione della foto (vuota se e' solo decorativa). */
 	imageAlt?: string;
 }
 
-const { image, title, words = [], eyebrow, imageAlt = '' } = Astro.props;
+const { image, title, words = [], imageAlt = '' } = Astro.props;
 ---
 
 <section class="ph">
 	<Img src={image} alt={imageAlt} class="img-cover" sizes="100vw" priority />
 	<div class="ph__overlay"></div>
 	<div class="ph__content">
-		{
-			eyebrow && (
-				<p class="pill ph__eyebrow" data-intro>
-					{eyebrow}
-				</p>
-			)
-		}
 		<h1 class="display-title ph__title" data-intro style="--intro-delay: 0.1s">
 			{title}
 			{
@@ -72,7 +63,9 @@ const { image, title, words = [], eyebrow, imageAlt = '' } = Astro.props;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		min-height: clamp(440px, 70svh, 700px);
+		/* Stessa altezza della hero della home (HeroCarousel). */
+		min-height: 100vh;
+		min-height: 100svh;
 		padding: calc(var(--header-h) + 32px) var(--gutter) 56px;
 		overflow: hidden;
 		background: var(--bg-dark);
@@ -89,10 +82,6 @@ const { image, title, words = [], eyebrow, imageAlt = '' } = Astro.props;
 		position: relative;
 		z-index: 1;
 		text-align: center;
-	}
-
-	.ph__eyebrow {
-		margin: 0 0 20px;
 	}
 
 	.ph__title {
@@ -129,6 +118,13 @@ const { image, title, words = [], eyebrow, imageAlt = '' } = Astro.props;
 		justify-content: center;
 		gap: 16px;
 		margin-top: 36px;
+	}
+
+	@media (max-width: 900px) {
+		.ph {
+			min-height: 74vh;
+			min-height: 74svh;
+		}
 	}
 
 	@media (max-width: 560px) {

@@ -22,8 +22,8 @@ const { pagina } = Astro.props;
 ---
 
 <Layout title={pagina.seo.title} description={pagina.seo.description}>
-	<article class="testo">
-		<SectionTitle as="h1" tone="light-bg" gap={40}>{pagina.titolo}</SectionTitle>
+	<article class="testo on-dark">
+		<SectionTitle as="h1" tone="dark-bg" gap={40}>{pagina.titolo}</SectionTitle>
 		<div class="testo__corpo container-wide">
 			<div class="testo__prosa" set:html={pagina.html} />
 			{
@@ -40,8 +40,8 @@ const { pagina } = Astro.props;
 <style>
 	.testo {
 		padding-block: clamp(40px, 6vw, 80px);
-		background: var(--bg);
-		color: var(--text);
+		background: var(--bg-dark);
+		color: var(--text-on-dark);
 	}
 
 	.testo__corpo {
@@ -57,7 +57,7 @@ const { pagina } = Astro.props;
 		margin: 2.2em 0 0.7em;
 		font-size: var(--text-lg);
 		font-weight: 800;
-		color: var(--text);
+		color: var(--text-on-dark);
 	}
 
 	.testo__prosa :global(h2:first-child) {
@@ -68,7 +68,7 @@ const { pagina } = Astro.props;
 		margin: 1.6em 0 0.5em;
 		font-size: var(--text-md);
 		font-weight: 800;
-		color: var(--accent-hover);
+		color: var(--accent);
 	}
 
 	.testo__prosa :global(p),
@@ -89,23 +89,27 @@ const { pagina } = Astro.props;
 	.testo__prosa :global(hr) {
 		margin: 2.4em 0;
 		border: 0;
-		border-top: 1px solid var(--border-strong);
+		border-top: 1px solid var(--border-on-dark);
 	}
 
 	.testo__prosa :global(blockquote) {
 		margin: 1.4em 0;
 		padding: 0.2em 0 0.2em 1.2em;
 		border-left: 4px solid var(--accent);
-		color: var(--text-muted);
+		color: var(--text-muted-on-dark);
 	}
 
 	.testo__prosa :global(a) {
-		color: var(--accent-hover);
+		color: var(--accent);
 		overflow-wrap: anywhere;
 	}
 
+	/* Il logo ha fondo chiaro: sta su un pannello bianco, non sul nero della pagina. */
 	.testo__fig {
 		margin: 2.4em 0 0;
+		padding: clamp(12px, 3vw, 28px);
+		border-radius: var(--radius-lg);
+		background: #fff;
 	}
 
 	.testo__fig :global(img) {

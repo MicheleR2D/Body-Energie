@@ -1,0 +1,100 @@
+---
+/*
+ * Indice delle sezioni di una pagina: collegamenti di navigazione (ancore), volutamente
+ * diversi dai pulsanti (.btn) che portano al modulo contatti. Per fondi scuri.
+ *
+ *   <IndiceAncore voci={[{ testo: 'Loft Gym', href: '#loftgym' }]} label="Aree della sala pesi" />
+ *
+ * Con `griglia` le voci stanno su due colonne allineate (per una colonna stretta).
+ */
+interface Props {
+	voci: { testo: string; href: string }[];
+	/** Nome della navigazione, letto dagli screen reader. */
+	label: string;
+	/** Due colonne allineate invece di una riga che va a capo. */
+	griglia?: boolean;
+}
+
+const { voci, label, griglia = false } = Astro.props;
+---
+
+<nav aria-label={label}>
+	<ul class:list={['indice', { 'indice--griglia': griglia }]} data-anim="up">
+		{
+			voci.map((v) => (
+				<li>
+					<a class="indice__link" href={v.href}>
+						<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+							<path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+						{v.testo}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>
+
+<style>
+	.indice {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 32px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.indice--griglia {
+		display: grid;
+		grid-template-columns: repeat(2, max-content);
+		gap: 0 clamp(24px, 3vw, 48px);
+	}
+
+	.indice__link {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 44px;
+		color: var(--text-on-dark);
+		font-size: var(--text-sm);
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-decoration: underline;
+		text-decoration-color: rgba(255, 255, 255, 0.35);
+		text-underline-offset: 6px;
+		transition: color var(--dur-base), text-decoration-color var(--dur-base);
+	}
+
+	.indice__link svg {
+		color: var(--accent);
+		transition: transform var(--dur-base) var(--ease-out-crit);
+	}
+
+	.indice__link:hover,
+	.indice__link:focus-visible {
+		color: var(--accent);
+		text-decoration-color: var(--accent);
+	}
+
+	.indice__link:hover svg,
+	.indice__link:focus-visible svg {
+		transform: translateY(3px);
+	}
+
+	.indice__link:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 4px;
+	}
+
+	@media (max-width: 560px) {
+		.indice {
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.indice--griglia {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

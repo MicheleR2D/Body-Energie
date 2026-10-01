@@ -189,6 +189,13 @@ a {
   text-transform: uppercase;
 }
 
+/* Grassetto nel testo su fondo scuro: arancione. Si mette la classe sulla sezione
+   scura; su fondo chiaro o arancione il grassetto resta del colore del testo. */
+.on-dark strong,
+.on-dark b {
+  color: var(--accent);
+}
+
 .pill--dark {
   background: var(--text);
   color: var(--text-on-dark);

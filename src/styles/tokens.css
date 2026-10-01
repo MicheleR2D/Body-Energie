@@ -13,6 +13,7 @@
   --text: #000000;
   --text-on-dark: #ffffff;
   --text-muted: #4a4a4a;
+  --text-muted-on-dark: rgba(255, 255, 255, 0.72);
 
   /* Sfondo nero delle sezioni/blocchi scuri del sito (non il nero puro del
      testo): leggermente piu' morbido, come richiesto dall'utente. */
@@ -23,6 +24,7 @@
   /* Bordi (semi-trasparenti) */
   --border: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.12);
+  --border-on-dark: rgba(255, 255, 255, 0.16);
 
   /* Accento (arancio del brand) */
   --accent: #ec740f;

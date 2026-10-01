@@ -41,6 +41,13 @@ const NOMI = {
 	'contributo-regione-veneto': 'Contributo Regione Veneto',
 };
 
+// Pagine con i blocchi arancioni alternati (nel vecchio sito il contenuto stava in riquadri arancioni).
+const STILE = { 'sala-pesi': 'arancio' };
+
+// Titolo grande delle pagine con un'introduzione "titolo + testo". Il vecchio sito non
+// lo aveva: e' un titolo scritto per questa migrazione, ricavato dal testo della pagina.
+const TITOLO_INTRO = { 'sala-pesi': 'Allenati tra innovazione e natura.' };
+
 const seoDa = (nome, testoHtml) => {
 	const piano = strip(testoHtml);
 	return {
@@ -210,14 +217,25 @@ for (const slug of SERVIZI) {
 		blocchi.slice(1).forEach((b, i) => (b.id = ordine[i]));
 	}
 
+	// L'introduzione "titolo + testo" prende il posto del primo blocco, se questo e' solo testo.
+	let intro = null;
+	if (TITOLO_INTRO[slug]) {
+		const [apertura, ...resto] = blocchi;
+		if (apertura.titolo || apertura.immagini.length || apertura.video) throw new Error("Il primo blocco non e' solo testo: " + slug);
+		intro = { titolo: TITOLO_INTRO[slug], html: apertura.descrizioneHtml };
+		blocchi = resto;
+	}
+
 	const nome = NOMI[slug];
-	const primo = blocchi.find((b) => b.descrizioneHtml);
+	const primoTesto = intro?.html ?? blocchi.find((b) => b.descrizioneHtml)?.descrizioneHtml ?? '';
 	const pagina = {
 		tipo: 'servizio',
 		slug,
 		nome,
-		seo: seoDa(nome, primo?.descrizioneHtml ?? ''),
+		...(STILE[slug] ? { stile: STILE[slug] } : {}),
+		seo: seoDa(nome, primoTesto),
 		hero: { ...heroDa(el[0]), pulsanti: pulsantiHero(el[0], slug) },
+		...(intro ? { intro } : {}),
 		percorsi,
 		blocchi,
 		faq,
