@@ -11,6 +11,7 @@
     "dev": "astro dev",
     "prebuild": "node scripts/optimize-images.mjs",
     "build": "astro build",
+    "postbuild": "node scripts/redirect-con-slash.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -19,5 +20,8 @@
     "@astrojs/vercel": "^11.0.9",
     "@supabase/supabase-js": "^2.112.4",
     "astro": "^7.1.6"
+  },
+  "overrides": {
+    "path-to-regexp": "6.3.0"
   }
 }

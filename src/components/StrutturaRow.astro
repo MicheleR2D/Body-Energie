@@ -132,6 +132,37 @@ const slug = (t: string) =>
 		);
 	}
 
+	// Su mobile le card sono impilate: aprirne una chiude quella aperta sopra e tutto
+	// scorre. Finche' dura l'animazione si tiene ferma la card toccata (iOS non ha lo
+	// scroll anchoring del browser), poi la si porta sotto l'header se resta tagliata.
+	const mobile = window.matchMedia('(max-width: 900px)');
+	let ancoraggio = 0;
+
+	function ancora(card: HTMLElement) {
+		cancelAnimationFrame(ancoraggio);
+		if (!mobile.matches || reduceMotion.matches) return;
+		const y0 = card.getBoundingClientRect().top;
+		const fine = performance.now() + 750;
+		const annulla = () => cancelAnimationFrame(ancoraggio);
+		window.addEventListener('touchstart', annulla, { once: true, passive: true });
+		window.addEventListener('wheel', annulla, { once: true, passive: true });
+		const segui = () => {
+			const d = card.getBoundingClientRect().top - y0;
+			if (Math.abs(d) > 0.5) window.scrollTo({ top: window.scrollY + d, behavior: 'instant' });
+			if (performance.now() < fine) {
+				ancoraggio = requestAnimationFrame(segui);
+				return;
+			}
+			if (!card.classList.contains('is-open')) return;
+			const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 61;
+			const r = card.getBoundingClientRect();
+			if (r.top < header + 4 || r.bottom > window.innerHeight - 8) {
+				window.scrollTo({ top: window.scrollY + r.top - header - 12, behavior: 'smooth' });
+			}
+		};
+		ancoraggio = requestAnimationFrame(segui);
+	}
+
 	function setOpen(card: HTMLElement | null) {
 		allCards.forEach((c) => {
 			const isOpen = c === card;
@@ -185,6 +216,7 @@ const slug = (t: string) =>
 		// (che resta come indicazione visiva, non come unico innesco).
 		card.addEventListener('click', () => {
 			if (suppressClick) return;
+			ancora(card);
 			setOpen(card.classList.contains('is-open') ? null : card);
 		});
 
@@ -493,22 +525,36 @@ const slug = (t: string) =>
 			height: auto;
 		}
 
+		/* Card in colonna come griglia a due righe (foto, testo): l'altezza non si puo'
+		   animare da un valore fisso ad "auto", le righe di una griglia si': la foto passa
+		   da 220 a 180px e il testo da 0fr a 1fr, cosi' si apre e si chiude con fluidita'. */
 		.scard {
+			display: grid;
+			grid-template-rows: 220px 0fr;
 			flex: 0 0 auto;
-			flex-direction: column;
-			height: 220px;
+			transition:
+				grid-template-rows 0.6s var(--ease-out-crit),
+				clip-path 1.1s var(--ease-out-crit);
 		}
 
 		.scard.is-open {
+			grid-template-rows: 180px 1fr;
+		}
+
+		.scard__visual {
+			transition: none;
+		}
+
+		.scard__panel {
+			min-height: 0;
+			transition: none;
+		}
+
+		.scard__panel-inner {
 			height: auto;
-		}
-
-		.scard.is-open .scard__visual {
-			flex-basis: 180px;
-		}
-
-		.scard.is-open .scard__panel {
-			flex-basis: auto;
+			overflow: visible;
+			/* Spazio per il pulsante Chiudi, ancorato in basso a destra della card. */
+			padding-bottom: 52px;
 		}
 	}
 </style>

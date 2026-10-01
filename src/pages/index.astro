@@ -11,6 +11,8 @@ import StrutturaRow from '../components/StrutturaRow.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import Img from '../components/Img.astro';
 import { stats, formattaNumero } from '../data/stats';
+import { schedaAttivita } from '../lib/jsonld';
+import { imgSources } from '../lib/img';
 
 const heroImages = [
 	'/wp-content/uploads/2025/12/Body-Energie-Ambienti-57-scaled.jpg',
@@ -248,6 +250,8 @@ const testimonianze = [
 <Layout
 	headerTone="overlay"
 	stack
+	jsonLd={schedaAttivita(Astro.site!.origin, new URL(imgSources(heroImages[0]).src, Astro.site).href)}
+	image={heroImages[0]}
 	title="Body Energie - Villafranca di Verona | Sport, Fitness e Salute"
 	description="Body Energie: fitness, benessere e sport a Villafranca di Verona. Sala pesi, corsi fitness, acqua fitness, Body Lab e molto altro su oltre 5.500 mq."
 >

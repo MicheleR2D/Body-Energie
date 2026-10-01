@@ -19,6 +19,7 @@ if (!sitoProduzione) {
 // vanno riviste con il cliente prima del lancio definitivo.
 const redirectWordpress = {
 	'/contatti/': '/',
+	'/body-energie-villafranca-di-verona/': '/',
 	'/personal-trainer-verona/': '/personal-training',
 	'/classes-list/': '/',
 	'/gallery/': '/',

@@ -63,7 +63,7 @@ const sfondoSenzaMedia = (i: number) =>
 	pagina.tipo !== 'corso' ? undefined : foto.length ? foto[i % foto.length].src : pagina.hero.immagine;
 ---
 
-<Layout title={pagina.seo.title} description={pagina.seo.description} headerTone="overlay">
+<Layout title={pagina.seo.title} description={pagina.seo.description} image={pagina.hero.immagine} headerTone="overlay">
 	<PageHero image={pagina.hero.immagine} title={pagina.hero.titolo} words={pagina.hero.parole}>
 		{
 			pulsanti.map((p) =>

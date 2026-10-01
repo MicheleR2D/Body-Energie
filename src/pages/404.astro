@@ -1,0 +1,63 @@
+---
+/*
+ * Pagina 404: stessa testata e stesso footer del sito, con le strade principali
+ * per ripartire. noindex: non deve finire su Google.
+ */
+import Layout from '../layouts/Layout.astro';
+
+const strade = [
+	{ href: '/', testo: 'Torna alla home' },
+	{ href: '/corsi-fitness', testo: 'Corsi fitness' },
+	{ href: '/orari', testo: 'Orari dei corsi' },
+];
+---
+
+<Layout title="Pagina non trovata - Body Energie" description="La pagina che cerchi non esiste o è stata spostata.">
+	<Fragment slot="head"><meta name="robots" content="noindex" /></Fragment>
+	<section class="nf on-dark">
+		<div class="nf__in">
+			<p class="nf__code">404</p>
+			<h1 class="display-title nf__title">Pagina non trovata</h1>
+			<p class="nf__lead">La pagina che cerchi non esiste o è stata spostata. Da qui puoi ripartire:</p>
+			<div class="nf__azioni">
+				{strade.map((s, i) => <a class:list={['btn', { 'btn--outline': i > 0 }]} href={s.href}>{s.testo}</a>)}
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.nf {
+		background: var(--bg-dark);
+		color: var(--text-on-dark, #fff);
+		min-height: calc(100svh - var(--header-h));
+		display: grid;
+		place-items: center;
+		padding: 64px 24px;
+		text-align: center;
+	}
+	.nf__in {
+		max-width: 40rem;
+	}
+	.nf__code {
+		margin: 0;
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(4rem, 14vw, 8rem);
+		line-height: 1;
+		color: var(--accent);
+	}
+	.nf__title {
+		margin: 8px 0 16px;
+	}
+	.nf__lead {
+		margin: 0 0 32px;
+		color: var(--text-muted-on-dark);
+	}
+	.nf__azioni {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		justify-content: center;
+	}
+</style>
