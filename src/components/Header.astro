@@ -1,26 +1,12 @@
 ---
 import { megaMenu } from '../data/nav';
-
-interface Props {
-	/** Trasparente in cima, sopra una hero scura; si riempie scorrendo.
-	 *  Se false l'header e' sempre pieno (pagine con sfondo chiaro). */
-	overlay?: boolean;
-}
-const { overlay = false } = Astro.props;
 ---
 
-<header class:list={['hd', { 'hd--scrolled': !overlay }]} data-overlay={overlay ? 'true' : 'false'}>
+<header class="hd">
 	<div class="hd__bar container">
 		<a class="hd__logo" href="/" aria-label="Body Energie - Home"></a>
 
-		<button
-			class="hd__toggle"
-			type="button"
-			aria-label="Apri il menu"
-			aria-expanded="false"
-			aria-controls="hd-nav"
-			data-hd-toggle
-		>
+		<button class="hd__toggle" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="hd-nav" data-hd-toggle>
 			<span></span><span></span><span></span>
 		</button>
 
@@ -48,128 +34,113 @@ const { overlay = false } = Astro.props;
 			</ul>
 			<div class="hd__actions">
 				<button
-					class="btn btn--sm btn--light hd__cta hd__cta--contact"
+					class="btn btn--outline hd__cta hd__cta--contact"
 					type="button"
 					data-open-contact
 					data-interest="informazioni"
 				>
 					Contattaci
 				</button>
-				<button class="btn btn--sm hd__cta" type="button" data-open-contact data-interest="abbonamento">I nostri abbonamenti</button>
+				<button class="btn hd__cta hd__cta--primary" type="button" data-open-contact data-interest="abbonamento">
+					I nostri abbonamenti
+				</button>
 			</div>
 		</nav>
 	</div>
 </header>
 
 <script>
-	const header = document.querySelector<HTMLElement>('.hd');
-	const toggle = document.querySelector<HTMLButtonElement>('[data-hd-toggle]');
-	const nav = document.querySelector<HTMLElement>('[data-hd-nav]');
+	const toggle = document.querySelector('[data-hd-toggle]');
+	const nav = document.querySelector('[data-hd-nav]');
+	const impostaMenu = (aperto) => {
+		nav?.classList.toggle('hd__nav--aperto', aperto);
+		toggle?.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+		toggle?.setAttribute('aria-label', aperto ? 'Chiudi il menu' : 'Apri il menu');
+		document.documentElement.classList.toggle('hd-lock', aperto);
+	};
+	toggle?.addEventListener('click', () => impostaMenu(!nav?.classList.contains('hd__nav--aperto')));
+	// Si chiude con un tap su un link o sul bottone contatti, con Esc o
+	// tornando a una larghezza desktop.
+	nav?.addEventListener('click', (e) => {
+		// I titoli delle colonne sono bottoni (aprono il sottomenu su desktop): non chiudono il pannello.
+		if (e.target instanceof Element && e.target.closest('a, button:not(.hd__col-title)')) impostaMenu(false);
+	});
+	document.addEventListener('keydown', (e) => e.key === 'Escape' && impostaMenu(false));
+	window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => e.matches && impostaMenu(false));
 
-	// --- Menu mobile -----------------------------------------------------
-	function setNavOpen(open: boolean) {
-		nav?.classList.toggle('hd__nav--aperto', open);
-		document.body.classList.toggle('hd-menu-open', open);
-		toggle?.setAttribute('aria-expanded', String(open));
-		toggle?.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
-	}
-	toggle?.addEventListener('click', () => setNavOpen(toggle.getAttribute('aria-expanded') !== 'true'));
-
-	// --- Mega-menu desktop: disclosure raggiungibile da tastiera ----------
-	// Mouse: si apre al passaggio. Tastiera e touch: il titolo e' un bottone
-	// (Invio/Spazio/tocco). Esc chiude e riporta il focus sul titolo.
-	const cols = Array.from(document.querySelectorAll<HTMLElement>('[data-hd-col]'));
-	function setColOpen(col: HTMLElement, open: boolean) {
-		col.classList.toggle('is-open', open);
-		col.querySelector('.hd__col-title')?.setAttribute('aria-expanded', String(open));
-	}
-	function closeAllCols(except?: HTMLElement) {
-		cols.forEach((c) => c !== except && setColOpen(c, false));
-	}
-
-	cols.forEach((col) => {
-		const btn = col.querySelector<HTMLButtonElement>('.hd__col-title');
-		col.addEventListener('pointerenter', (e) => {
-			if (e.pointerType !== 'mouse') return;
-			closeAllCols(col);
-			setColOpen(col, true);
-		});
-		col.addEventListener('pointerleave', (e) => {
-			if (e.pointerType !== 'mouse') return;
-			if (!col.contains(document.activeElement)) setColOpen(col, false);
-		});
-		btn?.addEventListener('click', (e) => {
+	// Mega-menu desktop raggiungibile da tastiera e da touch: col mouse si apre
+	// al passaggio (solo CSS), il titolo e' un bottone per Invio/Spazio/tocco.
+	// Esc chiude e riporta il focus sul titolo.
+	const colonne = Array.from(document.querySelectorAll('[data-hd-col]'));
+	const impostaColonna = (col, aperta) => {
+		col.classList.toggle('is-open', aperta);
+		col.querySelector('.hd__col-title')?.setAttribute('aria-expanded', String(aperta));
+	};
+	const chiudiColonne = (tranne) => colonne.forEach((c) => c !== tranne && impostaColonna(c, false));
+	colonne.forEach((col) => {
+		col.querySelector('.hd__col-title')?.addEventListener('click', (e) => {
 			// Un clic di mouse arriva con il menu gia' aperto dal passaggio.
-			if ((e as PointerEvent).pointerType === 'mouse') return;
-			const open = !col.classList.contains('is-open');
-			closeAllCols(col);
-			setColOpen(col, open);
+			if (e.pointerType === 'mouse') return;
+			const aperta = !col.classList.contains('is-open');
+			chiudiColonne(col);
+			impostaColonna(col, aperta);
 		});
 		col.addEventListener('focusout', (e) => {
-			if (!col.contains(e.relatedTarget as Node | null)) setColOpen(col, false);
+			if (!col.contains(e.relatedTarget)) impostaColonna(col, false);
 		});
 	});
-
 	document.addEventListener('keydown', (e) => {
 		if (e.key !== 'Escape') return;
-		const open = cols.find((c) => c.classList.contains('is-open'));
-		if (open) {
-			setColOpen(open, false);
-			open.querySelector<HTMLButtonElement>('.hd__col-title')?.focus();
-		}
-		if (toggle?.getAttribute('aria-expanded') === 'true') {
-			setNavOpen(false);
-			toggle.focus();
-		}
+		const aperta = colonne.find((c) => c.classList.contains('is-open'));
+		if (!aperta) return;
+		impostaColonna(aperta, false);
+		aperta.querySelector('.hd__col-title')?.focus();
 	});
 	document.addEventListener('click', (e) => {
-		if (!(e.target as Element).closest('[data-hd-col]')) closeAllCols();
+		if (!e.target.closest('[data-hd-col]')) chiudiColonne();
 	});
 
-	// --- Header trasparente -> pieno scorrendo (solo con hero scura) ------
-	if (header?.dataset.overlay === 'true') {
-		const aggiornaScroll = () => header.classList.toggle('hd--scrolled', window.scrollY > 10);
-		aggiornaScroll();
-		window.addEventListener('scroll', aggiornaScroll, { passive: true });
-	}
+	// L'header cambia colore (sfondo a gradiente, voci col colore che
+	// prima era lo sfondo) appena si inizia a scorrere la pagina.
+	const header = document.querySelector('.hd');
+	const aggiornaScroll = () => header?.classList.toggle('hd--scrolled', window.scrollY > 10);
+	aggiornaScroll();
+	window.addEventListener('scroll', aggiornaScroll, { passive: true });
 </script>
 
 <style>
 	.hd {
+		/* Sfondo bianco leggermente trasparente sempre (anche in cima):
+		   logo e simbolo del menu' sono neri e si perderebbero sulle
+		   sezioni scure. */
+		--hd-h: var(--header-h);
+		border-bottom: 1px solid var(--border);
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 40;
-		height: var(--header-h);
-		background: transparent;
-		border-bottom: 1px solid transparent;
-		transition: background 0.3s ease, border-color 0.3s ease;
 	}
 
-	/* In cima, sopra la hero scura: voci di menu, logo e hamburger chiari.
-	   Appena si scorre (o su pagine senza hero scura) torna l'header pieno,
-	   sfondo crema, voci nere, logo scuro. */
+	/* Lo sfondo sta in un pseudo-elemento: backdrop-filter sull'header stesso
+	   farebbe da contenitore al menu' mobile (position: fixed) e lo
+	   ridurrebbe all'altezza della barra. */
+	.hd::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: rgba(255, 255, 255, 0.82);
+		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
+	}
+
 	.hd__col-title,
 	.hd__chevron {
-		color: var(--text-on-dark);
-	}
-
-	.hd__col + .hd__col::before {
-		background: var(--text-on-dark);
-	}
-
-	.hd.hd--scrolled {
-		background: var(--bg-alt);
-		border-bottom-color: var(--border);
-	}
-
-	.hd--scrolled .hd__col-title,
-	.hd--scrolled .hd__chevron {
 		color: var(--text);
 	}
 
-	.hd--scrolled .hd__col + .hd__col::before {
+	.hd__col + .hd__col::before {
 		background: var(--accent);
 	}
 
@@ -184,50 +155,38 @@ const { overlay = false } = Astro.props;
 		flex-wrap: wrap;
 	}
 
-	/* L'altezza la decide --header-h: la barra la riempie, il contenuto si centra. */
 	.hd__bar {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 100%;
+		padding-block: 8px;
 	}
 
-	/* Due livelli: il logo chiaro (hero scura) e quello scuro (header pieno),
-	   entrambi caricati subito, si alterna solo la dimensione: niente lampi. */
 	.hd__logo {
+		text-decoration: none;
 		display: block;
+		-webkit-tap-highlight-color: transparent;
 		width: 113px;
 		height: 44px;
-		text-decoration: none;
-		-webkit-tap-highlight-color: transparent;
-		background-image: url('/images/logo-body-energie-chiaro.png'), url('/wp-content/uploads/2025/10/Logo-Body-Energie-header.png');
+		background-image: url('/wp-content/uploads/2025/10/Logo-Body-Energie-header.png');
 		background-repeat: no-repeat;
-		background-position: left center, left center;
-		background-size: contain, 0 0;
-	}
-
-	.hd--scrolled .hd__logo {
-		background-size: 0 0, contain;
+		background-position: left center;
+		background-size: contain;
 	}
 
 	.hd__toggle {
 		display: none;
 		flex-direction: column;
 		gap: 5px;
-		padding: 14px 8px;
 		background: none;
 		border: none;
-		cursor: pointer;
+		padding: 8px;
 	}
 
 	.hd__toggle span {
 		display: block;
 		width: 24px;
 		height: 2px;
-		background: var(--text-on-dark);
-	}
-
-	.hd--scrolled .hd__toggle span {
 		background: var(--text);
 	}
 
@@ -263,14 +222,19 @@ const { overlay = false } = Astro.props;
 	}
 
 	.hd__col-title {
+		padding: 0;
+		border: 0;
+		background: none;
 		font-family: var(--font-heading);
 		font-weight: 600;
 		font-size: 16px;
-		line-height: inherit;
-		padding: 6px 0;
-		background: none;
-		border: none;
-		cursor: pointer;
+		cursor: default;
+	}
+
+	.hd__col-title:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 4px;
+		border-radius: 4px;
 	}
 
 	.hd__col > ul {
@@ -291,6 +255,8 @@ const { overlay = false } = Astro.props;
 		transition: 0.15s ease;
 	}
 
+	.hd__col:hover > ul,
+	.hd__col:focus-within > ul,
 	.hd__col.is-open > ul {
 		opacity: 1;
 		visibility: visible;
@@ -305,98 +271,194 @@ const { overlay = false } = Astro.props;
 		font-size: var(--text-sm);
 	}
 
-	.hd__col > ul li a:hover,
-	.hd__col > ul li a:focus-visible {
+	.hd__col > ul li a:hover {
 		color: var(--accent);
 	}
 
-	.hd__col-title:focus-visible,
-	.hd__toggle:focus-visible,
-	.hd__logo:focus-visible {
-		outline: 2px solid var(--accent);
-		outline-offset: 3px;
-	}
-
-	/* Bottoni piccoli che vanno a capo solo se proprio necessario. */
 	.hd__cta {
 		white-space: normal;
+		font-size: 14px;
+		padding: 10px 16px;
 		text-align: center;
 	}
 
-	/* Il bottone "Contattaci" ha bordo bianco sopra la hero scura e nero
-	   sull'header pieno (stessa regola dell'hover: bordo nero -> testo arancione). */
-	.hd--scrolled .hd__cta--contact {
+	.hd__cta--contact {
 		--btn-border: var(--text);
+		--btn-hover-text: var(--accent);
 	}
 
 	@media (max-width: 900px) {
 		.hd__toggle {
 			display: flex;
+			position: relative;
+			z-index: 2;
+			width: 44px;
+			height: 44px;
+			align-items: center;
+			justify-content: center;
+			margin-right: -8px;
+			-webkit-tap-highlight-color: transparent;
 		}
 
-		/* Il pannello mobile e' sempre crema, quindi le sue voci sono sempre
-		   scure, qualunque sia lo stato dell'header sotto (trasparente o pieno). */
+		/* Le tre linee diventano una X */
+		.hd__toggle span {
+			position: absolute;
+			width: 24px;
+			transition: transform 0.35s var(--ease-out-crit), opacity 0.2s ease;
+		}
+		.hd__toggle span:nth-child(1) { transform: translateY(-7px); }
+		.hd__toggle span:nth-child(3) { transform: translateY(7px); }
+		.hd__toggle[aria-expanded='true'] span:nth-child(1) { transform: rotate(45deg); }
+		.hd__toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+		.hd__toggle[aria-expanded='true'] span:nth-child(3) { transform: rotate(-45deg); }
+
+		/* Pannello a tutto schermo sotto la barra */
 		.hd__nav {
 			position: fixed;
-			inset: var(--header-h) 0 0 0;
-			background: var(--bg-alt);
+			inset: var(--hd-h) 0 0 0;
+			z-index: 1;
+			flex: none;
 			flex-direction: column;
 			align-items: stretch;
-			padding: 20px;
+			justify-content: space-between;
+			gap: 28px;
+			padding: 28px 24px max(24px, env(safe-area-inset-bottom));
 			overflow-y: auto;
-			display: none;
+			overscroll-behavior: contain;
+			color: var(--text-on-dark);
+			background:
+				radial-gradient(120% 60% at 100% 0%, rgba(236, 116, 15, 0.22), transparent 60%),
+				var(--bg-dark);
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-12px);
+			transition: opacity 0.3s ease, transform 0.45s var(--ease-out-crit), visibility 0s 0.45s;
 		}
 
 		.hd__nav.hd__nav--aperto {
-			display: flex;
+			opacity: 1;
+			visibility: visible;
+			transform: none;
+			transition: opacity 0.3s ease, transform 0.45s var(--ease-out-crit), visibility 0s;
 		}
 
-		.hd__nav .hd__col-title,
-		.hd__nav .hd__chevron {
-			color: var(--text);
-		}
-
-		.hd__nav .hd__cta--contact {
-			--btn-border: var(--text);
+		:global(html.hd-lock) {
+			overflow: hidden;
 		}
 
 		.hd__mega {
 			flex-direction: column;
-			gap: 20px;
+			align-items: stretch;
+			gap: 26px;
+			margin: 0;
+			counter-reset: sezione;
+		}
+
+		.hd__col {
+			counter-increment: sezione;
+			padding-top: 18px;
+			border-top: 1px solid rgba(255, 255, 255, 0.14);
 		}
 
 		.hd__col + .hd__col::before {
 			display: none;
 		}
 
-		.hd__col > ul {
-			position: static;
-			opacity: 1;
-			visibility: visible;
-			transform: none;
-			box-shadow: none;
-			border: none;
-			padding: 8px 0 0 12px;
-			display: block;
+		.hd__col-title {
+			display: flex;
+			width: 100%;
+			text-align: left;
+			align-items: baseline;
+			gap: 12px;
+			margin-bottom: 12px;
+			color: var(--text-on-dark);
+			font-size: 1.35rem;
+			font-weight: 700;
+			letter-spacing: -0.01em;
+		}
+
+		.hd__col-title::before {
+			content: counter(sezione, decimal-leading-zero);
+			color: var(--accent);
+			font-size: 0.75rem;
+			font-weight: 600;
+			letter-spacing: 0.08em;
 		}
 
 		.hd__chevron {
 			display: none;
 		}
-	}
 
-	/* Il passaggio del mouse apre il menu solo dove esiste un mouse vero. */
-	@media (hover: hover) and (pointer: fine) and (min-width: 901px) {
-		.hd__col:hover > ul {
+		/* Le voci in due colonne, cosi' entra tutto senza troppo scroll */
+		.hd__col > ul {
+			position: static;
 			opacity: 1;
 			visibility: visible;
-			transform: translateY(0);
+			transform: none;
+			min-width: 0;
+			background: none;
+			box-shadow: none;
+			border: none;
+			border-radius: 0;
+			padding: 0;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 2px 16px;
 		}
-	}
-</style>
 
-<style is:global>
-	body.hd-menu-open {
-		overflow: hidden;
+		.hd__col > ul li a {
+			padding: 9px 0;
+			color: rgba(255, 255, 255, 0.78);
+			font-size: 0.95rem;
+			font-weight: 500;
+		}
+
+		.hd__col > ul li a:hover,
+		.hd__col > ul li a:active {
+			color: var(--accent);
+		}
+
+		.hd__actions {
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.hd__cta {
+			width: 100%;
+			padding: 14px 16px;
+			font-size: 15px;
+		}
+
+		.hd__cta--contact {
+			--btn-border: var(--text-on-dark);
+			--btn-hover-text: var(--accent);
+		}
+
+		/* Ingresso a cascata dei contenuti */
+		.hd__col,
+		.hd__actions {
+			opacity: 0;
+			transform: translateY(14px);
+			transition: opacity 0.4s ease, transform 0.5s var(--ease-out-crit);
+		}
+
+		.hd__nav--aperto .hd__col,
+		.hd__nav--aperto .hd__actions {
+			opacity: 1;
+			transform: none;
+		}
+
+		.hd__nav--aperto .hd__col:nth-child(1) { transition-delay: 0.08s; }
+		.hd__nav--aperto .hd__col:nth-child(2) { transition-delay: 0.16s; }
+		.hd__nav--aperto .hd__col:nth-child(3) { transition-delay: 0.24s; }
+		.hd__nav--aperto .hd__actions { transition-delay: 0.32s; }
+	}
+
+	@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+		.hd__nav,
+		.hd__col,
+		.hd__actions {
+			transition: none !important;
+		}
 	}
 </style>

@@ -8,8 +8,8 @@ import LeadModal from '../components/LeadModal.astro';
 interface Props {
 	title: string;
 	description?: string;
-	/** "overlay": header trasparente sopra una hero scura (la home).
-	 *  "solid" (default): header pieno, il contenuto parte sotto di esso. */
+	/** "overlay": la pagina parte con una foto a tutta altezza che passa sotto l'header
+	 *  (home e pagine con hero). "solid" (default): il contenuto parte sotto l'header. */
 	headerTone?: 'overlay' | 'solid';
 	/** Sezioni a blocchi con fasce di colore tra l'una e l'altra (la home). */
 	stack?: boolean;
@@ -118,7 +118,7 @@ const ogImage = new URL('/wp-content/uploads/2025/12/Body-Energie-Ambienti-57-sc
 		}
 
 		<a class="skip-link" href="#main">Vai al contenuto</a>
-		<Header overlay={overlay} />
+		<Header />
 		<main id="main" class:list={{ 'main--stack': stack, 'main--offset': !overlay }}>
 			<slot />
 		</main>
